@@ -1,0 +1,13 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["DeepSampleCount"] = GafferImage.Grade( "DeepSampleCount" )
+parent.addChild( __children["DeepSampleCount"] )
+__children["DeepSampleCount"]["user"].addChild( Gaffer.BoolPlug( "normalize", defaultValue = True ) )
+Gaffer.Metadata.registerValue( __children["DeepSampleCount"]["user"]["normalize"], "label", "Normalize" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Deep sample count analysis.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

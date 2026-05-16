@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["DVPscene"] = GafferImage.Grade( "DVPscene" )
+parent.addChild( __children["DVPscene"] )
+__children["DVPscene"]["user"].addChild( Gaffer.FloatPlug( "depthScale", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["DVPscene"]["user"]["depthScale"], "label", "Depth Scale" )
+__children["DVPscene"]["user"].addChild( Gaffer.FloatPlug( "offset", defaultValue = 0.0 ) )
+Gaffer.Metadata.registerValue( __children["DVPscene"]["user"]["offset"], "label", "Offset" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Deep scene assembly.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

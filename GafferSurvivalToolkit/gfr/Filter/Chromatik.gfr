@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["Chromatik"] = GafferImage.Grade( "Chromatik" )
+parent.addChild( __children["Chromatik"] )
+__children["Chromatik"]["user"].addChild( Gaffer.FloatPlug( "amount", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["Chromatik"]["user"]["amount"], "label", "Amount" )
+__children["Chromatik"]["user"].addChild( Gaffer.FloatPlug( "angle", defaultValue = 0.0 ) )
+Gaffer.Metadata.registerValue( __children["Chromatik"]["user"]["angle"], "label", "Angle" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Chromatic aberration.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["SceneDepthCalculator"] = GafferImage.Grade( "SceneDepthCalculator" )
+parent.addChild( __children["SceneDepthCalculator"] )
+__children["SceneDepthCalculator"]["user"].addChild( Gaffer.StringPlug( "camera", defaultValue = "Camera1" ) )
+Gaffer.Metadata.registerValue( __children["SceneDepthCalculator"]["user"]["camera"], "label", "Camera" )
+__children["SceneDepthCalculator"]["user"].addChild( Gaffer.FloatPlug( "maxDepth", defaultValue = 100.0 ) )
+Gaffer.Metadata.registerValue( __children["SceneDepthCalculator"]["user"]["maxDepth"], "label", "Max Depth" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Calculate scene depth.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

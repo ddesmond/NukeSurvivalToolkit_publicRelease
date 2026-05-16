@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["apFresnel"] = GafferImage.Grade( "apFresnel" )
+parent.addChild( __children["apFresnel"] )
+__children["apFresnel"]["user"].addChild( Gaffer.FloatPlug( "ior", defaultValue = 1.5 ) )
+Gaffer.Metadata.registerValue( __children["apFresnel"]["user"]["ior"], "label", "IOR" )
+__children["apFresnel"]["user"].addChild( Gaffer.FloatPlug( "falloff", defaultValue = 5.0 ) )
+Gaffer.Metadata.registerValue( __children["apFresnel"]["user"]["falloff"], "label", "Falloff" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Fresnel effect.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

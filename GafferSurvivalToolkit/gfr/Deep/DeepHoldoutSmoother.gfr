@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["DeepHoldoutSmoother"] = GafferImage.Grade( "DeepHoldoutSmoother" )
+parent.addChild( __children["DeepHoldoutSmoother"] )
+__children["DeepHoldoutSmoother"]["user"].addChild( Gaffer.FloatPlug( "smoothness", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["DeepHoldoutSmoother"]["user"]["smoothness"], "label", "Smoothness" )
+__children["DeepHoldoutSmoother"]["user"].addChild( Gaffer.StringPlug( "channels", defaultValue = "rgba.alpha" ) )
+Gaffer.Metadata.registerValue( __children["DeepHoldoutSmoother"]["user"]["channels"], "label", "Channels" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Deep holdout smoothing.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

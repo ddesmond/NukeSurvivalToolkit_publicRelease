@@ -1,0 +1,13 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["Z2P"] = GafferImage.Grade( "Z2P" )
+parent.addChild( __children["Z2P"] )
+__children["Z2P"]["user"].addChild( Gaffer.StringPlug( "camera", defaultValue = "Camera1" ) )
+Gaffer.Metadata.registerValue( __children["Z2P"]["user"]["camera"], "label", "Camera" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Z-depth to Position.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

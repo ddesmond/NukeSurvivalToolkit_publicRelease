@@ -1,0 +1,17 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["Halation"] = GafferImage.Grade( "Halation" )
+parent.addChild( __children["Halation"] )
+__children["Halation"]["user"].addChild( Gaffer.FloatPlug( "intensity", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["Halation"]["user"]["intensity"], "label", "Intensity" )
+__children["Halation"]["user"].addChild( Gaffer.FloatPlug( "threshold", defaultValue = 0.8 ) )
+Gaffer.Metadata.registerValue( __children["Halation"]["user"]["threshold"], "label", "Threshold" )
+__children["Halation"]["user"].addChild( Gaffer.FloatPlug( "size", defaultValue = 5.0 ) )
+Gaffer.Metadata.registerValue( __children["Halation"]["user"]["size"], "label", "Size" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Film halation effect.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

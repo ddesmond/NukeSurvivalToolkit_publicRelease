@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["GlueP"] = GafferImage.Grade( "GlueP" )
+parent.addChild( __children["GlueP"] )
+__children["GlueP"]["user"].addChild( Gaffer.FloatPlug( "tolerance", defaultValue = 0.1 ) )
+Gaffer.Metadata.registerValue( __children["GlueP"]["user"]["tolerance"], "label", "Tolerance" )
+__children["GlueP"]["user"].addChild( Gaffer.FloatPlug( "softness", defaultValue = 0.1 ) )
+Gaffer.Metadata.registerValue( __children["GlueP"]["user"]["softness"], "label", "Softness" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Position glue.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

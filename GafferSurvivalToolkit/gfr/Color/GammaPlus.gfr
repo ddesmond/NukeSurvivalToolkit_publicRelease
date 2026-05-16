@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["GammaPlus"] = GafferImage.Grade( "GammaPlus" )
+parent.addChild( __children["GammaPlus"] )
+__children["GammaPlus"]["user"].addChild( Gaffer.FloatPlug( "gamma", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["GammaPlus"]["user"]["gamma"], "label", "Gamma" )
+__children["GammaPlus"]["user"].addChild( Gaffer.FloatPlug( "pivot", defaultValue = 0.18 ) )
+Gaffer.Metadata.registerValue( __children["GammaPlus"]["user"]["pivot"], "label", "Pivot" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Enhanced gamma control.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

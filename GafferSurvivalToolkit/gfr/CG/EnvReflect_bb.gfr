@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["EnvReflect_bb"] = GafferImage.Grade( "EnvReflect_bb" )
+parent.addChild( __children["EnvReflect_bb"] )
+__children["EnvReflect_bb"]["user"].addChild( Gaffer.FloatPlug( "intensity", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["EnvReflect_bb"]["user"]["intensity"], "label", "Intensity" )
+__children["EnvReflect_bb"]["user"].addChild( Gaffer.FloatPlug( "blur", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["EnvReflect_bb"]["user"]["blur"], "label", "Blur" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Environment reflection.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

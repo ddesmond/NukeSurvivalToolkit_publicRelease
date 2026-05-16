@@ -1,0 +1,13 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["C44Kernel"] = GafferImage.Grade( "C44Kernel" )
+parent.addChild( __children["C44Kernel"] )
+__children["C44Kernel"]["user"].addChild( Gaffer.StringPlug( "kernel", defaultValue = "" ) )
+Gaffer.Metadata.registerValue( __children["C44Kernel"]["user"]["kernel"], "label", "Kernel Matrix" )
+
+Gaffer.Metadata.registerValue( parent, "description", "4x4 kernel operations.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

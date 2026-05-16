@@ -1,0 +1,17 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["HeatWave"] = GafferImage.Grade( "HeatWave" )
+parent.addChild( __children["HeatWave"] )
+__children["HeatWave"]["user"].addChild( Gaffer.FloatPlug( "amount", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["HeatWave"]["user"]["amount"], "label", "Amount" )
+__children["HeatWave"]["user"].addChild( Gaffer.FloatPlug( "speed", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["HeatWave"]["user"]["speed"], "label", "Speed" )
+__children["HeatWave"]["user"].addChild( Gaffer.FloatPlug( "scale", defaultValue = 10.0 ) )
+Gaffer.Metadata.registerValue( __children["HeatWave"]["user"]["scale"], "label", "Scale" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Heat wave distortion.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

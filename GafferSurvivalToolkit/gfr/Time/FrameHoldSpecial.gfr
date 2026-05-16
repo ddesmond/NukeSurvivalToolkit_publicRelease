@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["FrameHoldSpecial"] = GafferImage.Grade( "FrameHoldSpecial" )
+parent.addChild( __children["FrameHoldSpecial"] )
+__children["FrameHoldSpecial"]["user"].addChild( Gaffer.IntPlug( "holdFrame", defaultValue = 1 ) )
+Gaffer.Metadata.registerValue( __children["FrameHoldSpecial"]["user"]["holdFrame"], "label", "Hold Frame" )
+__children["FrameHoldSpecial"]["user"].addChild( Gaffer.BoolPlug( "freeze", defaultValue = False ) )
+Gaffer.Metadata.registerValue( __children["FrameHoldSpecial"]["user"]["freeze"], "label", "Freeze" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Enhanced frame hold.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

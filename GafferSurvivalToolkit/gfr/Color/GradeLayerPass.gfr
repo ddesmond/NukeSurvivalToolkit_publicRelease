@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["GradeLayerPass"] = GafferImage.Grade( "GradeLayerPass" )
+parent.addChild( __children["GradeLayerPass"] )
+__children["GradeLayerPass"]["user"].addChild( Gaffer.StringPlug( "layerName", defaultValue = "" ) )
+Gaffer.Metadata.registerValue( __children["GradeLayerPass"]["user"]["layerName"], "label", "Layer Name" )
+__children["GradeLayerPass"]["user"].addChild( Gaffer.FloatPlug( "layerOpacity", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["GradeLayerPass"]["user"]["layerOpacity"], "label", "Layer Opacity" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Grade with layer pass awareness.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

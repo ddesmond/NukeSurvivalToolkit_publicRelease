@@ -1,0 +1,17 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["XDistort"] = GafferImage.Grade( "XDistort" )
+parent.addChild( __children["XDistort"] )
+__children["XDistort"]["user"].addChild( Gaffer.StringPlug( "type", defaultValue = "turbulence" ) )
+Gaffer.Metadata.registerValue( __children["XDistort"]["user"]["type"], "label", "Type" )
+__children["XDistort"]["user"].addChild( Gaffer.FloatPlug( "amount", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["XDistort"]["user"]["amount"], "label", "Amount" )
+__children["XDistort"]["user"].addChild( Gaffer.FloatPlug( "scale", defaultValue = 10.0 ) )
+Gaffer.Metadata.registerValue( __children["XDistort"]["user"]["scale"], "label", "Scale" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Custom distortion.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

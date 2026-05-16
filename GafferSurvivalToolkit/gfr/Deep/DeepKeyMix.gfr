@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["DeepKeyMix"] = GafferImage.Grade( "DeepKeyMix" )
+parent.addChild( __children["DeepKeyMix"] )
+__children["DeepKeyMix"]["user"].addChild( Gaffer.FloatPlug( "mix", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["DeepKeyMix"]["user"]["mix"], "label", "Mix" )
+__children["DeepKeyMix"]["user"].addChild( Gaffer.StringPlug( "channels", defaultValue = "rgba.alpha" ) )
+Gaffer.Metadata.registerValue( __children["DeepKeyMix"]["user"]["channels"], "label", "Channels" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Deep keymix.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

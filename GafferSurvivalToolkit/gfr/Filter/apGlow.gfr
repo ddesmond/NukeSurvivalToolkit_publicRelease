@@ -1,0 +1,17 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["apGlow"] = GafferImage.Grade( "apGlow" )
+parent.addChild( __children["apGlow"] )
+__children["apGlow"]["user"].addChild( Gaffer.IntPlug( "passes", defaultValue = 3 ) )
+Gaffer.Metadata.registerValue( __children["apGlow"]["user"]["passes"], "label", "Passes" )
+__children["apGlow"]["user"].addChild( Gaffer.FloatPlug( "intensity", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["apGlow"]["user"]["intensity"], "label", "Intensity" )
+__children["apGlow"]["user"].addChild( Gaffer.FloatPlug( "size", defaultValue = 10.0 ) )
+Gaffer.Metadata.registerValue( __children["apGlow"]["user"]["size"], "label", "Size" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Advanced glow (multi-pass).\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

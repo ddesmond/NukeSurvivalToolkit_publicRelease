@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["apChromaMerge"] = GafferImage.Grade( "apChromaMerge" )
+parent.addChild( __children["apChromaMerge"] )
+__children["apChromaMerge"]["user"].addChild( Gaffer.FloatPlug( "mix", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["apChromaMerge"]["user"]["mix"], "label", "Mix" )
+__children["apChromaMerge"]["user"].addChild( Gaffer.FloatPlug( "chromaShift", defaultValue = 0.0 ) )
+Gaffer.Metadata.registerValue( __children["apChromaMerge"]["user"]["chromaShift"], "label", "Chroma Shift" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Merge with chroma handling.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

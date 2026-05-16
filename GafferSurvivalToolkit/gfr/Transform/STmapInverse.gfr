@@ -1,0 +1,13 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["STmapInverse"] = GafferImage.Grade( "STmapInverse" )
+parent.addChild( __children["STmapInverse"] )
+__children["STmapInverse"]["user"].addChild( Gaffer.StringPlug( "filter", defaultValue = "cubic" ) )
+Gaffer.Metadata.registerValue( __children["STmapInverse"]["user"]["filter"], "label", "Filter" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Invert STMap.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

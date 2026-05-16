@@ -1,0 +1,21 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["RadialAdvanced"] = GafferImage.Grade( "RadialAdvanced" )
+parent.addChild( __children["RadialAdvanced"] )
+__children["RadialAdvanced"]["user"].addChild( Gaffer.FloatPlug( "innerRadius", defaultValue = 0.0 ) )
+Gaffer.Metadata.registerValue( __children["RadialAdvanced"]["user"]["innerRadius"], "label", "Inner Radius" )
+__children["RadialAdvanced"]["user"].addChild( Gaffer.FloatPlug( "outerRadius", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["RadialAdvanced"]["user"]["outerRadius"], "label", "Outer Radius" )
+__children["RadialAdvanced"]["user"].addChild( Gaffer.FloatPlug( "softness", defaultValue = 0.1 ) )
+Gaffer.Metadata.registerValue( __children["RadialAdvanced"]["user"]["softness"], "label", "Softness" )
+__children["RadialAdvanced"]["user"].addChild( Gaffer.V2fPlug( "center", defaultValue = (0.5, 0.5) ) )
+Gaffer.Metadata.registerValue( __children["RadialAdvanced"]["user"]["center"], "label", "Center" )
+__children["RadialAdvanced"]["user"].addChild( Gaffer.FloatPlug( "rotation", defaultValue = 0.0 ) )
+Gaffer.Metadata.registerValue( __children["RadialAdvanced"]["user"]["rotation"], "label", "Rotation" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Advanced radial gradient with inner/outer radius, softness, and rotation.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

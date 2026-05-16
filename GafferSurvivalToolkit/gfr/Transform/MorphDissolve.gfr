@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["MorphDissolve"] = GafferImage.Grade( "MorphDissolve" )
+parent.addChild( __children["MorphDissolve"] )
+__children["MorphDissolve"]["user"].addChild( Gaffer.FloatPlug( "mix", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["MorphDissolve"]["user"]["mix"], "label", "Mix" )
+__children["MorphDissolve"]["user"].addChild( Gaffer.FloatPlug( "distortion", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["MorphDissolve"]["user"]["distortion"], "label", "Distortion" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Morph dissolve transition.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

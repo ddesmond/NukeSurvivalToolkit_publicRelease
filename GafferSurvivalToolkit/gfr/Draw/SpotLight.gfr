@@ -1,0 +1,19 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["SpotLight"] = GafferImage.Grade( "SpotLight" )
+parent.addChild( __children["SpotLight"] )
+__children["SpotLight"]["user"].addChild( Gaffer.V2fPlug( "position", defaultValue = (0.5, 0.5) ) )
+Gaffer.Metadata.registerValue( __children["SpotLight"]["user"]["position"], "label", "Position" )
+__children["SpotLight"]["user"].addChild( Gaffer.FloatPlug( "spread", defaultValue = 0.3 ) )
+Gaffer.Metadata.registerValue( __children["SpotLight"]["user"]["spread"], "label", "Spread" )
+__children["SpotLight"]["user"].addChild( Gaffer.FloatPlug( "intensity", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["SpotLight"]["user"]["intensity"], "label", "Intensity" )
+__children["SpotLight"]["user"].addChild( Gaffer.FloatPlug( "falloff", defaultValue = 2.0 ) )
+Gaffer.Metadata.registerValue( __children["SpotLight"]["user"]["falloff"], "label", "Falloff" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Simulated spotlight with position, spread, intensity, and falloff.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["ConvertPNZ"] = GafferImage.Grade( "ConvertPNZ" )
+parent.addChild( __children["ConvertPNZ"] )
+__children["ConvertPNZ"]["user"].addChild( Gaffer.StringPlug( "source", defaultValue = "position" ) )
+Gaffer.Metadata.registerValue( __children["ConvertPNZ"]["user"]["source"], "label", "Source" )
+__children["ConvertPNZ"]["user"].addChild( Gaffer.StringPlug( "target", defaultValue = "normal" ) )
+Gaffer.Metadata.registerValue( __children["ConvertPNZ"]["user"]["target"], "label", "Target" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Position/Normal/Z convert.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["LightSwitchPuppet"] = GafferImage.Grade( "LightSwitchPuppet" )
+parent.addChild( __children["LightSwitchPuppet"] )
+__children["LightSwitchPuppet"]["user"].addChild( Gaffer.IntPlug( "numLights", defaultValue = 3 ) )
+Gaffer.Metadata.registerValue( __children["LightSwitchPuppet"]["user"]["numLights"], "label", "Number of Lights" )
+__children["LightSwitchPuppet"]["user"].addChild( Gaffer.BoolPlug( "puppetMode", defaultValue = True ) )
+Gaffer.Metadata.registerValue( __children["LightSwitchPuppet"]["user"]["puppetMode"], "label", "Puppet Mode" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Light switch puppet rig.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

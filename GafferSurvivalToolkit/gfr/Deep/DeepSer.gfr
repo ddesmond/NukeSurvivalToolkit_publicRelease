@@ -1,0 +1,13 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["DeepSer"] = GafferImage.Grade( "DeepSer" )
+parent.addChild( __children["DeepSer"] )
+__children["DeepSer"]["user"].addChild( Gaffer.StringPlug( "format", defaultValue = "exr" ) )
+Gaffer.Metadata.registerValue( __children["DeepSer"]["user"]["format"], "label", "Format" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Deep serialize.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

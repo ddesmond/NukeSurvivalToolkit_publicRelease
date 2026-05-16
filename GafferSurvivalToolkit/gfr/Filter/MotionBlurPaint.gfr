@@ -1,0 +1,17 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["MotionBlurPaint"] = GafferImage.Grade( "MotionBlurPaint" )
+parent.addChild( __children["MotionBlurPaint"] )
+__children["MotionBlurPaint"]["user"].addChild( Gaffer.FloatPlug( "direction", defaultValue = 0.0 ) )
+Gaffer.Metadata.registerValue( __children["MotionBlurPaint"]["user"]["direction"], "label", "Direction" )
+__children["MotionBlurPaint"]["user"].addChild( Gaffer.FloatPlug( "length", defaultValue = 10.0 ) )
+Gaffer.Metadata.registerValue( __children["MotionBlurPaint"]["user"]["length"], "label", "Length" )
+__children["MotionBlurPaint"]["user"].addChild( Gaffer.FloatPlug( "taper", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["MotionBlurPaint"]["user"]["taper"], "label", "Taper" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Painted motion blur.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

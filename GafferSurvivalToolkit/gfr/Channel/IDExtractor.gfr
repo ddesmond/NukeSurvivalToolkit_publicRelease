@@ -1,0 +1,21 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["IDExtractor"] = GafferImage.Grade( "IDExtractor" )
+parent.addChild( __children["IDExtractor"] )
+__children["IDExtractor"]["user"].addChild( Gaffer.FloatPlug( "targetRed", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["IDExtractor"]["user"]["targetRed"], "label", "Target Red" )
+__children["IDExtractor"]["user"].addChild( Gaffer.FloatPlug( "targetGreen", defaultValue = 0.0 ) )
+Gaffer.Metadata.registerValue( __children["IDExtractor"]["user"]["targetGreen"], "label", "Target Green" )
+__children["IDExtractor"]["user"].addChild( Gaffer.FloatPlug( "targetBlue", defaultValue = 0.0 ) )
+Gaffer.Metadata.registerValue( __children["IDExtractor"]["user"]["targetBlue"], "label", "Target Blue" )
+__children["IDExtractor"]["user"].addChild( Gaffer.FloatPlug( "tolerance", defaultValue = 0.01 ) )
+Gaffer.Metadata.registerValue( __children["IDExtractor"]["user"]["tolerance"], "label", "Tolerance" )
+__children["IDExtractor"]["user"].addChild( Gaffer.BoolPlug( "invert", defaultValue = False ) )
+Gaffer.Metadata.registerValue( __children["IDExtractor"]["user"]["invert"], "label", "Invert" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Extract ID mattes from ID passes.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

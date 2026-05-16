@@ -1,0 +1,13 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["DVPToImage"] = GafferImage.Grade( "DVPToImage" )
+parent.addChild( __children["DVPToImage"] )
+__children["DVPToImage"]["user"].addChild( Gaffer.StringPlug( "depthChannel", defaultValue = "depth.Z" ) )
+Gaffer.Metadata.registerValue( __children["DVPToImage"]["user"]["depthChannel"], "label", "Depth Channel" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Deep position to image.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

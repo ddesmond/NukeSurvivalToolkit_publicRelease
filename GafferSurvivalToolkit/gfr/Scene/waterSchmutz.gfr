@@ -1,0 +1,17 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["waterSchmutz"] = GafferImage.Grade( "waterSchmutz" )
+parent.addChild( __children["waterSchmutz"] )
+__children["waterSchmutz"]["user"].addChild( Gaffer.IntPlug( "count", defaultValue = 100 ) )
+Gaffer.Metadata.registerValue( __children["waterSchmutz"]["user"]["count"], "label", "Count" )
+__children["waterSchmutz"]["user"].addChild( Gaffer.FloatPlug( "speed", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["waterSchmutz"]["user"]["speed"], "label", "Speed" )
+__children["waterSchmutz"]["user"].addChild( Gaffer.IntPlug( "seed", defaultValue = 0 ) )
+Gaffer.Metadata.registerValue( __children["waterSchmutz"]["user"]["seed"], "label", "Seed" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Water droplet/dirt particles.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

@@ -1,0 +1,17 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["PRamp"] = GafferImage.Grade( "PRamp" )
+parent.addChild( __children["PRamp"] )
+__children["PRamp"]["user"].addChild( Gaffer.StringPlug( "axis", defaultValue = "y" ) )
+Gaffer.Metadata.registerValue( __children["PRamp"]["user"]["axis"], "label", "Axis" )
+__children["PRamp"]["user"].addChild( Gaffer.FloatPlug( "start", defaultValue = 0.0 ) )
+Gaffer.Metadata.registerValue( __children["PRamp"]["user"]["start"], "label", "Start" )
+__children["PRamp"]["user"].addChild( Gaffer.FloatPlug( "end", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["PRamp"]["user"]["end"], "label", "End" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Position ramp.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

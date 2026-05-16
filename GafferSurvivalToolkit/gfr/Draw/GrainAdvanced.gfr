@@ -1,0 +1,23 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["GrainAdvanced"] = GafferImage.Grade( "GrainAdvanced" )
+parent.addChild( __children["GrainAdvanced"] )
+__children["GrainAdvanced"]["user"].addChild( Gaffer.FloatPlug( "intensity", defaultValue = 0.1 ) )
+Gaffer.Metadata.registerValue( __children["GrainAdvanced"]["user"]["intensity"], "label", "Intensity" )
+__children["GrainAdvanced"]["user"].addChild( Gaffer.FloatPlug( "size", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["GrainAdvanced"]["user"]["size"], "label", "Size" )
+__children["GrainAdvanced"]["user"].addChild( Gaffer.FloatPlug( "midtone", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["GrainAdvanced"]["user"]["midtone"], "label", "Midtone" )
+__children["GrainAdvanced"]["user"].addChild( Gaffer.FloatPlug( "highlights", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["GrainAdvanced"]["user"]["highlights"], "label", "Highlights" )
+__children["GrainAdvanced"]["user"].addChild( Gaffer.FloatPlug( "shadows", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["GrainAdvanced"]["user"]["shadows"], "label", "Shadows" )
+__children["GrainAdvanced"]["user"].addChild( Gaffer.IntPlug( "seed", defaultValue = 0 ) )
+Gaffer.Metadata.registerValue( __children["GrainAdvanced"]["user"]["seed"], "label", "Seed" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Advanced grain with per-zone controls.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

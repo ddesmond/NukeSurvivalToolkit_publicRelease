@@ -1,0 +1,17 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["BeautifulSkin"] = GafferImage.Grade( "BeautifulSkin" )
+parent.addChild( __children["BeautifulSkin"] )
+__children["BeautifulSkin"]["user"].addChild( Gaffer.FloatPlug( "smoothness", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["BeautifulSkin"]["user"]["smoothness"], "label", "Smoothness" )
+__children["BeautifulSkin"]["user"].addChild( Gaffer.FloatPlug( "detail", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["BeautifulSkin"]["user"]["detail"], "label", "Detail" )
+__children["BeautifulSkin"]["user"].addChild( Gaffer.FloatPlug( "warmth", defaultValue = 0.0 ) )
+Gaffer.Metadata.registerValue( __children["BeautifulSkin"]["user"]["warmth"], "label", "Warmth" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Skin smoothing/beautification.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

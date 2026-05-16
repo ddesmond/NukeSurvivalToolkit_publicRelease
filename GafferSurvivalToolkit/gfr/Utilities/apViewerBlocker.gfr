@@ -1,0 +1,13 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["apViewerBlocker"] = GafferImage.Grade( "apViewerBlocker" )
+parent.addChild( __children["apViewerBlocker"] )
+__children["apViewerBlocker"]["user"].addChild( Gaffer.BoolPlug( "block", defaultValue = False ) )
+Gaffer.Metadata.registerValue( __children["apViewerBlocker"]["user"]["block"], "label", "Block" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Block viewer during render.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

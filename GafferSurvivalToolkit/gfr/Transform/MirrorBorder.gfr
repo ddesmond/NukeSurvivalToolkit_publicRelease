@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["MirrorBorder"] = GafferImage.Grade( "MirrorBorder" )
+parent.addChild( __children["MirrorBorder"] )
+__children["MirrorBorder"]["user"].addChild( Gaffer.StringPlug( "direction", defaultValue = "horizontal" ) )
+Gaffer.Metadata.registerValue( __children["MirrorBorder"]["user"]["direction"], "label", "Direction" )
+__children["MirrorBorder"]["user"].addChild( Gaffer.FloatPlug( "amount", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["MirrorBorder"]["user"]["amount"], "label", "Amount" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Mirror at borders.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

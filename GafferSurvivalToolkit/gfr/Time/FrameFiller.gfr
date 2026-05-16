@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["FrameFiller"] = GafferImage.Grade( "FrameFiller" )
+parent.addChild( __children["FrameFiller"] )
+__children["FrameFiller"]["user"].addChild( Gaffer.StringPlug( "method", defaultValue = "interpolate" ) )
+Gaffer.Metadata.registerValue( __children["FrameFiller"]["user"]["method"], "label", "Method" )
+__children["FrameFiller"]["user"].addChild( Gaffer.IntPlug( "maxGap", defaultValue = 5 ) )
+Gaffer.Metadata.registerValue( __children["FrameFiller"]["user"]["maxGap"], "label", "Max Gap" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Fill missing frames.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

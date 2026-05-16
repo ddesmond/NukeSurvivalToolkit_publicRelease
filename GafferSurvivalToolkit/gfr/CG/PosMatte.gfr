@@ -1,0 +1,17 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["PosMatte"] = GafferImage.Grade( "PosMatte" )
+parent.addChild( __children["PosMatte"] )
+__children["PosMatte"]["user"].addChild( Gaffer.V3fPlug( "positionMin", defaultValue = (0.0, 0.0, 0.0) ) )
+Gaffer.Metadata.registerValue( __children["PosMatte"]["user"]["positionMin"], "label", "Position Min" )
+__children["PosMatte"]["user"].addChild( Gaffer.V3fPlug( "positionMax", defaultValue = (1.0, 1.0, 1.0) ) )
+Gaffer.Metadata.registerValue( __children["PosMatte"]["user"]["positionMax"], "label", "Position Max" )
+__children["PosMatte"]["user"].addChild( Gaffer.FloatPlug( "softness", defaultValue = 0.1 ) )
+Gaffer.Metadata.registerValue( __children["PosMatte"]["user"]["softness"], "label", "Softness" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Position-based matte.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["DeepBoolean"] = GafferImage.Grade( "DeepBoolean" )
+parent.addChild( __children["DeepBoolean"] )
+__children["DeepBoolean"]["user"].addChild( Gaffer.StringPlug( "operation", defaultValue = "union" ) )
+Gaffer.Metadata.registerValue( __children["DeepBoolean"]["user"]["operation"], "label", "Operation" )
+__children["DeepBoolean"]["user"].addChild( Gaffer.FloatPlug( "threshold", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["DeepBoolean"]["user"]["threshold"], "label", "Threshold" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Deep boolean operations.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

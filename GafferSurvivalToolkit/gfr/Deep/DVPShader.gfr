@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["DVPShader"] = GafferImage.Grade( "DVPShader" )
+parent.addChild( __children["DVPShader"] )
+__children["DVPShader"]["user"].addChild( Gaffer.FloatPlug( "diffuse", defaultValue = 0.8 ) )
+Gaffer.Metadata.registerValue( __children["DVPShader"]["user"]["diffuse"], "label", "Diffuse" )
+__children["DVPShader"]["user"].addChild( Gaffer.FloatPlug( "specular", defaultValue = 0.2 ) )
+Gaffer.Metadata.registerValue( __children["DVPShader"]["user"]["specular"], "label", "Specular" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Deep shader.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

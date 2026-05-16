@@ -1,0 +1,21 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["FlareSuperStar"] = GafferImage.Grade( "FlareSuperStar" )
+parent.addChild( __children["FlareSuperStar"] )
+__children["FlareSuperStar"]["user"].addChild( Gaffer.V2fPlug( "position", defaultValue = (0.5, 0.5) ) )
+Gaffer.Metadata.registerValue( __children["FlareSuperStar"]["user"]["position"], "label", "Position" )
+__children["FlareSuperStar"]["user"].addChild( Gaffer.IntPlug( "numSpikes", defaultValue = 6 ) )
+Gaffer.Metadata.registerValue( __children["FlareSuperStar"]["user"]["numSpikes"], "label", "Number of Spikes" )
+__children["FlareSuperStar"]["user"].addChild( Gaffer.FloatPlug( "length", defaultValue = 0.3 ) )
+Gaffer.Metadata.registerValue( __children["FlareSuperStar"]["user"]["length"], "label", "Length" )
+__children["FlareSuperStar"]["user"].addChild( Gaffer.FloatPlug( "width", defaultValue = 0.02 ) )
+Gaffer.Metadata.registerValue( __children["FlareSuperStar"]["user"]["width"], "label", "Width" )
+__children["FlareSuperStar"]["user"].addChild( Gaffer.FloatPlug( "intensity", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["FlareSuperStar"]["user"]["intensity"], "label", "Intensity" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Superstar flare effect.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

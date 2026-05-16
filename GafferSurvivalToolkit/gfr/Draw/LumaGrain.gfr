@@ -1,0 +1,19 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["LumaGrain"] = GafferImage.Grade( "LumaGrain" )
+parent.addChild( __children["LumaGrain"] )
+__children["LumaGrain"]["user"].addChild( Gaffer.FloatPlug( "intensity", defaultValue = 0.1 ) )
+Gaffer.Metadata.registerValue( __children["LumaGrain"]["user"]["intensity"], "label", "Intensity" )
+__children["LumaGrain"]["user"].addChild( Gaffer.FloatPlug( "lumaThreshold", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["LumaGrain"]["user"]["lumaThreshold"], "label", "Luma Threshold" )
+__children["LumaGrain"]["user"].addChild( Gaffer.FloatPlug( "size", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["LumaGrain"]["user"]["size"], "label", "Size" )
+__children["LumaGrain"]["user"].addChild( Gaffer.IntPlug( "seed", defaultValue = 0 ) )
+Gaffer.Metadata.registerValue( __children["LumaGrain"]["user"]["seed"], "label", "Seed" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Luminance-based grain.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

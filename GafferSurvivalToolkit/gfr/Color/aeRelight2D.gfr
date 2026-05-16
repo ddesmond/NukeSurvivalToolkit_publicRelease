@@ -1,0 +1,17 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["aeRelight2D"] = GafferImage.Grade( "aeRelight2D" )
+parent.addChild( __children["aeRelight2D"] )
+__children["aeRelight2D"]["user"].addChild( Gaffer.FloatPlug( "lightAngle", defaultValue = 45.0 ) )
+Gaffer.Metadata.registerValue( __children["aeRelight2D"]["user"]["lightAngle"], "label", "Light Angle" )
+__children["aeRelight2D"]["user"].addChild( Gaffer.FloatPlug( "lightIntensity", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["aeRelight2D"]["user"]["lightIntensity"], "label", "Light Intensity" )
+__children["aeRelight2D"]["user"].addChild( Gaffer.FloatPlug( "ambient", defaultValue = 0.2 ) )
+Gaffer.Metadata.registerValue( __children["aeRelight2D"]["user"]["ambient"], "label", "Ambient" )
+
+Gaffer.Metadata.registerValue( parent, "description", "2D relighting from normals.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

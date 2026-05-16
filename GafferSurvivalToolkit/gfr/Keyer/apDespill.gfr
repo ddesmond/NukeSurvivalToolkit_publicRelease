@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["apDespill"] = GafferImage.Grade( "apDespill" )
+parent.addChild( __children["apDespill"] )
+__children["apDespill"]["user"].addChild( Gaffer.StringPlug( "method", defaultValue = "green" ) )
+Gaffer.Metadata.registerValue( __children["apDespill"]["user"]["method"], "label", "Method" )
+__children["apDespill"]["user"].addChild( Gaffer.FloatPlug( "amount", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["apDespill"]["user"]["amount"], "label", "Amount" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Despill for green/blue screen.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

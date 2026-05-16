@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["RayDeepAO"] = GafferImage.Grade( "RayDeepAO" )
+parent.addChild( __children["RayDeepAO"] )
+__children["RayDeepAO"]["user"].addChild( Gaffer.IntPlug( "samples", defaultValue = 16 ) )
+Gaffer.Metadata.registerValue( __children["RayDeepAO"]["user"]["samples"], "label", "Samples" )
+__children["RayDeepAO"]["user"].addChild( Gaffer.FloatPlug( "radius", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["RayDeepAO"]["user"]["radius"], "label", "Radius" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Ray-deep ambient occlusion.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

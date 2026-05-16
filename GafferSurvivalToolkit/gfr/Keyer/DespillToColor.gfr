@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["DespillToColor"] = GafferImage.Grade( "DespillToColor" )
+parent.addChild( __children["DespillToColor"] )
+__children["DespillToColor"]["user"].addChild( Gaffer.StringPlug( "targetColor", defaultValue = "gray" ) )
+Gaffer.Metadata.registerValue( __children["DespillToColor"]["user"]["targetColor"], "label", "Target Color" )
+__children["DespillToColor"]["user"].addChild( Gaffer.FloatPlug( "amount", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["DespillToColor"]["user"]["amount"], "label", "Amount" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Despill to specific color.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

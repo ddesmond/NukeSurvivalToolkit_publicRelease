@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["deHaze"] = GafferImage.Grade( "deHaze" )
+parent.addChild( __children["deHaze"] )
+__children["deHaze"]["user"].addChild( Gaffer.FloatPlug( "amount", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["deHaze"]["user"]["amount"], "label", "Amount" )
+__children["deHaze"]["user"].addChild( Gaffer.FloatPlug( "distance", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["deHaze"]["user"]["distance"], "label", "Distance" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Atmospheric haze removal.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

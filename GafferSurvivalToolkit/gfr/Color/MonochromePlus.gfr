@@ -1,0 +1,19 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["MonochromePlus"] = GafferImage.Grade( "MonochromePlus" )
+parent.addChild( __children["MonochromePlus"] )
+__children["MonochromePlus"]["user"].addChild( Gaffer.FloatPlug( "redWeight", defaultValue = 0.2126 ) )
+Gaffer.Metadata.registerValue( __children["MonochromePlus"]["user"]["redWeight"], "label", "Red Weight" )
+__children["MonochromePlus"]["user"].addChild( Gaffer.FloatPlug( "greenWeight", defaultValue = 0.7152 ) )
+Gaffer.Metadata.registerValue( __children["MonochromePlus"]["user"]["greenWeight"], "label", "Green Weight" )
+__children["MonochromePlus"]["user"].addChild( Gaffer.FloatPlug( "blueWeight", defaultValue = 0.0722 ) )
+Gaffer.Metadata.registerValue( __children["MonochromePlus"]["user"]["blueWeight"], "label", "Blue Weight" )
+__children["MonochromePlus"]["user"].addChild( Gaffer.FloatPlug( "contrast", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["MonochromePlus"]["user"]["contrast"], "label", "Contrast" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Advanced monochrome conversion.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

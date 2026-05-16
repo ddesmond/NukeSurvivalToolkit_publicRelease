@@ -1,0 +1,17 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["Glass"] = GafferImage.Grade( "Glass" )
+parent.addChild( __children["Glass"] )
+__children["Glass"]["user"].addChild( Gaffer.FloatPlug( "distortion", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["Glass"]["user"]["distortion"], "label", "Distortion" )
+__children["Glass"]["user"].addChild( Gaffer.FloatPlug( "scale", defaultValue = 10.0 ) )
+Gaffer.Metadata.registerValue( __children["Glass"]["user"]["scale"], "label", "Scale" )
+__children["Glass"]["user"].addChild( Gaffer.IntPlug( "seed", defaultValue = 0 ) )
+Gaffer.Metadata.registerValue( __children["Glass"]["user"]["seed"], "label", "Seed" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Glass refraction distortion.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

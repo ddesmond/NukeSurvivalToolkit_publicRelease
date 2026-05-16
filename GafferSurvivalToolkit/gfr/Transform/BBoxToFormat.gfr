@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["BBoxToFormat"] = GafferImage.Grade( "BBoxToFormat" )
+parent.addChild( __children["BBoxToFormat"] )
+__children["BBoxToFormat"]["user"].addChild( Gaffer.StringPlug( "channels", defaultValue = "rgba.alpha" ) )
+Gaffer.Metadata.registerValue( __children["BBoxToFormat"]["user"]["channels"], "label", "Channels" )
+__children["BBoxToFormat"]["user"].addChild( Gaffer.FloatPlug( "threshold", defaultValue = 0.01 ) )
+Gaffer.Metadata.registerValue( __children["BBoxToFormat"]["user"]["threshold"], "label", "Threshold" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Convert bbox to format.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["streamCart"] = GafferImage.Grade( "streamCart" )
+parent.addChild( __children["streamCart"] )
+__children["streamCart"]["user"].addChild( Gaffer.StringPlug( "prefix", defaultValue = "" ) )
+Gaffer.Metadata.registerValue( __children["streamCart"]["user"]["prefix"], "label", "Prefix" )
+__children["streamCart"]["user"].addChild( Gaffer.StringPlug( "suffix", defaultValue = "" ) )
+Gaffer.Metadata.registerValue( __children["streamCart"]["user"]["suffix"], "label", "Suffix" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Channel stream management.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

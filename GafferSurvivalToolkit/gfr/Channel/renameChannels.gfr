@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["renameChannels"] = GafferImage.Grade( "renameChannels" )
+parent.addChild( __children["renameChannels"] )
+__children["renameChannels"]["user"].addChild( Gaffer.StringPlug( "findPattern", defaultValue = "" ) )
+Gaffer.Metadata.registerValue( __children["renameChannels"]["user"]["findPattern"], "label", "Find Pattern" )
+__children["renameChannels"]["user"].addChild( Gaffer.StringPlug( "replaceWith", defaultValue = "" ) )
+Gaffer.Metadata.registerValue( __children["renameChannels"]["user"]["replaceWith"], "label", "Replace With" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Batch channel renaming.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

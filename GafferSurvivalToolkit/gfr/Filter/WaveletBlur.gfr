@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["WaveletBlur"] = GafferImage.Grade( "WaveletBlur" )
+parent.addChild( __children["WaveletBlur"] )
+__children["WaveletBlur"]["user"].addChild( Gaffer.FloatPlug( "scale", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["WaveletBlur"]["user"]["scale"], "label", "Scale" )
+__children["WaveletBlur"]["user"].addChild( Gaffer.IntPlug( "iterations", defaultValue = 3 ) )
+Gaffer.Metadata.registerValue( __children["WaveletBlur"]["user"]["iterations"], "label", "Iterations" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Wavelet-based blur.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

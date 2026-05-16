@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["Distance3D"] = GafferImage.Grade( "Distance3D" )
+parent.addChild( __children["Distance3D"] )
+__children["Distance3D"]["user"].addChild( Gaffer.V3fPlug( "pointA", defaultValue = (0.0, 0.0, 0.0) ) )
+Gaffer.Metadata.registerValue( __children["Distance3D"]["user"]["pointA"], "label", "Point A" )
+__children["Distance3D"]["user"].addChild( Gaffer.V3fPlug( "pointB", defaultValue = (1.0, 1.0, 1.0) ) )
+Gaffer.Metadata.registerValue( __children["Distance3D"]["user"]["pointB"], "label", "Point B" )
+
+Gaffer.Metadata.registerValue( parent, "description", "3D distance measurement.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

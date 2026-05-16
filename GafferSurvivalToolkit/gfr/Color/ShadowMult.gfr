@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["ShadowMult"] = GafferImage.Grade( "ShadowMult" )
+parent.addChild( __children["ShadowMult"] )
+__children["ShadowMult"]["user"].addChild( Gaffer.FloatPlug( "threshold", defaultValue = 0.3 ) )
+Gaffer.Metadata.registerValue( __children["ShadowMult"]["user"]["threshold"], "label", "Threshold" )
+__children["ShadowMult"]["user"].addChild( Gaffer.FloatPlug( "multiplier", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["ShadowMult"]["user"]["multiplier"], "label", "Multiplier" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Shadow multiplication/enhancement.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

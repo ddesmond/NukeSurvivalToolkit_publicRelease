@@ -1,0 +1,17 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["apVignette"] = GafferImage.Grade( "apVignette" )
+parent.addChild( __children["apVignette"] )
+__children["apVignette"]["user"].addChild( Gaffer.FloatPlug( "amount", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["apVignette"]["user"]["amount"], "label", "Amount" )
+__children["apVignette"]["user"].addChild( Gaffer.FloatPlug( "softness", defaultValue = 0.3 ) )
+Gaffer.Metadata.registerValue( __children["apVignette"]["user"]["softness"], "label", "Softness" )
+__children["apVignette"]["user"].addChild( Gaffer.V2fPlug( "center", defaultValue = (0.5, 0.5) ) )
+Gaffer.Metadata.registerValue( __children["apVignette"]["user"]["center"], "label", "Center" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Vignette effect.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["apChromaTransform"] = GafferImage.Grade( "apChromaTransform" )
+parent.addChild( __children["apChromaTransform"] )
+__children["apChromaTransform"]["user"].addChild( Gaffer.V2fPlug( "offset", defaultValue = (0.0, 0.0) ) )
+Gaffer.Metadata.registerValue( __children["apChromaTransform"]["user"]["offset"], "label", "Offset" )
+__children["apChromaTransform"]["user"].addChild( Gaffer.BoolPlug( "chromaOnly", defaultValue = False ) )
+Gaffer.Metadata.registerValue( __children["apChromaTransform"]["user"]["chromaOnly"], "label", "Chroma Only" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Chroma-aware transform.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

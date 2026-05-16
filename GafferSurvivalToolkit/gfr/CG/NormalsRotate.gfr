@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["NormalsRotate"] = GafferImage.Grade( "NormalsRotate" )
+parent.addChild( __children["NormalsRotate"] )
+__children["NormalsRotate"]["user"].addChild( Gaffer.FloatPlug( "angle", defaultValue = 0.0 ) )
+Gaffer.Metadata.registerValue( __children["NormalsRotate"]["user"]["angle"], "label", "Angle" )
+__children["NormalsRotate"]["user"].addChild( Gaffer.StringPlug( "axis", defaultValue = "z" ) )
+Gaffer.Metadata.registerValue( __children["NormalsRotate"]["user"]["axis"], "label", "Axis" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Rotate normals.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

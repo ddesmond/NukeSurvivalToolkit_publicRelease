@@ -1,0 +1,17 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["Matrix4x4Math"] = GafferImage.Grade( "Matrix4x4Math" )
+parent.addChild( __children["Matrix4x4Math"] )
+__children["Matrix4x4Math"]["user"].addChild( Gaffer.StringPlug( "operation", defaultValue = "multiply" ) )
+Gaffer.Metadata.registerValue( __children["Matrix4x4Math"]["user"]["operation"], "label", "Operation" )
+__children["Matrix4x4Math"]["user"].addChild( Gaffer.StringPlug( "matrixA", defaultValue = "" ) )
+Gaffer.Metadata.registerValue( __children["Matrix4x4Math"]["user"]["matrixA"], "label", "Matrix A" )
+__children["Matrix4x4Math"]["user"].addChild( Gaffer.StringPlug( "matrixB", defaultValue = "" ) )
+Gaffer.Metadata.registerValue( __children["Matrix4x4Math"]["user"]["matrixB"], "label", "Matrix B" )
+
+Gaffer.Metadata.registerValue( parent, "description", "4x4 matrix operations.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

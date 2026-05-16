@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["NukeZ"] = GafferImage.Grade( "NukeZ" )
+parent.addChild( __children["NukeZ"] )
+__children["NukeZ"]["user"].addChild( Gaffer.StringPlug( "depthChannel", defaultValue = "depth.Z" ) )
+Gaffer.Metadata.registerValue( __children["NukeZ"]["user"]["depthChannel"], "label", "Depth Channel" )
+__children["NukeZ"]["user"].addChild( Gaffer.FloatPlug( "maxDepth", defaultValue = 100.0 ) )
+Gaffer.Metadata.registerValue( __children["NukeZ"]["user"]["maxDepth"], "label", "Max Depth" )
+
+Gaffer.Metadata.registerValue( parent, "description", "NukeZ deep file utility.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

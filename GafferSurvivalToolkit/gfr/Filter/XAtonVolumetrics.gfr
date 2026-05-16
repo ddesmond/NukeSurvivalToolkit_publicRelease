@@ -1,0 +1,17 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["XAtonVolumetrics"] = GafferImage.Grade( "XAtonVolumetrics" )
+parent.addChild( __children["XAtonVolumetrics"] )
+__children["XAtonVolumetrics"]["user"].addChild( Gaffer.FloatPlug( "intensity", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["XAtonVolumetrics"]["user"]["intensity"], "label", "Intensity" )
+__children["XAtonVolumetrics"]["user"].addChild( Gaffer.IntPlug( "samples", defaultValue = 32 ) )
+Gaffer.Metadata.registerValue( __children["XAtonVolumetrics"]["user"]["samples"], "label", "Samples" )
+__children["XAtonVolumetrics"]["user"].addChild( Gaffer.FloatPlug( "density", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["XAtonVolumetrics"]["user"]["density"], "label", "Density" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Volumetric lighting.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

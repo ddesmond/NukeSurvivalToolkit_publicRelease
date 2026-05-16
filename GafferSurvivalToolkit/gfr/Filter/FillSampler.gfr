@@ -1,0 +1,17 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["FillSampler"] = GafferImage.Grade( "FillSampler" )
+parent.addChild( __children["FillSampler"] )
+__children["FillSampler"]["user"].addChild( Gaffer.IntPlug( "sampleX", defaultValue = 0 ) )
+Gaffer.Metadata.registerValue( __children["FillSampler"]["user"]["sampleX"], "label", "Sample X" )
+__children["FillSampler"]["user"].addChild( Gaffer.IntPlug( "sampleY", defaultValue = 0 ) )
+Gaffer.Metadata.registerValue( __children["FillSampler"]["user"]["sampleY"], "label", "Sample Y" )
+__children["FillSampler"]["user"].addChild( Gaffer.IntPlug( "radius", defaultValue = 5 ) )
+Gaffer.Metadata.registerValue( __children["FillSampler"]["user"]["radius"], "label", "Radius" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Fill from sampled area.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

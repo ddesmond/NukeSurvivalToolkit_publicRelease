@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["MirrorDimension"] = GafferImage.Grade( "MirrorDimension" )
+parent.addChild( __children["MirrorDimension"] )
+__children["MirrorDimension"]["user"].addChild( Gaffer.StringPlug( "axis", defaultValue = "x" ) )
+Gaffer.Metadata.registerValue( __children["MirrorDimension"]["user"]["axis"], "label", "Axis" )
+__children["MirrorDimension"]["user"].addChild( Gaffer.FloatPlug( "offset", defaultValue = 0.0 ) )
+Gaffer.Metadata.registerValue( __children["MirrorDimension"]["user"]["offset"], "label", "Offset" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Mirror dimension/portal.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

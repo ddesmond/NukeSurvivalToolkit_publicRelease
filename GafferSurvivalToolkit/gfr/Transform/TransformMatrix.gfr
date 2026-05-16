@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["TransformMatrix"] = GafferImage.Grade( "TransformMatrix" )
+parent.addChild( __children["TransformMatrix"] )
+__children["TransformMatrix"]["user"].addChild( Gaffer.StringPlug( "matrix", defaultValue = "" ) )
+Gaffer.Metadata.registerValue( __children["TransformMatrix"]["user"]["matrix"], "label", "Matrix" )
+__children["TransformMatrix"]["user"].addChild( Gaffer.StringPlug( "filter", defaultValue = "cubic" ) )
+Gaffer.Metadata.registerValue( __children["TransformMatrix"]["user"]["filter"], "label", "Filter" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Matrix-based transform.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

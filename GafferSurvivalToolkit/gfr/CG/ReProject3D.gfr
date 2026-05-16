@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["ReProject3D"] = GafferImage.Grade( "ReProject3D" )
+parent.addChild( __children["ReProject3D"] )
+__children["ReProject3D"]["user"].addChild( Gaffer.StringPlug( "camera", defaultValue = "Camera1" ) )
+Gaffer.Metadata.registerValue( __children["ReProject3D"]["user"]["camera"], "label", "Camera" )
+__children["ReProject3D"]["user"].addChild( Gaffer.StringPlug( "filter", defaultValue = "cubic" ) )
+Gaffer.Metadata.registerValue( __children["ReProject3D"]["user"]["filter"], "label", "Filter" )
+
+Gaffer.Metadata.registerValue( parent, "description", "3D re-projection.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

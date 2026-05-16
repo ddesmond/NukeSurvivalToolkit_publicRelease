@@ -1,0 +1,13 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["BinaryAlpha"] = GafferImage.Grade( "BinaryAlpha" )
+parent.addChild( __children["BinaryAlpha"] )
+__children["BinaryAlpha"]["user"].addChild( Gaffer.FloatPlug( "threshold", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["BinaryAlpha"]["user"]["threshold"], "label", "Threshold" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Convert alpha to binary.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

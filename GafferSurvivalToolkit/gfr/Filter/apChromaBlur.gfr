@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["apChromaBlur"] = GafferImage.Grade( "apChromaBlur" )
+parent.addChild( __children["apChromaBlur"] )
+__children["apChromaBlur"]["user"].addChild( Gaffer.FloatPlug( "size", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["apChromaBlur"]["user"]["size"], "label", "Size" )
+__children["apChromaBlur"]["user"].addChild( Gaffer.BoolPlug( "chromaOnly", defaultValue = False ) )
+Gaffer.Metadata.registerValue( __children["apChromaBlur"]["user"]["chromaOnly"], "label", "Chroma Only" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Chroma-aware blur.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

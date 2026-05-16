@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["MergeAtmos"] = GafferImage.Grade( "MergeAtmos" )
+parent.addChild( __children["MergeAtmos"] )
+__children["MergeAtmos"]["user"].addChild( Gaffer.FloatPlug( "depthInfluence", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["MergeAtmos"]["user"]["depthInfluence"], "label", "Depth Influence" )
+__children["MergeAtmos"]["user"].addChild( Gaffer.FloatPlug( "density", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["MergeAtmos"]["user"]["density"], "label", "Density" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Atmospheric merge (depth-aware).\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["apEdgePush"] = GafferImage.Grade( "apEdgePush" )
+parent.addChild( __children["apEdgePush"] )
+__children["apEdgePush"]["user"].addChild( Gaffer.FloatPlug( "amount", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["apEdgePush"]["user"]["amount"], "label", "Amount" )
+__children["apEdgePush"]["user"].addChild( Gaffer.FloatPlug( "softness", defaultValue = 0.1 ) )
+Gaffer.Metadata.registerValue( __children["apEdgePush"]["user"]["softness"], "label", "Softness" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Push edges outward.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

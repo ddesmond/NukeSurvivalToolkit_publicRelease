@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["aPmatte"] = GafferImage.Grade( "aPmatte" )
+parent.addChild( __children["aPmatte"] )
+__children["aPmatte"]["user"].addChild( Gaffer.FloatPlug( "threshold", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["aPmatte"]["user"]["threshold"], "label", "Threshold" )
+__children["aPmatte"]["user"].addChild( Gaffer.FloatPlug( "softness", defaultValue = 0.1 ) )
+Gaffer.Metadata.registerValue( __children["aPmatte"]["user"]["softness"], "label", "Softness" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Matte generation.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

@@ -1,0 +1,19 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["SliceTool"] = GafferImage.Grade( "SliceTool" )
+parent.addChild( __children["SliceTool"] )
+__children["SliceTool"]["user"].addChild( Gaffer.IntPlug( "sliceX", defaultValue = 0 ) )
+Gaffer.Metadata.registerValue( __children["SliceTool"]["user"]["sliceX"], "label", "X" )
+__children["SliceTool"]["user"].addChild( Gaffer.IntPlug( "sliceY", defaultValue = 0 ) )
+Gaffer.Metadata.registerValue( __children["SliceTool"]["user"]["sliceY"], "label", "Y" )
+__children["SliceTool"]["user"].addChild( Gaffer.IntPlug( "sliceWidth", defaultValue = 1 ) )
+Gaffer.Metadata.registerValue( __children["SliceTool"]["user"]["sliceWidth"], "label", "Width" )
+__children["SliceTool"]["user"].addChild( Gaffer.IntPlug( "sliceHeight", defaultValue = 1 ) )
+Gaffer.Metadata.registerValue( __children["SliceTool"]["user"]["sliceHeight"], "label", "Height" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Image slice analysis tool.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

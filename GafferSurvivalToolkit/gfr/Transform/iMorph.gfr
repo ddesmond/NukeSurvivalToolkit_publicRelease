@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["iMorph"] = GafferImage.Grade( "iMorph" )
+parent.addChild( __children["iMorph"] )
+__children["iMorph"]["user"].addChild( Gaffer.FloatPlug( "mix", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["iMorph"]["user"]["mix"], "label", "Mix" )
+__children["iMorph"]["user"].addChild( Gaffer.FloatPlug( "distortion", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["iMorph"]["user"]["distortion"], "label", "Distortion" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Image morphing.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

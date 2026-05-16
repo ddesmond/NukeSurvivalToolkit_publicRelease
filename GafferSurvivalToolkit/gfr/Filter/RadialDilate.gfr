@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["RadialDilate"] = GafferImage.Grade( "RadialDilate" )
+parent.addChild( __children["RadialDilate"] )
+__children["RadialDilate"]["user"].addChild( Gaffer.FloatPlug( "amount", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["RadialDilate"]["user"]["amount"], "label", "Amount" )
+__children["RadialDilate"]["user"].addChild( Gaffer.V2fPlug( "center", defaultValue = (0.5, 0.5) ) )
+Gaffer.Metadata.registerValue( __children["RadialDilate"]["user"]["center"], "label", "Center" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Radial dilation.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

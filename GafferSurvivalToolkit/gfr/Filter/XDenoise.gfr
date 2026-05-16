@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["XDenoise"] = GafferImage.Grade( "XDenoise" )
+parent.addChild( __children["XDenoise"] )
+__children["XDenoise"]["user"].addChild( Gaffer.FloatPlug( "strength", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["XDenoise"]["user"]["strength"], "label", "Strength" )
+__children["XDenoise"]["user"].addChild( Gaffer.FloatPlug( "preserveDetail", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["XDenoise"]["user"]["preserveDetail"], "label", "Preserve Detail" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Denoising.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

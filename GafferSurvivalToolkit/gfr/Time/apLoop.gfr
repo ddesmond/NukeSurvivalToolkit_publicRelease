@@ -1,0 +1,17 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["apLoop"] = GafferImage.Grade( "apLoop" )
+parent.addChild( __children["apLoop"] )
+__children["apLoop"]["user"].addChild( Gaffer.IntPlug( "loopStart", defaultValue = 1 ) )
+Gaffer.Metadata.registerValue( __children["apLoop"]["user"]["loopStart"], "label", "Loop Start" )
+__children["apLoop"]["user"].addChild( Gaffer.IntPlug( "loopEnd", defaultValue = 10 ) )
+Gaffer.Metadata.registerValue( __children["apLoop"]["user"]["loopEnd"], "label", "Loop End" )
+__children["apLoop"]["user"].addChild( Gaffer.IntPlug( "loopCount", defaultValue = 0 ) )
+Gaffer.Metadata.registerValue( __children["apLoop"]["user"]["loopCount"], "label", "Loop Count (0 = infinite)" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Loop frames/sequence cycling.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

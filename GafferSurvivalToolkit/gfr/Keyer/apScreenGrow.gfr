@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["apScreenGrow"] = GafferImage.Grade( "apScreenGrow" )
+parent.addChild( __children["apScreenGrow"] )
+__children["apScreenGrow"]["user"].addChild( Gaffer.FloatPlug( "grow", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["apScreenGrow"]["user"]["grow"], "label", "Grow" )
+__children["apScreenGrow"]["user"].addChild( Gaffer.FloatPlug( "softness", defaultValue = 0.1 ) )
+Gaffer.Metadata.registerValue( __children["apScreenGrow"]["user"]["softness"], "label", "Softness" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Screen matte growth.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

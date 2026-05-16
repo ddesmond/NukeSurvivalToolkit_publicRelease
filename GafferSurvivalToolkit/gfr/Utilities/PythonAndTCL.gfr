@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["PythonAndTCL"] = GafferImage.Grade( "PythonAndTCL" )
+parent.addChild( __children["PythonAndTCL"] )
+__children["PythonAndTCL"]["user"].addChild( Gaffer.StringPlug( "expression", defaultValue = "" ) )
+Gaffer.Metadata.registerValue( __children["PythonAndTCL"]["user"]["expression"], "label", "Expression" )
+__children["PythonAndTCL"]["user"].addChild( Gaffer.StringPlug( "language", defaultValue = "python" ) )
+Gaffer.Metadata.registerValue( __children["PythonAndTCL"]["user"]["language"], "label", "Language" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Python/TCL expression evaluator.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

@@ -1,0 +1,17 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["Symmetry"] = GafferImage.Grade( "Symmetry" )
+parent.addChild( __children["Symmetry"] )
+__children["Symmetry"]["user"].addChild( Gaffer.StringPlug( "axis", defaultValue = "vertical" ) )
+Gaffer.Metadata.registerValue( __children["Symmetry"]["user"]["axis"], "label", "Axis" )
+__children["Symmetry"]["user"].addChild( Gaffer.IntPlug( "copies", defaultValue = 2 ) )
+Gaffer.Metadata.registerValue( __children["Symmetry"]["user"]["copies"], "label", "Copies" )
+__children["Symmetry"]["user"].addChild( Gaffer.FloatPlug( "blend", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["Symmetry"]["user"]["blend"], "label", "Blend" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Symmetry mirroring.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

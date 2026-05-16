@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["aeShadows"] = GafferImage.Grade( "aeShadows" )
+parent.addChild( __children["aeShadows"] )
+__children["aeShadows"]["user"].addChild( Gaffer.FloatPlug( "depth", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["aeShadows"]["user"]["depth"], "label", "Depth" )
+__children["aeShadows"]["user"].addChild( Gaffer.FloatPlug( "softness", defaultValue = 0.3 ) )
+Gaffer.Metadata.registerValue( __children["aeShadows"]["user"]["softness"], "label", "Softness" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Shadow enhancement.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

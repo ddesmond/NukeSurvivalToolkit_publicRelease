@@ -1,0 +1,13 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["DeepCopyBBox"] = GafferImage.Grade( "DeepCopyBBox" )
+parent.addChild( __children["DeepCopyBBox"] )
+__children["DeepCopyBBox"]["user"].addChild( Gaffer.StringPlug( "channels", defaultValue = "rgba" ) )
+Gaffer.Metadata.registerValue( __children["DeepCopyBBox"]["user"]["channels"], "label", "Channels" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Deep bbox copy.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

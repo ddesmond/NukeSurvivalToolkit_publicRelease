@@ -1,0 +1,23 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["SuppressRGBCMY"] = GafferImage.Grade( "SuppressRGBCMY" )
+parent.addChild( __children["SuppressRGBCMY"] )
+__children["SuppressRGBCMY"]["user"].addChild( Gaffer.FloatPlug( "red", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["SuppressRGBCMY"]["user"]["red"], "label", "Red" )
+__children["SuppressRGBCMY"]["user"].addChild( Gaffer.FloatPlug( "green", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["SuppressRGBCMY"]["user"]["green"], "label", "Green" )
+__children["SuppressRGBCMY"]["user"].addChild( Gaffer.FloatPlug( "blue", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["SuppressRGBCMY"]["user"]["blue"], "label", "Blue" )
+__children["SuppressRGBCMY"]["user"].addChild( Gaffer.FloatPlug( "cyan", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["SuppressRGBCMY"]["user"]["cyan"], "label", "Cyan" )
+__children["SuppressRGBCMY"]["user"].addChild( Gaffer.FloatPlug( "magenta", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["SuppressRGBCMY"]["user"]["magenta"], "label", "Magenta" )
+__children["SuppressRGBCMY"]["user"].addChild( Gaffer.FloatPlug( "yellow", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["SuppressRGBCMY"]["user"]["yellow"], "label", "Yellow" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Suppress specific RGB/CMY ranges.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

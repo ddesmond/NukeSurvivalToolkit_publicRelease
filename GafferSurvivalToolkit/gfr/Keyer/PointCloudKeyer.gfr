@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["PointCloudKeyer"] = GafferImage.Grade( "PointCloudKeyer" )
+parent.addChild( __children["PointCloudKeyer"] )
+__children["PointCloudKeyer"]["user"].addChild( Gaffer.FloatPlug( "tolerance", defaultValue = 0.1 ) )
+Gaffer.Metadata.registerValue( __children["PointCloudKeyer"]["user"]["tolerance"], "label", "Tolerance" )
+__children["PointCloudKeyer"]["user"].addChild( Gaffer.FloatPlug( "softness", defaultValue = 0.1 ) )
+Gaffer.Metadata.registerValue( __children["PointCloudKeyer"]["user"]["softness"], "label", "Softness" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Key from point cloud data.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["origami"] = GafferImage.Grade( "origami" )
+parent.addChild( __children["origami"] )
+__children["origami"]["user"].addChild( Gaffer.IntPlug( "folds", defaultValue = 4 ) )
+Gaffer.Metadata.registerValue( __children["origami"]["user"]["folds"], "label", "Folds" )
+__children["origami"]["user"].addChild( Gaffer.FloatPlug( "angle", defaultValue = 45.0 ) )
+Gaffer.Metadata.registerValue( __children["origami"]["user"]["angle"], "label", "Angle" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Fold/origami geometry.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

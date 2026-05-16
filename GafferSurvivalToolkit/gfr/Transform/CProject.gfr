@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["CProject"] = GafferImage.Grade( "CProject" )
+parent.addChild( __children["CProject"] )
+__children["CProject"]["user"].addChild( Gaffer.StringPlug( "corners", defaultValue = "" ) )
+Gaffer.Metadata.registerValue( __children["CProject"]["user"]["corners"], "label", "Corner Points" )
+__children["CProject"]["user"].addChild( Gaffer.StringPlug( "filter", defaultValue = "cubic" ) )
+Gaffer.Metadata.registerValue( __children["CProject"]["user"]["filter"], "label", "Filter" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Corner projection.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

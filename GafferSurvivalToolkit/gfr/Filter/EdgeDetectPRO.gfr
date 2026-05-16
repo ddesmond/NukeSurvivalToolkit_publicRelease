@@ -1,0 +1,17 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["EdgeDetectPRO"] = GafferImage.Grade( "EdgeDetectPRO" )
+parent.addChild( __children["EdgeDetectPRO"] )
+__children["EdgeDetectPRO"]["user"].addChild( Gaffer.StringPlug( "method", defaultValue = "sobel" ) )
+Gaffer.Metadata.registerValue( __children["EdgeDetectPRO"]["user"]["method"], "label", "Method" )
+__children["EdgeDetectPRO"]["user"].addChild( Gaffer.FloatPlug( "threshold", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["EdgeDetectPRO"]["user"]["threshold"], "label", "Threshold" )
+__children["EdgeDetectPRO"]["user"].addChild( Gaffer.BoolPlug( "invert", defaultValue = False ) )
+Gaffer.Metadata.registerValue( __children["EdgeDetectPRO"]["user"]["invert"], "label", "Invert" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Professional edge detection.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

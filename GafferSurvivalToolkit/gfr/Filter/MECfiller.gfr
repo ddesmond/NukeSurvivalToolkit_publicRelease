@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["MECfiller"] = GafferImage.Grade( "MECfiller" )
+parent.addChild( __children["MECfiller"] )
+__children["MECfiller"]["user"].addChild( Gaffer.StringPlug( "method", defaultValue = "forward" ) )
+Gaffer.Metadata.registerValue( __children["MECfiller"]["user"]["method"], "label", "Method" )
+__children["MECfiller"]["user"].addChild( Gaffer.IntPlug( "maxGap", defaultValue = 5 ) )
+Gaffer.Metadata.registerValue( __children["MECfiller"]["user"]["maxGap"], "label", "Max Gap" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Motion-estimated fill.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

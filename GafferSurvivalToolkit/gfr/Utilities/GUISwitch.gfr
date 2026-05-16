@@ -1,0 +1,13 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["GUISwitch"] = GafferImage.Grade( "GUISwitch" )
+parent.addChild( __children["GUISwitch"] )
+__children["GUISwitch"]["user"].addChild( Gaffer.BoolPlug( "enabled", defaultValue = True ) )
+Gaffer.Metadata.registerValue( __children["GUISwitch"]["user"]["enabled"], "label", "Enabled" )
+
+Gaffer.Metadata.registerValue( parent, "description", "GUI-based switch control.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

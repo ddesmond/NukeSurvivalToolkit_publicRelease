@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["DVPToonShader"] = GafferImage.Grade( "DVPToonShader" )
+parent.addChild( __children["DVPToonShader"] )
+__children["DVPToonShader"]["user"].addChild( Gaffer.IntPlug( "levels", defaultValue = 4 ) )
+Gaffer.Metadata.registerValue( __children["DVPToonShader"]["user"]["levels"], "label", "Levels" )
+__children["DVPToonShader"]["user"].addChild( Gaffer.FloatPlug( "outline", defaultValue = 0.1 ) )
+Gaffer.Metadata.registerValue( __children["DVPToonShader"]["user"]["outline"], "label", "Outline" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Deep toon shader.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

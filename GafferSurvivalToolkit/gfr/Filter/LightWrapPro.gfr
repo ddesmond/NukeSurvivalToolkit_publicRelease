@@ -1,0 +1,17 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["LightWrapPro"] = GafferImage.Grade( "LightWrapPro" )
+parent.addChild( __children["LightWrapPro"] )
+__children["LightWrapPro"]["user"].addChild( Gaffer.FloatPlug( "wrap", defaultValue = 5.0 ) )
+Gaffer.Metadata.registerValue( __children["LightWrapPro"]["user"]["wrap"], "label", "Wrap" )
+__children["LightWrapPro"]["user"].addChild( Gaffer.FloatPlug( "softness", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["LightWrapPro"]["user"]["softness"], "label", "Softness" )
+__children["LightWrapPro"]["user"].addChild( Gaffer.FloatPlug( "threshold", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["LightWrapPro"]["user"]["threshold"], "label", "Threshold" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Professional lightwrap.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["CornerPin2DMatrix"] = GafferImage.Grade( "CornerPin2DMatrix" )
+parent.addChild( __children["CornerPin2DMatrix"] )
+__children["CornerPin2DMatrix"]["user"].addChild( Gaffer.StringPlug( "corners", defaultValue = "" ) )
+Gaffer.Metadata.registerValue( __children["CornerPin2DMatrix"]["user"]["corners"], "label", "Corner Points" )
+__children["CornerPin2DMatrix"]["user"].addChild( Gaffer.StringPlug( "filter", defaultValue = "cubic" ) )
+Gaffer.Metadata.registerValue( __children["CornerPin2DMatrix"]["user"]["filter"], "label", "Filter" )
+
+Gaffer.Metadata.registerValue( parent, "description", "CornerPin via matrix.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

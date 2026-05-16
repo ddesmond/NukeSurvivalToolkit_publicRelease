@@ -1,0 +1,17 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["ContactSheetAuto"] = GafferImage.Grade( "ContactSheetAuto" )
+parent.addChild( __children["ContactSheetAuto"] )
+__children["ContactSheetAuto"]["user"].addChild( Gaffer.IntPlug( "columns", defaultValue = 4 ) )
+Gaffer.Metadata.registerValue( __children["ContactSheetAuto"]["user"]["columns"], "label", "Columns" )
+__children["ContactSheetAuto"]["user"].addChild( Gaffer.IntPlug( "rows", defaultValue = 0 ) )
+Gaffer.Metadata.registerValue( __children["ContactSheetAuto"]["user"]["rows"], "label", "Rows (0 = auto)" )
+__children["ContactSheetAuto"]["user"].addChild( Gaffer.IntPlug( "gap", defaultValue = 2 ) )
+Gaffer.Metadata.registerValue( __children["ContactSheetAuto"]["user"]["gap"], "label", "Gap" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Auto contact sheet from inputs.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

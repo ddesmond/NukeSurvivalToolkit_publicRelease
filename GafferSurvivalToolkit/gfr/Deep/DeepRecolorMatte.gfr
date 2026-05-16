@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["DeepRecolorMatte"] = GafferImage.Grade( "DeepRecolorMatte" )
+parent.addChild( __children["DeepRecolorMatte"] )
+__children["DeepRecolorMatte"]["user"].addChild( Gaffer.StringPlug( "matteChannel", defaultValue = "rgba.alpha" ) )
+Gaffer.Metadata.registerValue( __children["DeepRecolorMatte"]["user"]["matteChannel"], "label", "Matte Channel" )
+__children["DeepRecolorMatte"]["user"].addChild( Gaffer.StringPlug( "color", defaultValue = "white" ) )
+Gaffer.Metadata.registerValue( __children["DeepRecolorMatte"]["user"]["color"], "label", "Color" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Deep recolor with matte.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

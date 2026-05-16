@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["Pyclopedia"] = GafferImage.Grade( "Pyclopedia" )
+parent.addChild( __children["Pyclopedia"] )
+__children["Pyclopedia"]["user"].addChild( Gaffer.StringPlug( "category", defaultValue = "all" ) )
+Gaffer.Metadata.registerValue( __children["Pyclopedia"]["user"]["category"], "label", "Category" )
+__children["Pyclopedia"]["user"].addChild( Gaffer.StringPlug( "search", defaultValue = "" ) )
+Gaffer.Metadata.registerValue( __children["Pyclopedia"]["user"]["search"], "label", "Search" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Preset encyclopedia browser.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

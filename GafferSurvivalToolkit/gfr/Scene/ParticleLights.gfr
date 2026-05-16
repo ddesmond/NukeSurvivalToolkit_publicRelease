@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["ParticleLights"] = GafferImage.Grade( "ParticleLights" )
+parent.addChild( __children["ParticleLights"] )
+__children["ParticleLights"]["user"].addChild( Gaffer.FloatPlug( "intensity", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["ParticleLights"]["user"]["intensity"], "label", "Intensity" )
+__children["ParticleLights"]["user"].addChild( Gaffer.StringPlug( "color", defaultValue = "white" ) )
+Gaffer.Metadata.registerValue( __children["ParticleLights"]["user"]["color"], "label", "Color" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Lights on particles.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["TProject"] = GafferImage.Grade( "TProject" )
+parent.addChild( __children["TProject"] )
+__children["TProject"]["user"].addChild( Gaffer.StringPlug( "transform", defaultValue = "" ) )
+Gaffer.Metadata.registerValue( __children["TProject"]["user"]["transform"], "label", "Transform Matrix" )
+__children["TProject"]["user"].addChild( Gaffer.StringPlug( "filter", defaultValue = "cubic" ) )
+Gaffer.Metadata.registerValue( __children["TProject"]["user"]["filter"], "label", "Filter" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Transform projection.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

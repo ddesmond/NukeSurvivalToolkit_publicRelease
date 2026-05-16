@@ -1,0 +1,17 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["RelightSimple"] = GafferImage.Grade( "RelightSimple" )
+parent.addChild( __children["RelightSimple"] )
+__children["RelightSimple"]["user"].addChild( Gaffer.FloatPlug( "lightAngle", defaultValue = 45.0 ) )
+Gaffer.Metadata.registerValue( __children["RelightSimple"]["user"]["lightAngle"], "label", "Light Angle" )
+__children["RelightSimple"]["user"].addChild( Gaffer.FloatPlug( "intensity", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["RelightSimple"]["user"]["intensity"], "label", "Intensity" )
+__children["RelightSimple"]["user"].addChild( Gaffer.FloatPlug( "ambient", defaultValue = 0.2 ) )
+Gaffer.Metadata.registerValue( __children["RelightSimple"]["user"]["ambient"], "label", "Ambient" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Simple relight.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

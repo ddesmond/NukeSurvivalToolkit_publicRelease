@@ -1,0 +1,17 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["Noise4D"] = GafferImage.Grade( "Noise4D" )
+parent.addChild( __children["Noise4D"] )
+__children["Noise4D"]["user"].addChild( Gaffer.FloatPlug( "scale", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["Noise4D"]["user"]["scale"], "label", "Scale" )
+__children["Noise4D"]["user"].addChild( Gaffer.FloatPlug( "timeScale", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["Noise4D"]["user"]["timeScale"], "label", "Time Scale" )
+__children["Noise4D"]["user"].addChild( Gaffer.IntPlug( "seed", defaultValue = 0 ) )
+Gaffer.Metadata.registerValue( __children["Noise4D"]["user"]["seed"], "label", "Seed" )
+
+Gaffer.Metadata.registerValue( parent, "description", "4D noise (temporal).\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

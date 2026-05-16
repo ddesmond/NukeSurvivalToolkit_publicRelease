@@ -1,0 +1,17 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["mScatterGeo"] = GafferImage.Grade( "mScatterGeo" )
+parent.addChild( __children["mScatterGeo"] )
+__children["mScatterGeo"]["user"].addChild( Gaffer.IntPlug( "count", defaultValue = 100 ) )
+Gaffer.Metadata.registerValue( __children["mScatterGeo"]["user"]["count"], "label", "Count" )
+__children["mScatterGeo"]["user"].addChild( Gaffer.IntPlug( "seed", defaultValue = 0 ) )
+Gaffer.Metadata.registerValue( __children["mScatterGeo"]["user"]["seed"], "label", "Seed" )
+__children["mScatterGeo"]["user"].addChild( Gaffer.FloatPlug( "scale", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["mScatterGeo"]["user"]["scale"], "label", "Scale" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Scatter geometry on surfaces.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

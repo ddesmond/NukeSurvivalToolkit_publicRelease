@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["DVPattern"] = GafferImage.Grade( "DVPattern" )
+parent.addChild( __children["DVPattern"] )
+__children["DVPattern"]["user"].addChild( Gaffer.StringPlug( "pattern", defaultValue = "grid" ) )
+Gaffer.Metadata.registerValue( __children["DVPattern"]["user"]["pattern"], "label", "Pattern" )
+__children["DVPattern"]["user"].addChild( Gaffer.FloatPlug( "scale", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["DVPattern"]["user"]["scale"], "label", "Scale" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Deep pattern.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

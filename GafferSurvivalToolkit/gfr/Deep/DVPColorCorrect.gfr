@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["DVPColorCorrect"] = GafferImage.Grade( "DVPColorCorrect" )
+parent.addChild( __children["DVPColorCorrect"] )
+__children["DVPColorCorrect"]["user"].addChild( Gaffer.FloatPlug( "gain", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["DVPColorCorrect"]["user"]["gain"], "label", "Gain" )
+__children["DVPColorCorrect"]["user"].addChild( Gaffer.FloatPlug( "gamma", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["DVPColorCorrect"]["user"]["gamma"], "label", "Gamma" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Deep position color correct.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

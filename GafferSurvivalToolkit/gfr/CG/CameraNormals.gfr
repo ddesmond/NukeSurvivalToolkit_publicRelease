@@ -1,0 +1,13 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["CameraNormals"] = GafferImage.Grade( "CameraNormals" )
+parent.addChild( __children["CameraNormals"] )
+__children["CameraNormals"]["user"].addChild( Gaffer.StringPlug( "camera", defaultValue = "Camera1" ) )
+Gaffer.Metadata.registerValue( __children["CameraNormals"]["user"]["camera"], "label", "Camera" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Generate normals from camera.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

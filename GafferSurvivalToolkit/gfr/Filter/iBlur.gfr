@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["iBlur"] = GafferImage.Grade( "iBlur" )
+parent.addChild( __children["iBlur"] )
+__children["iBlur"]["user"].addChild( Gaffer.FloatPlug( "size", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["iBlur"]["user"]["size"], "label", "Size" )
+__children["iBlur"]["user"].addChild( Gaffer.BoolPlug( "edgeAware", defaultValue = True ) )
+Gaffer.Metadata.registerValue( __children["iBlur"]["user"]["edgeAware"], "label", "Edge Aware" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Intelligent blur.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["MergeBlend"] = GafferImage.Grade( "MergeBlend" )
+parent.addChild( __children["MergeBlend"] )
+__children["MergeBlend"]["user"].addChild( Gaffer.FloatPlug( "mix", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["MergeBlend"]["user"]["mix"], "label", "Mix" )
+__children["MergeBlend"]["user"].addChild( Gaffer.StringPlug( "blendMode", defaultValue = "mix" ) )
+Gaffer.Metadata.registerValue( __children["MergeBlend"]["user"]["blendMode"], "label", "Blend Mode" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Blend merge modes.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

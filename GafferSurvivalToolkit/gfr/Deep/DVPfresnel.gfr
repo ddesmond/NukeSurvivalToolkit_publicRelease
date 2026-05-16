@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["DVPfresnel"] = GafferImage.Grade( "DVPfresnel" )
+parent.addChild( __children["DVPfresnel"] )
+__children["DVPfresnel"]["user"].addChild( Gaffer.FloatPlug( "ior", defaultValue = 1.5 ) )
+Gaffer.Metadata.registerValue( __children["DVPfresnel"]["user"]["ior"], "label", "IOR" )
+__children["DVPfresnel"]["user"].addChild( Gaffer.FloatPlug( "falloff", defaultValue = 5.0 ) )
+Gaffer.Metadata.registerValue( __children["DVPfresnel"]["user"]["falloff"], "label", "Falloff" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Deep fresnel.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

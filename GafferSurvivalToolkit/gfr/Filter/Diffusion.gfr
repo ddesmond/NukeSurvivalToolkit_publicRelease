@@ -1,0 +1,17 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["Diffusion"] = GafferImage.Grade( "Diffusion" )
+parent.addChild( __children["Diffusion"] )
+__children["Diffusion"]["user"].addChild( Gaffer.FloatPlug( "amount", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["Diffusion"]["user"]["amount"], "label", "Amount" )
+__children["Diffusion"]["user"].addChild( Gaffer.FloatPlug( "size", defaultValue = 5.0 ) )
+Gaffer.Metadata.registerValue( __children["Diffusion"]["user"]["size"], "label", "Size" )
+__children["Diffusion"]["user"].addChild( Gaffer.FloatPlug( "highlights", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["Diffusion"]["user"]["highlights"], "label", "Highlights" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Diffusion/pro-mist effect.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

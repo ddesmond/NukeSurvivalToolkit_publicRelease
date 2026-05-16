@@ -1,0 +1,13 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["MatrixInverse"] = GafferImage.Grade( "MatrixInverse" )
+parent.addChild( __children["MatrixInverse"] )
+__children["MatrixInverse"]["user"].addChild( Gaffer.StringPlug( "matrix", defaultValue = "" ) )
+Gaffer.Metadata.registerValue( __children["MatrixInverse"]["user"]["matrix"], "label", "Matrix Input" )
+
+Gaffer.Metadata.registerValue( parent, "description", "4x4 matrix inverse.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

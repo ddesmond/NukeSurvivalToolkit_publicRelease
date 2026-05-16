@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["FrameMedian"] = GafferImage.Grade( "FrameMedian" )
+parent.addChild( __children["FrameMedian"] )
+__children["FrameMedian"]["user"].addChild( Gaffer.IntPlug( "frameRange", defaultValue = 5 ) )
+Gaffer.Metadata.registerValue( __children["FrameMedian"]["user"]["frameRange"], "label", "Frame Range" )
+__children["FrameMedian"]["user"].addChild( Gaffer.IntPlug( "centerFrame", defaultValue = 0 ) )
+Gaffer.Metadata.registerValue( __children["FrameMedian"]["user"]["centerFrame"], "label", "Center Frame" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Median across multiple frames.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

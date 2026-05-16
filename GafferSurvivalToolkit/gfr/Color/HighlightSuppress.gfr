@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["HighlightSuppress"] = GafferImage.Grade( "HighlightSuppress" )
+parent.addChild( __children["HighlightSuppress"] )
+__children["HighlightSuppress"]["user"].addChild( Gaffer.FloatPlug( "threshold", defaultValue = 0.8 ) )
+Gaffer.Metadata.registerValue( __children["HighlightSuppress"]["user"]["threshold"], "label", "Threshold" )
+__children["HighlightSuppress"]["user"].addChild( Gaffer.FloatPlug( "suppression", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["HighlightSuppress"]["user"]["suppression"], "label", "Suppression" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Suppress highlights.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

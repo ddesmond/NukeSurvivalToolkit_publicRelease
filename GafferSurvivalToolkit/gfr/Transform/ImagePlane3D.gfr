@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["ImagePlane3D"] = GafferImage.Grade( "ImagePlane3D" )
+parent.addChild( __children["ImagePlane3D"] )
+__children["ImagePlane3D"]["user"].addChild( Gaffer.FloatPlug( "depth", defaultValue = 0.0 ) )
+Gaffer.Metadata.registerValue( __children["ImagePlane3D"]["user"]["depth"], "label", "Depth" )
+__children["ImagePlane3D"]["user"].addChild( Gaffer.FloatPlug( "scale", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["ImagePlane3D"]["user"]["scale"], "label", "Scale" )
+
+Gaffer.Metadata.registerValue( parent, "description", "3D image plane/card.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

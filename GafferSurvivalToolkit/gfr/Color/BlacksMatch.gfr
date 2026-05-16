@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["BlacksMatch"] = GafferImage.Grade( "BlacksMatch" )
+parent.addChild( __children["BlacksMatch"] )
+__children["BlacksMatch"]["user"].addChild( Gaffer.FloatPlug( "targetBlack", defaultValue = 0.0 ) )
+Gaffer.Metadata.registerValue( __children["BlacksMatch"]["user"]["targetBlack"], "label", "Target Black Level" )
+__children["BlacksMatch"]["user"].addChild( Gaffer.BoolPlug( "autoMatch", defaultValue = True ) )
+Gaffer.Metadata.registerValue( __children["BlacksMatch"]["user"]["autoMatch"], "label", "Auto Match" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Match black levels between images.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

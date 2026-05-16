@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["DeepFromDepth"] = GafferImage.Grade( "DeepFromDepth" )
+parent.addChild( __children["DeepFromDepth"] )
+__children["DeepFromDepth"]["user"].addChild( Gaffer.StringPlug( "depthChannel", defaultValue = "depth.Z" ) )
+Gaffer.Metadata.registerValue( __children["DeepFromDepth"]["user"]["depthChannel"], "label", "Depth Channel" )
+__children["DeepFromDepth"]["user"].addChild( Gaffer.FloatPlug( "maxDepth", defaultValue = 100.0 ) )
+Gaffer.Metadata.registerValue( __children["DeepFromDepth"]["user"]["maxDepth"], "label", "Max Depth" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Generate deep from depth.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

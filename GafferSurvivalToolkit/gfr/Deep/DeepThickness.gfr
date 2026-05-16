@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["DeepThickness"] = GafferImage.Grade( "DeepThickness" )
+parent.addChild( __children["DeepThickness"] )
+__children["DeepThickness"]["user"].addChild( Gaffer.FloatPlug( "minDepth", defaultValue = 0.0 ) )
+Gaffer.Metadata.registerValue( __children["DeepThickness"]["user"]["minDepth"], "label", "Min Depth" )
+__children["DeepThickness"]["user"].addChild( Gaffer.FloatPlug( "maxDepth", defaultValue = 100.0 ) )
+Gaffer.Metadata.registerValue( __children["DeepThickness"]["user"]["maxDepth"], "label", "Max Depth" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Deep thickness calculation.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

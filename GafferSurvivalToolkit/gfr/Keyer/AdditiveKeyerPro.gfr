@@ -1,0 +1,17 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["AdditiveKeyerPro"] = GafferImage.Grade( "AdditiveKeyerPro" )
+parent.addChild( __children["AdditiveKeyerPro"] )
+__children["AdditiveKeyerPro"]["user"].addChild( Gaffer.FloatPlug( "clipBlack", defaultValue = 0.0 ) )
+Gaffer.Metadata.registerValue( __children["AdditiveKeyerPro"]["user"]["clipBlack"], "label", "Clip Black" )
+__children["AdditiveKeyerPro"]["user"].addChild( Gaffer.FloatPlug( "clipWhite", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["AdditiveKeyerPro"]["user"]["clipWhite"], "label", "Clip White" )
+__children["AdditiveKeyerPro"]["user"].addChild( Gaffer.FloatPlug( "gain", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["AdditiveKeyerPro"]["user"]["gain"], "label", "Gain" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Additive keying approach.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

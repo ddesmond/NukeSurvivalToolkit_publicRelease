@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["KillOutline"] = GafferImage.Grade( "KillOutline" )
+parent.addChild( __children["KillOutline"] )
+__children["KillOutline"]["user"].addChild( Gaffer.FloatPlug( "tolerance", defaultValue = 0.1 ) )
+Gaffer.Metadata.registerValue( __children["KillOutline"]["user"]["tolerance"], "label", "Tolerance" )
+__children["KillOutline"]["user"].addChild( Gaffer.StringPlug( "channels", defaultValue = "rgba.alpha" ) )
+Gaffer.Metadata.registerValue( __children["KillOutline"]["user"]["channels"], "label", "Channels" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Remove outline artifacts.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

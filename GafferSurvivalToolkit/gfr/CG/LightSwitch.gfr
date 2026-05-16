@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["LightSwitch"] = GafferImage.Grade( "LightSwitch" )
+parent.addChild( __children["LightSwitch"] )
+__children["LightSwitch"]["user"].addChild( Gaffer.StringPlug( "lightName", defaultValue = "light1" ) )
+Gaffer.Metadata.registerValue( __children["LightSwitch"]["user"]["lightName"], "label", "Light Name" )
+__children["LightSwitch"]["user"].addChild( Gaffer.BoolPlug( "enabled", defaultValue = True ) )
+Gaffer.Metadata.registerValue( __children["LightSwitch"]["user"]["enabled"], "label", "Enabled" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Toggle lights on/off.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

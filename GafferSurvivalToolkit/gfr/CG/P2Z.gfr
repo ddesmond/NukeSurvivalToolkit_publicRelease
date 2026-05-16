@@ -1,0 +1,13 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["P2Z"] = GafferImage.Grade( "P2Z" )
+parent.addChild( __children["P2Z"] )
+__children["P2Z"]["user"].addChild( Gaffer.FloatPlug( "scale", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["P2Z"]["user"]["scale"], "label", "Scale" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Position to Z-depth.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

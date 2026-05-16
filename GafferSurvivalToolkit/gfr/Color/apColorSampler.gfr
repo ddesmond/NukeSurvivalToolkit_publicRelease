@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["apColorSampler"] = GafferImage.Grade( "apColorSampler" )
+parent.addChild( __children["apColorSampler"] )
+__children["apColorSampler"]["user"].addChild( Gaffer.V2fPlug( "samplePoint", defaultValue = (0.5, 0.5) ) )
+Gaffer.Metadata.registerValue( __children["apColorSampler"]["user"]["samplePoint"], "label", "Sample Point" )
+__children["apColorSampler"]["user"].addChild( Gaffer.FloatPlug( "sampleSize", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["apColorSampler"]["user"]["sampleSize"], "label", "Sample Size" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Color sampling/analysis.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

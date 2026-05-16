@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["KeyChew"] = GafferImage.Grade( "KeyChew" )
+parent.addChild( __children["KeyChew"] )
+__children["KeyChew"]["user"].addChild( Gaffer.FloatPlug( "amount", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["KeyChew"]["user"]["amount"], "label", "Amount" )
+__children["KeyChew"]["user"].addChild( Gaffer.FloatPlug( "threshold", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["KeyChew"]["user"]["threshold"], "label", "Threshold" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Matte refinement/chewing.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

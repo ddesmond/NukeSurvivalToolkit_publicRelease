@@ -1,0 +1,17 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["PerspectiveGuide"] = GafferImage.Grade( "PerspectiveGuide" )
+parent.addChild( __children["PerspectiveGuide"] )
+__children["PerspectiveGuide"]["user"].addChild( Gaffer.IntPlug( "numLines", defaultValue = 8 ) )
+Gaffer.Metadata.registerValue( __children["PerspectiveGuide"]["user"]["numLines"], "label", "Number of Lines" )
+__children["PerspectiveGuide"]["user"].addChild( Gaffer.V2fPlug( "vanishingPoint", defaultValue = (0.5, 0.5) ) )
+Gaffer.Metadata.registerValue( __children["PerspectiveGuide"]["user"]["vanishingPoint"], "label", "Vanishing Point" )
+__children["PerspectiveGuide"]["user"].addChild( Gaffer.FloatPlug( "opacity", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["PerspectiveGuide"]["user"]["opacity"], "label", "Opacity" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Perspective guide overlay.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

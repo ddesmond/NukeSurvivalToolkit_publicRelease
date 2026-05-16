@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["bmMatteCheck"] = GafferImage.Grade( "bmMatteCheck" )
+parent.addChild( __children["bmMatteCheck"] )
+__children["bmMatteCheck"]["user"].addChild( Gaffer.StringPlug( "channel", defaultValue = "rgba.alpha" ) )
+Gaffer.Metadata.registerValue( __children["bmMatteCheck"]["user"]["channel"], "label", "Channel" )
+__children["bmMatteCheck"]["user"].addChild( Gaffer.BoolPlug( "invert", defaultValue = False ) )
+Gaffer.Metadata.registerValue( __children["bmMatteCheck"]["user"]["invert"], "label", "Invert" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Matte check utility.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

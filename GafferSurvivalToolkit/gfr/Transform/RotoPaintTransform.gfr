@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["RotoPaintTransform"] = GafferImage.Grade( "RotoPaintTransform" )
+parent.addChild( __children["RotoPaintTransform"] )
+__children["RotoPaintTransform"]["user"].addChild( Gaffer.StringPlug( "trackMethod", defaultValue = "planar" ) )
+Gaffer.Metadata.registerValue( __children["RotoPaintTransform"]["user"]["trackMethod"], "label", "Track Method" )
+__children["RotoPaintTransform"]["user"].addChild( Gaffer.FloatPlug( "confidence", defaultValue = 0.8 ) )
+Gaffer.Metadata.registerValue( __children["RotoPaintTransform"]["user"]["confidence"], "label", "Confidence" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Roto/paint transform tracking.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

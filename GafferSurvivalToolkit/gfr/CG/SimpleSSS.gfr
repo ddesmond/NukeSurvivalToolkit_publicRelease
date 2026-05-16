@@ -1,0 +1,17 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["SimpleSSS"] = GafferImage.Grade( "SimpleSSS" )
+parent.addChild( __children["SimpleSSS"] )
+__children["SimpleSSS"]["user"].addChild( Gaffer.FloatPlug( "radius", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["SimpleSSS"]["user"]["radius"], "label", "Radius" )
+__children["SimpleSSS"]["user"].addChild( Gaffer.StringPlug( "color", defaultValue = "white" ) )
+Gaffer.Metadata.registerValue( __children["SimpleSSS"]["user"]["color"], "label", "Color" )
+__children["SimpleSSS"]["user"].addChild( Gaffer.IntPlug( "samples", defaultValue = 8 ) )
+Gaffer.Metadata.registerValue( __children["SimpleSSS"]["user"]["samples"], "label", "Samples" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Simple subsurface scattering.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

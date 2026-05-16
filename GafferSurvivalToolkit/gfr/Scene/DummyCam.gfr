@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["DummyCam"] = GafferImage.Grade( "DummyCam" )
+parent.addChild( __children["DummyCam"] )
+__children["DummyCam"]["user"].addChild( Gaffer.FloatPlug( "focalLength", defaultValue = 35.0 ) )
+Gaffer.Metadata.registerValue( __children["DummyCam"]["user"]["focalLength"], "label", "Focal Length" )
+__children["DummyCam"]["user"].addChild( Gaffer.FloatPlug( "fov", defaultValue = 54.4 ) )
+Gaffer.Metadata.registerValue( __children["DummyCam"]["user"]["fov"], "label", "FOV" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Dummy camera placeholder.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

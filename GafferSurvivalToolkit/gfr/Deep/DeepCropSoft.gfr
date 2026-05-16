@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["DeepCropSoft"] = GafferImage.Grade( "DeepCropSoft" )
+parent.addChild( __children["DeepCropSoft"] )
+__children["DeepCropSoft"]["user"].addChild( Gaffer.FloatPlug( "softness", defaultValue = 0.1 ) )
+Gaffer.Metadata.registerValue( __children["DeepCropSoft"]["user"]["softness"], "label", "Softness" )
+__children["DeepCropSoft"]["user"].addChild( Gaffer.StringPlug( "channels", defaultValue = "rgba.alpha" ) )
+Gaffer.Metadata.registerValue( __children["DeepCropSoft"]["user"]["channels"], "label", "Channels" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Soft deep crop.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

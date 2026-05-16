@@ -1,0 +1,19 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["RingsOfPower"] = GafferImage.Grade( "RingsOfPower" )
+parent.addChild( __children["RingsOfPower"] )
+__children["RingsOfPower"]["user"].addChild( Gaffer.IntPlug( "numRings", defaultValue = 5 ) )
+Gaffer.Metadata.registerValue( __children["RingsOfPower"]["user"]["numRings"], "label", "Number of Rings" )
+__children["RingsOfPower"]["user"].addChild( Gaffer.FloatPlug( "ringWidth", defaultValue = 0.02 ) )
+Gaffer.Metadata.registerValue( __children["RingsOfPower"]["user"]["ringWidth"], "label", "Ring Width" )
+__children["RingsOfPower"]["user"].addChild( Gaffer.FloatPlug( "softness", defaultValue = 0.01 ) )
+Gaffer.Metadata.registerValue( __children["RingsOfPower"]["user"]["softness"], "label", "Softness" )
+__children["RingsOfPower"]["user"].addChild( Gaffer.V2fPlug( "center", defaultValue = (0.5, 0.5) ) )
+Gaffer.Metadata.registerValue( __children["RingsOfPower"]["user"]["center"], "label", "Center" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Concentric ring pattern generator.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

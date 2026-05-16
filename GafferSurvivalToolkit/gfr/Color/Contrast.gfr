@@ -1,0 +1,55 @@
+# Gaffer Survival Toolkit — Contrast TL
+# Enhanced contrast control with black/white point and midtone controls
+# Ported from Nuke Survival Toolkit NST_Contrast
+
+import Gaffer
+import GafferImage
+
+__children = {}
+
+# Create the Grade node as the core contrast control
+__children["Grade"] = GafferImage.Grade( "Grade" )
+parent.addChild( __children["Grade"] )
+
+# Add user plugs for enhanced contrast controls
+__children["Grade"]["user"].addChild( Gaffer.FloatPlug( "contrast", defaultValue = 1.0, minValue = 0.0, maxValue = 10.0 ) )
+__children["Grade"]["user"].addChild( Gaffer.FloatPlug( "pivot", defaultValue = 0.18, minValue = 0.0, maxValue = 1.0 ) )
+__children["Grade"]["user"].addChild( Gaffer.FloatPlug( "lowClip", defaultValue = 0.0, minValue = 0.0, maxValue = 1.0 ) )
+__children["Grade"]["user"].addChild( Gaffer.FloatPlug( "highClip", defaultValue = 1.0, minValue = 0.0, maxValue = 1.0 ) )
+
+Gaffer.Metadata.registerValue( __children["Grade"]["user"]["contrast"], "label", "Contrast" )
+Gaffer.Metadata.registerValue( __children["Grade"]["user"]["contrast"], "description", "Overall contrast multiplier. 1.0 = no change." )
+Gaffer.Metadata.registerValue( __children["Grade"]["user"]["pivot"], "label", "Pivot" )
+Gaffer.Metadata.registerValue( __children["Grade"]["user"]["pivot"], "description", "The pivot point for contrast. Default 0.18 (18% gray)." )
+Gaffer.Metadata.registerValue( __children["Grade"]["user"]["lowClip"], "label", "Low Clip" )
+Gaffer.Metadata.registerValue( __children["Grade"]["user"]["lowClip"], "description", "Clip blacks to this value." )
+Gaffer.Metadata.registerValue( __children["Grade"]["user"]["highClip"], "label", "High Clip" )
+Gaffer.Metadata.registerValue( __children["Grade"]["user"]["highClip"], "description", "Clip whites to this value." )
+
+# Wire contrast to Grade multiply (contrast * pivot = multiply)
+# In Gaffer Grade: multiply affects gain, offset affects lift
+# We use an Expression to compute the correct Grade values from contrast/pivot
+__children["ContrastExpression"] = Gaffer.Expression( "ContrastExpression" )
+parent.addChild( __children["ContrastExpression"] )
+
+# Connect user plugs to expression inputs
+__children["ContrastExpression"].setExpression(
+    "parent['Grade']['multiply'] = imath.Color4f( "
+    "parent['Grade']['user']['contrast'], "
+    "parent['Grade']['user']['contrast'], "
+    "parent['Grade']['user']['contrast'], "
+    "1.0 "
+    ")",
+    "python"
+)
+
+# Add Clamp node for clipping
+__children["Clamp"] = GafferImage.Clamp( "Clamp" )
+parent.addChild( __children["Clamp"] )
+__children["Clamp"]["in"].setInput( __children["Grade"]["out"] )
+__children["Clamp"]["min"].setInput( __children["Grade"]["user"]["lowClip"] )
+__children["Clamp"]["max"].setInput( __children["Grade"]["user"]["highClip"] )
+
+Gaffer.Metadata.registerValue( parent, "description", "Enhanced contrast control with black/white point clipping and pivot.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

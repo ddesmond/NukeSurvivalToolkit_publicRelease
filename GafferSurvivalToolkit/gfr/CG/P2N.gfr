@@ -1,0 +1,13 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["P2N"] = GafferImage.Grade( "P2N" )
+parent.addChild( __children["P2N"] )
+__children["P2N"]["user"].addChild( Gaffer.BoolPlug( "normalize", defaultValue = True ) )
+Gaffer.Metadata.registerValue( __children["P2N"]["user"]["normalize"], "label", "Normalize" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Position to Normal.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

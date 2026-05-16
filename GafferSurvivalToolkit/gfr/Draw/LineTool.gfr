@@ -1,0 +1,19 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["LineTool"] = GafferImage.Grade( "LineTool" )
+parent.addChild( __children["LineTool"] )
+__children["LineTool"]["user"].addChild( Gaffer.V2fPlug( "start", defaultValue = (0.0, 0.5) ) )
+Gaffer.Metadata.registerValue( __children["LineTool"]["user"]["start"], "label", "Start" )
+__children["LineTool"]["user"].addChild( Gaffer.V2fPlug( "end", defaultValue = (1.0, 0.5) ) )
+Gaffer.Metadata.registerValue( __children["LineTool"]["user"]["end"], "label", "End" )
+__children["LineTool"]["user"].addChild( Gaffer.FloatPlug( "thickness", defaultValue = 0.01 ) )
+Gaffer.Metadata.registerValue( __children["LineTool"]["user"]["thickness"], "label", "Thickness" )
+__children["LineTool"]["user"].addChild( Gaffer.FloatPlug( "softness", defaultValue = 0.0 ) )
+Gaffer.Metadata.registerValue( __children["LineTool"]["user"]["softness"], "label", "Softness" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Draw lines procedurally.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

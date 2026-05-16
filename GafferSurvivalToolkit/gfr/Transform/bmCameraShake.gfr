@@ -1,0 +1,17 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["bmCameraShake"] = GafferImage.Grade( "bmCameraShake" )
+parent.addChild( __children["bmCameraShake"] )
+__children["bmCameraShake"]["user"].addChild( Gaffer.FloatPlug( "amount", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["bmCameraShake"]["user"]["amount"], "label", "Amount" )
+__children["bmCameraShake"]["user"].addChild( Gaffer.FloatPlug( "frequency", defaultValue = 5.0 ) )
+Gaffer.Metadata.registerValue( __children["bmCameraShake"]["user"]["frequency"], "label", "Frequency" )
+__children["bmCameraShake"]["user"].addChild( Gaffer.IntPlug( "seed", defaultValue = 0 ) )
+Gaffer.Metadata.registerValue( __children["bmCameraShake"]["user"]["seed"], "label", "Seed" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Camera shake simulation.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

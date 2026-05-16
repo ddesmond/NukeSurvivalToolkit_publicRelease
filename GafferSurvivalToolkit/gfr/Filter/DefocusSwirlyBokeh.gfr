@@ -1,0 +1,17 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["DefocusSwirlyBokeh"] = GafferImage.Grade( "DefocusSwirlyBokeh" )
+parent.addChild( __children["DefocusSwirlyBokeh"] )
+__children["DefocusSwirlyBokeh"]["user"].addChild( Gaffer.FloatPlug( "size", defaultValue = 5.0 ) )
+Gaffer.Metadata.registerValue( __children["DefocusSwirlyBokeh"]["user"]["size"], "label", "Size" )
+__children["DefocusSwirlyBokeh"]["user"].addChild( Gaffer.FloatPlug( "swirl", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["DefocusSwirlyBokeh"]["user"]["swirl"], "label", "Swirl" )
+__children["DefocusSwirlyBokeh"]["user"].addChild( Gaffer.V2fPlug( "center", defaultValue = (0.5, 0.5) ) )
+Gaffer.Metadata.registerValue( __children["DefocusSwirlyBokeh"]["user"]["center"], "label", "Center" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Swirly bokeh defocus.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

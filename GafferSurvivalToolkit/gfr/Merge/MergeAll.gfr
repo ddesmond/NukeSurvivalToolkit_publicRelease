@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["MergeAll"] = GafferImage.Grade( "MergeAll" )
+parent.addChild( __children["MergeAll"] )
+__children["MergeAll"]["user"].addChild( Gaffer.StringPlug( "operation", defaultValue = "over" ) )
+Gaffer.Metadata.registerValue( __children["MergeAll"]["user"]["operation"], "label", "Operation" )
+__children["MergeAll"]["user"].addChild( Gaffer.BoolPlug( "autoOrder", defaultValue = True ) )
+Gaffer.Metadata.registerValue( __children["MergeAll"]["user"]["autoOrder"], "label", "Auto Order" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Merge all inputs at once.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

@@ -1,0 +1,13 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["DeepFromPosition"] = GafferImage.Grade( "DeepFromPosition" )
+parent.addChild( __children["DeepFromPosition"] )
+__children["DeepFromPosition"]["user"].addChild( Gaffer.StringPlug( "positionChannel", defaultValue = "position" ) )
+Gaffer.Metadata.registerValue( __children["DeepFromPosition"]["user"]["positionChannel"], "label", "Position Channel" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Generate deep from position.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

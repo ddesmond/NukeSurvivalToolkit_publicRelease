@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["EdgeFromAlpha"] = GafferImage.Grade( "EdgeFromAlpha" )
+parent.addChild( __children["EdgeFromAlpha"] )
+__children["EdgeFromAlpha"]["user"].addChild( Gaffer.FloatPlug( "softness", defaultValue = 0.1 ) )
+Gaffer.Metadata.registerValue( __children["EdgeFromAlpha"]["user"]["softness"], "label", "Softness" )
+__children["EdgeFromAlpha"]["user"].addChild( Gaffer.BoolPlug( "invert", defaultValue = False ) )
+Gaffer.Metadata.registerValue( __children["EdgeFromAlpha"]["user"]["invert"], "label", "Invert" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Generate edge from alpha.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

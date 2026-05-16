@@ -1,0 +1,17 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["Looper"] = GafferImage.Grade( "Looper" )
+parent.addChild( __children["Looper"] )
+__children["Looper"]["user"].addChild( Gaffer.IntPlug( "startFrame", defaultValue = 1 ) )
+Gaffer.Metadata.registerValue( __children["Looper"]["user"]["startFrame"], "label", "Start Frame" )
+__children["Looper"]["user"].addChild( Gaffer.IntPlug( "endFrame", defaultValue = 100 ) )
+Gaffer.Metadata.registerValue( __children["Looper"]["user"]["endFrame"], "label", "End Frame" )
+__children["Looper"]["user"].addChild( Gaffer.StringPlug( "loopMode", defaultValue = "loop" ) )
+Gaffer.Metadata.registerValue( __children["Looper"]["user"]["loopMode"], "label", "Loop Mode" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Frame range looper.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

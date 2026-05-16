@@ -1,0 +1,17 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["apDirLight"] = GafferImage.Grade( "apDirLight" )
+parent.addChild( __children["apDirLight"] )
+__children["apDirLight"]["user"].addChild( Gaffer.FloatPlug( "angle", defaultValue = 45.0 ) )
+Gaffer.Metadata.registerValue( __children["apDirLight"]["user"]["angle"], "label", "Angle" )
+__children["apDirLight"]["user"].addChild( Gaffer.FloatPlug( "intensity", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["apDirLight"]["user"]["intensity"], "label", "Intensity" )
+__children["apDirLight"]["user"].addChild( Gaffer.FloatPlug( "softness", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["apDirLight"]["user"]["softness"], "label", "Softness" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Directional light simulation.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

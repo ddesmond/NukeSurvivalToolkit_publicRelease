@@ -1,0 +1,13 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["apChromaPremult"] = GafferImage.Grade( "apChromaPremult" )
+parent.addChild( __children["apChromaPremult"] )
+__children["apChromaPremult"]["user"].addChild( Gaffer.StringPlug( "channels", defaultValue = "rgb" ) )
+Gaffer.Metadata.registerValue( __children["apChromaPremult"]["user"]["channels"], "label", "Channels" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Chroma-safe premult.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

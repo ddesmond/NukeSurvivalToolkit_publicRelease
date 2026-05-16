@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["Reconcile3DFast"] = GafferImage.Grade( "Reconcile3DFast" )
+parent.addChild( __children["Reconcile3DFast"] )
+__children["Reconcile3DFast"]["user"].addChild( Gaffer.FloatPlug( "tolerance", defaultValue = 0.1 ) )
+Gaffer.Metadata.registerValue( __children["Reconcile3DFast"]["user"]["tolerance"], "label", "Tolerance" )
+__children["Reconcile3DFast"]["user"].addChild( Gaffer.StringPlug( "method", defaultValue = "fast" ) )
+Gaffer.Metadata.registerValue( __children["Reconcile3DFast"]["user"]["method"], "label", "Method" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Fast 3D reconcile.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

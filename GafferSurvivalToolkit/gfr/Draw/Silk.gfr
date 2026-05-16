@@ -1,0 +1,19 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["Silk"] = GafferImage.Grade( "Silk" )
+parent.addChild( __children["Silk"] )
+__children["Silk"]["user"].addChild( Gaffer.FloatPlug( "density", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["Silk"]["user"]["density"], "label", "Density" )
+__children["Silk"]["user"].addChild( Gaffer.FloatPlug( "softness", defaultValue = 0.3 ) )
+Gaffer.Metadata.registerValue( __children["Silk"]["user"]["softness"], "label", "Softness" )
+__children["Silk"]["user"].addChild( Gaffer.FloatPlug( "angle", defaultValue = 45.0 ) )
+Gaffer.Metadata.registerValue( __children["Silk"]["user"]["angle"], "label", "Angle" )
+__children["Silk"]["user"].addChild( Gaffer.FloatPlug( "variation", defaultValue = 0.2 ) )
+Gaffer.Metadata.registerValue( __children["Silk"]["user"]["variation"], "label", "Variation" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Silk-like texture generator.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

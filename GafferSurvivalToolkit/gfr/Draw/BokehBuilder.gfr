@@ -1,0 +1,17 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["BokehBuilder"] = GafferImage.Grade( "BokehBuilder" )
+parent.addChild( __children["BokehBuilder"] )
+__children["BokehBuilder"]["user"].addChild( Gaffer.IntPlug( "blades", defaultValue = 6 ) )
+Gaffer.Metadata.registerValue( __children["BokehBuilder"]["user"]["blades"], "label", "Aperture Blades" )
+__children["BokehBuilder"]["user"].addChild( Gaffer.FloatPlug( "roundness", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["BokehBuilder"]["user"]["roundness"], "label", "Roundness" )
+__children["BokehBuilder"]["user"].addChild( Gaffer.FloatPlug( "rotation", defaultValue = 0.0 ) )
+Gaffer.Metadata.registerValue( __children["BokehBuilder"]["user"]["rotation"], "label", "Rotation" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Custom bokeh shape builder.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

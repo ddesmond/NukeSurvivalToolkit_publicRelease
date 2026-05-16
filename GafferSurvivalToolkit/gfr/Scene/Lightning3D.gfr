@@ -1,0 +1,17 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["Lightning3D"] = GafferImage.Grade( "Lightning3D" )
+parent.addChild( __children["Lightning3D"] )
+__children["Lightning3D"]["user"].addChild( Gaffer.FloatPlug( "intensity", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["Lightning3D"]["user"]["intensity"], "label", "Intensity" )
+__children["Lightning3D"]["user"].addChild( Gaffer.FloatPlug( "branching", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["Lightning3D"]["user"]["branching"], "label", "Branching" )
+__children["Lightning3D"]["user"].addChild( Gaffer.IntPlug( "seed", defaultValue = 0 ) )
+Gaffer.Metadata.registerValue( __children["Lightning3D"]["user"]["seed"], "label", "Seed" )
+
+Gaffer.Metadata.registerValue( parent, "description", "3D lightning effect.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

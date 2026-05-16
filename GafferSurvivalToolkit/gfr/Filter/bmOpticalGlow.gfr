@@ -1,0 +1,17 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["bmOpticalGlow"] = GafferImage.Grade( "bmOpticalGlow" )
+parent.addChild( __children["bmOpticalGlow"] )
+__children["bmOpticalGlow"]["user"].addChild( Gaffer.FloatPlug( "intensity", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["bmOpticalGlow"]["user"]["intensity"], "label", "Intensity" )
+__children["bmOpticalGlow"]["user"].addChild( Gaffer.FloatPlug( "size", defaultValue = 10.0 ) )
+Gaffer.Metadata.registerValue( __children["bmOpticalGlow"]["user"]["size"], "label", "Size" )
+__children["bmOpticalGlow"]["user"].addChild( Gaffer.FloatPlug( "softness", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["bmOpticalGlow"]["user"]["softness"], "label", "Softness" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Optical-quality glow.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

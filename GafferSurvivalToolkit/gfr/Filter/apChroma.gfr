@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["apChroma"] = GafferImage.Grade( "apChroma" )
+parent.addChild( __children["apChroma"] )
+__children["apChroma"]["user"].addChild( Gaffer.FloatPlug( "amount", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["apChroma"]["user"]["amount"], "label", "Amount" )
+__children["apChroma"]["user"].addChild( Gaffer.FloatPlug( "angle", defaultValue = 0.0 ) )
+Gaffer.Metadata.registerValue( __children["apChroma"]["user"]["angle"], "label", "Angle" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Chromatic aberration correction.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

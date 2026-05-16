@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["ColorCopy"] = GafferImage.Grade( "ColorCopy" )
+parent.addChild( __children["ColorCopy"] )
+__children["ColorCopy"]["user"].addChild( Gaffer.FloatPlug( "mix", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["ColorCopy"]["user"]["mix"], "label", "Mix" )
+__children["ColorCopy"]["user"].addChild( Gaffer.BoolPlug( "matchLuma", defaultValue = False ) )
+Gaffer.Metadata.registerValue( __children["ColorCopy"]["user"]["matchLuma"], "label", "Match Luma" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Copy color from one image to another.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

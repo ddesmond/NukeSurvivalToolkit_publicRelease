@@ -1,0 +1,17 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["Noise3D"] = GafferImage.Grade( "Noise3D" )
+parent.addChild( __children["Noise3D"] )
+__children["Noise3D"]["user"].addChild( Gaffer.FloatPlug( "scale", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["Noise3D"]["user"]["scale"], "label", "Scale" )
+__children["Noise3D"]["user"].addChild( Gaffer.IntPlug( "seed", defaultValue = 0 ) )
+Gaffer.Metadata.registerValue( __children["Noise3D"]["user"]["seed"], "label", "Seed" )
+__children["Noise3D"]["user"].addChild( Gaffer.StringPlug( "type", defaultValue = "perlin" ) )
+Gaffer.Metadata.registerValue( __children["Noise3D"]["user"]["type"], "label", "Type" )
+
+Gaffer.Metadata.registerValue( parent, "description", "3D noise.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

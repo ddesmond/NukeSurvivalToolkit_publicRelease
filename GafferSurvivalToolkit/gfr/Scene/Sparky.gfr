@@ -1,0 +1,17 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["Sparky"] = GafferImage.Grade( "Sparky" )
+parent.addChild( __children["Sparky"] )
+__children["Sparky"]["user"].addChild( Gaffer.IntPlug( "count", defaultValue = 50 ) )
+Gaffer.Metadata.registerValue( __children["Sparky"]["user"]["count"], "label", "Count" )
+__children["Sparky"]["user"].addChild( Gaffer.FloatPlug( "speed", defaultValue = 2.0 ) )
+Gaffer.Metadata.registerValue( __children["Sparky"]["user"]["speed"], "label", "Speed" )
+__children["Sparky"]["user"].addChild( Gaffer.FloatPlug( "life", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["Sparky"]["user"]["life"], "label", "Life" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Spark particle effect.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

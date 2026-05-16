@@ -1,0 +1,19 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["XTesla"] = GafferImage.Grade( "XTesla" )
+parent.addChild( __children["XTesla"] )
+__children["XTesla"]["user"].addChild( Gaffer.FloatPlug( "intensity", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["XTesla"]["user"]["intensity"], "label", "Intensity" )
+__children["XTesla"]["user"].addChild( Gaffer.FloatPlug( "frequency", defaultValue = 5.0 ) )
+Gaffer.Metadata.registerValue( __children["XTesla"]["user"]["frequency"], "label", "Frequency" )
+__children["XTesla"]["user"].addChild( Gaffer.FloatPlug( "branching", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["XTesla"]["user"]["branching"], "label", "Branching" )
+__children["XTesla"]["user"].addChild( Gaffer.IntPlug( "seed", defaultValue = 0 ) )
+Gaffer.Metadata.registerValue( __children["XTesla"]["user"]["seed"], "label", "Seed" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Tesla coil/electricity effect.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

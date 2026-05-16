@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["bmOpticalLightwrap"] = GafferImage.Grade( "bmOpticalLightwrap" )
+parent.addChild( __children["bmOpticalLightwrap"] )
+__children["bmOpticalLightwrap"]["user"].addChild( Gaffer.FloatPlug( "wrap", defaultValue = 5.0 ) )
+Gaffer.Metadata.registerValue( __children["bmOpticalLightwrap"]["user"]["wrap"], "label", "Wrap" )
+__children["bmOpticalLightwrap"]["user"].addChild( Gaffer.FloatPlug( "softness", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["bmOpticalLightwrap"]["user"]["softness"], "label", "Softness" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Optical-quality lightwrap.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

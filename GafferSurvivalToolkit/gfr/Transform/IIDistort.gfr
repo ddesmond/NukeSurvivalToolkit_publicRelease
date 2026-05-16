@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["IIDistort"] = GafferImage.Grade( "IIDistort" )
+parent.addChild( __children["IIDistort"] )
+__children["IIDistort"]["user"].addChild( Gaffer.FloatPlug( "amount", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["IIDistort"]["user"]["amount"], "label", "Amount" )
+__children["IIDistort"]["user"].addChild( Gaffer.FloatPlug( "scale", defaultValue = 10.0 ) )
+Gaffer.Metadata.registerValue( __children["IIDistort"]["user"]["scale"], "label", "Scale" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Image-based distort.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

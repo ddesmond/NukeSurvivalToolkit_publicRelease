@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["BlacksExpon"] = GafferImage.Grade( "BlacksExpon" )
+parent.addChild( __children["BlacksExpon"] )
+__children["BlacksExpon"]["user"].addChild( Gaffer.FloatPlug( "amount", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["BlacksExpon"]["user"]["amount"], "label", "Amount" )
+__children["BlacksExpon"]["user"].addChild( Gaffer.FloatPlug( "exponent", defaultValue = 2.0 ) )
+Gaffer.Metadata.registerValue( __children["BlacksExpon"]["user"]["exponent"], "label", "Exponent" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Exponential black enhancement.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

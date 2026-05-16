@@ -1,0 +1,17 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["ChannelCombiner"] = GafferImage.Grade( "ChannelCombiner" )
+parent.addChild( __children["ChannelCombiner"] )
+__children["ChannelCombiner"]["user"].addChild( Gaffer.StringPlug( "redSource", defaultValue = "rgba.red" ) )
+Gaffer.Metadata.registerValue( __children["ChannelCombiner"]["user"]["redSource"], "label", "Red Source" )
+__children["ChannelCombiner"]["user"].addChild( Gaffer.StringPlug( "greenSource", defaultValue = "rgba.green" ) )
+Gaffer.Metadata.registerValue( __children["ChannelCombiner"]["user"]["greenSource"], "label", "Green Source" )
+__children["ChannelCombiner"]["user"].addChild( Gaffer.StringPlug( "blueSource", defaultValue = "rgba.blue" ) )
+Gaffer.Metadata.registerValue( __children["ChannelCombiner"]["user"]["blueSource"], "label", "Blue Source" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Combine channels from multiple inputs.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

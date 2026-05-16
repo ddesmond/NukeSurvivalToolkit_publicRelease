@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["SSMesh"] = GafferImage.Grade( "SSMesh" )
+parent.addChild( __children["SSMesh"] )
+__children["SSMesh"]["user"].addChild( Gaffer.FloatPlug( "radius", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["SSMesh"]["user"]["radius"], "label", "Radius" )
+__children["SSMesh"]["user"].addChild( Gaffer.IntPlug( "samples", defaultValue = 8 ) )
+Gaffer.Metadata.registerValue( __children["SSMesh"]["user"]["samples"], "label", "Samples" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Subsurface mesh.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["HexColor"] = GafferImage.Grade( "HexColor" )
+parent.addChild( __children["HexColor"] )
+__children["HexColor"]["user"].addChild( Gaffer.StringPlug( "hexColor", defaultValue = "FF0000" ) )
+Gaffer.Metadata.registerValue( __children["HexColor"]["user"]["hexColor"], "label", "Hex Color" )
+__children["HexColor"]["user"].addChild( Gaffer.BoolPlug( "autoConvert", defaultValue = True ) )
+Gaffer.Metadata.registerValue( __children["HexColor"]["user"]["autoConvert"], "label", "Auto Convert" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Create a constant color from a hex color code.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

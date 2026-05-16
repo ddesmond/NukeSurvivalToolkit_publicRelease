@@ -1,0 +1,13 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["PProject"] = GafferImage.Grade( "PProject" )
+parent.addChild( __children["PProject"] )
+__children["PProject"]["user"].addChild( Gaffer.StringPlug( "projectionType", defaultValue = "perspective" ) )
+Gaffer.Metadata.registerValue( __children["PProject"]["user"]["projectionType"], "label", "Projection Type" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Position projection.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

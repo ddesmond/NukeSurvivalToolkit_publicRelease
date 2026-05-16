@@ -1,0 +1,17 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["LumaKeyer"] = GafferImage.Grade( "LumaKeyer" )
+parent.addChild( __children["LumaKeyer"] )
+__children["LumaKeyer"]["user"].addChild( Gaffer.FloatPlug( "threshold", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["LumaKeyer"]["user"]["threshold"], "label", "Threshold" )
+__children["LumaKeyer"]["user"].addChild( Gaffer.FloatPlug( "softness", defaultValue = 0.1 ) )
+Gaffer.Metadata.registerValue( __children["LumaKeyer"]["user"]["softness"], "label", "Softness" )
+__children["LumaKeyer"]["user"].addChild( Gaffer.BoolPlug( "invert", defaultValue = False ) )
+Gaffer.Metadata.registerValue( __children["LumaKeyer"]["user"]["invert"], "label", "Invert" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Luminance-based keying.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["WhiteBalance"] = GafferImage.Grade( "WhiteBalance" )
+parent.addChild( __children["WhiteBalance"] )
+__children["WhiteBalance"]["user"].addChild( Gaffer.FloatPlug( "temperature", defaultValue = 6500.0 ) )
+Gaffer.Metadata.registerValue( __children["WhiteBalance"]["user"]["temperature"], "label", "Temperature" )
+__children["WhiteBalance"]["user"].addChild( Gaffer.FloatPlug( "tint", defaultValue = 0.0 ) )
+Gaffer.Metadata.registerValue( __children["WhiteBalance"]["user"]["tint"], "label", "Tint" )
+
+Gaffer.Metadata.registerValue( parent, "description", "White balance correction.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

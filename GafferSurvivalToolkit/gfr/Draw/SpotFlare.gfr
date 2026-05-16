@@ -1,0 +1,19 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["SpotFlare"] = GafferImage.Grade( "SpotFlare" )
+parent.addChild( __children["SpotFlare"] )
+__children["SpotFlare"]["user"].addChild( Gaffer.V2fPlug( "position", defaultValue = (0.5, 0.5) ) )
+Gaffer.Metadata.registerValue( __children["SpotFlare"]["user"]["position"], "label", "Position" )
+__children["SpotFlare"]["user"].addChild( Gaffer.FloatPlug( "size", defaultValue = 0.2 ) )
+Gaffer.Metadata.registerValue( __children["SpotFlare"]["user"]["size"], "label", "Size" )
+__children["SpotFlare"]["user"].addChild( Gaffer.FloatPlug( "intensity", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["SpotFlare"]["user"]["intensity"], "label", "Intensity" )
+__children["SpotFlare"]["user"].addChild( Gaffer.FloatPlug( "glow", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["SpotFlare"]["user"]["glow"], "label", "Glow" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Lens spot flare.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

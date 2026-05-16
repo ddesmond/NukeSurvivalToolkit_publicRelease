@@ -1,0 +1,17 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["EdgeRimLight"] = GafferImage.Grade( "EdgeRimLight" )
+parent.addChild( __children["EdgeRimLight"] )
+__children["EdgeRimLight"]["user"].addChild( Gaffer.FloatPlug( "intensity", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["EdgeRimLight"]["user"]["intensity"], "label", "Intensity" )
+__children["EdgeRimLight"]["user"].addChild( Gaffer.StringPlug( "color", defaultValue = "rgba" ) )
+Gaffer.Metadata.registerValue( __children["EdgeRimLight"]["user"]["color"], "label", "Color Channel" )
+__children["EdgeRimLight"]["user"].addChild( Gaffer.FloatPlug( "softness", defaultValue = 0.1 ) )
+Gaffer.Metadata.registerValue( __children["EdgeRimLight"]["user"]["softness"], "label", "Softness" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Rim light from edges.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

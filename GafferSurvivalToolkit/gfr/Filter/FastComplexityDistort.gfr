@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["FastComplexityDistort"] = GafferImage.Grade( "FastComplexityDistort" )
+parent.addChild( __children["FastComplexityDistort"] )
+__children["FastComplexityDistort"]["user"].addChild( Gaffer.FloatPlug( "amount", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["FastComplexityDistort"]["user"]["amount"], "label", "Amount" )
+__children["FastComplexityDistort"]["user"].addChild( Gaffer.FloatPlug( "threshold", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["FastComplexityDistort"]["user"]["threshold"], "label", "Threshold" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Complexity-based distortion.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

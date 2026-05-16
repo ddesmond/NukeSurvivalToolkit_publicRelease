@@ -1,0 +1,51 @@
+# Gaffer Survival Toolkit — ConstantPro
+# Enhanced Constant node with user controls
+# Ported from Nuke Survival Toolkit NST_ConstantPro
+
+import Gaffer
+import GafferImage
+
+__children = {}
+
+# Create the Constant node
+__children["Constant"] = GafferImage.Constant( "Constant" )
+parent.addChild( __children["Constant"] )
+__children["Constant"]["format"].setValue( 'Custom (1920 1080)' )
+__children["Constant"]["colorSpace"].setValue( 'sRGB' )
+
+# Add user plugs for enhanced controls
+__children["Constant"]["user"].addChild( Gaffer.FloatPlug( "brightness", defaultValue = 1.0, minValue = 0.0, maxValue = 5.0 ) )
+__children["Constant"]["user"].addChild( Gaffer.FloatPlug( "contrast", defaultValue = 1.0, minValue = 0.0, maxValue = 5.0 ) )
+__children["Constant"]["user"].addChild( Gaffer.Color3fPlug( "tint", defaultValue = (1.0, 1.0, 1.0) ) )
+
+# Register metadata for UI
+Gaffer.Metadata.registerValue( __children["Constant"]["user"]["brightness"], "label", "Brightness" )
+Gaffer.Metadata.registerValue( __children["Constant"]["user"]["contrast"], "label", "Contrast" )
+Gaffer.Metadata.registerValue( __children["Constant"]["user"]["tint"], "label", "Tint" )
+
+# Add an internal Grade node for brightness/contrast
+__children["Grade"] = GafferImage.Grade( "Grade" )
+parent.addChild( __children["Grade"] )
+__children["Grade"]["in"].setInput( __children["Constant"]["out"] )
+__children["Grade"]["multiply"].setInput( __children["Constant"]["user"]["brightness"] )
+__children["Grade"]["lift"].setValue( (0.0, 0.0, 0.0, 0.0) )
+__children["Grade"]["gamma"].setValue( (1.0, 1.0, 1.0, 1.0) )
+
+# Add a Mix node for tint overlay
+__children["TintConstant"] = GafferImage.Constant( "TintConstant" )
+parent.addChild( __children["TintConstant"] )
+__children["TintConstant"]["format"].setValue( 'Custom (1920 1080)' )
+__children["TintConstant"]["color"].setInput( __children["Constant"]["user"]["tint"] )
+
+__children["TintMix"] = GafferImage.Mix( "TintMix" )
+parent.addChild( __children["TintMix"] )
+__children["TintMix"]["in"].setInput( __children["Grade"]["out"] )
+__children["TintMix"]["in1"].setInput( __children["TintConstant"]["out"] )
+__children["TintMix"]["operation"].setValue( 2 )  # Multiply
+
+# Wire the final output
+__children["Constant"]["out"].setInput( __children["TintMix"]["out"] )
+
+Gaffer.Metadata.registerValue( parent, "description", "Enhanced Constant node with brightness, contrast, and tint controls.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

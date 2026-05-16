@@ -1,0 +1,19 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["DasGrain"] = GafferImage.Grade( "DasGrain" )
+parent.addChild( __children["DasGrain"] )
+__children["DasGrain"]["user"].addChild( Gaffer.FloatPlug( "intensity", defaultValue = 0.1 ) )
+Gaffer.Metadata.registerValue( __children["DasGrain"]["user"]["intensity"], "label", "Intensity" )
+__children["DasGrain"]["user"].addChild( Gaffer.FloatPlug( "size", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["DasGrain"]["user"]["size"], "label", "Size" )
+__children["DasGrain"]["user"].addChild( Gaffer.FloatPlug( "monochrome", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["DasGrain"]["user"]["monochrome"], "label", "Monochrome" )
+__children["DasGrain"]["user"].addChild( Gaffer.IntPlug( "seed", defaultValue = 0 ) )
+Gaffer.Metadata.registerValue( __children["DasGrain"]["user"]["seed"], "label", "Seed" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Film grain simulation.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

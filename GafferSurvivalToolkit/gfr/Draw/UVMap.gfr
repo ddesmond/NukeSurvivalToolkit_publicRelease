@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["UVMap"] = GafferImage.Grade( "UVMap" )
+parent.addChild( __children["UVMap"] )
+__children["UVMap"]["user"].addChild( Gaffer.FloatPlug( "scale", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["UVMap"]["user"]["scale"], "label", "Scale" )
+__children["UVMap"]["user"].addChild( Gaffer.V2fPlug( "offset", defaultValue = (0.0, 0.0) ) )
+Gaffer.Metadata.registerValue( __children["UVMap"]["user"]["offset"], "label", "Offset" )
+
+Gaffer.Metadata.registerValue( parent, "description", "UV coordinate map generator with scale and offset.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

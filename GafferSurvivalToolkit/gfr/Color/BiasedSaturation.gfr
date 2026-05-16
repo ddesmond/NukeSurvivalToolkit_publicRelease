@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["BiasedSaturation"] = GafferImage.Grade( "BiasedSaturation" )
+parent.addChild( __children["BiasedSaturation"] )
+__children["BiasedSaturation"]["user"].addChild( Gaffer.FloatPlug( "saturation", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["BiasedSaturation"]["user"]["saturation"], "label", "Saturation" )
+__children["BiasedSaturation"]["user"].addChild( Gaffer.FloatPlug( "bias", defaultValue = 0.0 ) )
+Gaffer.Metadata.registerValue( __children["BiasedSaturation"]["user"]["bias"], "label", "Bias" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Selective saturation boost.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

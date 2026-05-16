@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["CardToTrack_v7"] = GafferImage.Grade( "CardToTrack_v7" )
+parent.addChild( __children["CardToTrack_v7"] )
+__children["CardToTrack_v7"]["user"].addChild( Gaffer.StringPlug( "trackMethod", defaultValue = "planar" ) )
+Gaffer.Metadata.registerValue( __children["CardToTrack_v7"]["user"]["trackMethod"], "label", "Track Method" )
+__children["CardToTrack_v7"]["user"].addChild( Gaffer.FloatPlug( "confidence", defaultValue = 0.8 ) )
+Gaffer.Metadata.registerValue( __children["CardToTrack_v7"]["user"]["confidence"], "label", "Confidence" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Card-to-track conversion v7.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

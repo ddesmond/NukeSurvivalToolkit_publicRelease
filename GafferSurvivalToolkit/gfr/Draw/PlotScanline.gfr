@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["PlotScanline"] = GafferImage.Grade( "PlotScanline" )
+parent.addChild( __children["PlotScanline"] )
+__children["PlotScanline"]["user"].addChild( Gaffer.IntPlug( "scanline", defaultValue = 0 ) )
+Gaffer.Metadata.registerValue( __children["PlotScanline"]["user"]["scanline"], "label", "Scanline Y" )
+__children["PlotScanline"]["user"].addChild( Gaffer.StringPlug( "channel", defaultValue = "rgba.red" ) )
+Gaffer.Metadata.registerValue( __children["PlotScanline"]["user"]["channel"], "label", "Channel" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Plot scanline intensity graph.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["iConvolve"] = GafferImage.Grade( "iConvolve" )
+parent.addChild( __children["iConvolve"] )
+__children["iConvolve"]["user"].addChild( Gaffer.StringPlug( "kernel", defaultValue = "sharpen" ) )
+Gaffer.Metadata.registerValue( __children["iConvolve"]["user"]["kernel"], "label", "Kernel" )
+__children["iConvolve"]["user"].addChild( Gaffer.FloatPlug( "scale", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["iConvolve"]["user"]["scale"], "label", "Scale" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Custom convolution.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

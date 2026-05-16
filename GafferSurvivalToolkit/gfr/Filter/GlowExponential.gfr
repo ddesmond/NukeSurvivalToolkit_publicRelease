@@ -1,0 +1,17 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["GlowExponential"] = GafferImage.Grade( "GlowExponential" )
+parent.addChild( __children["GlowExponential"] )
+__children["GlowExponential"]["user"].addChild( Gaffer.FloatPlug( "intensity", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["GlowExponential"]["user"]["intensity"], "label", "Intensity" )
+__children["GlowExponential"]["user"].addChild( Gaffer.FloatPlug( "threshold", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["GlowExponential"]["user"]["threshold"], "label", "Threshold" )
+__children["GlowExponential"]["user"].addChild( Gaffer.FloatPlug( "size", defaultValue = 10.0 ) )
+Gaffer.Metadata.registerValue( __children["GlowExponential"]["user"]["size"], "label", "Size" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Exponential glow variant.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

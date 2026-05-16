@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["RotoCentroid"] = GafferImage.Grade( "RotoCentroid" )
+parent.addChild( __children["RotoCentroid"] )
+__children["RotoCentroid"]["user"].addChild( Gaffer.StringPlug( "channel", defaultValue = "rgba.alpha" ) )
+Gaffer.Metadata.registerValue( __children["RotoCentroid"]["user"]["channel"], "label", "Channel" )
+__children["RotoCentroid"]["user"].addChild( Gaffer.FloatPlug( "threshold", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["RotoCentroid"]["user"]["threshold"], "label", "Threshold" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Find roto centroid.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

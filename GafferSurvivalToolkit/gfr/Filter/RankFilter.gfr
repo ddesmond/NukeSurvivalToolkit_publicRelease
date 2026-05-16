@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["RankFilter"] = GafferImage.Grade( "RankFilter" )
+parent.addChild( __children["RankFilter"] )
+__children["RankFilter"]["user"].addChild( Gaffer.FloatPlug( "rank", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["RankFilter"]["user"]["rank"], "label", "Rank" )
+__children["RankFilter"]["user"].addChild( Gaffer.IntPlug( "size", defaultValue = 3 ) )
+Gaffer.Metadata.registerValue( __children["RankFilter"]["user"]["size"], "label", "Size" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Rank-order filter.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

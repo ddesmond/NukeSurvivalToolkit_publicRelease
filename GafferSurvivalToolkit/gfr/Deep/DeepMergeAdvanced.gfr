@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["DeepMergeAdvanced"] = GafferImage.Grade( "DeepMergeAdvanced" )
+parent.addChild( __children["DeepMergeAdvanced"] )
+__children["DeepMergeAdvanced"]["user"].addChild( Gaffer.StringPlug( "operation", defaultValue = "over" ) )
+Gaffer.Metadata.registerValue( __children["DeepMergeAdvanced"]["user"]["operation"], "label", "Operation" )
+__children["DeepMergeAdvanced"]["user"].addChild( Gaffer.BoolPlug( "depthSort", defaultValue = True ) )
+Gaffer.Metadata.registerValue( __children["DeepMergeAdvanced"]["user"]["depthSort"], "label", "Depth Sort" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Advanced deep merge.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

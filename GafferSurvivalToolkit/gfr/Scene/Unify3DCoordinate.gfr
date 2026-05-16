@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["Unify3DCoordinate"] = GafferImage.Grade( "Unify3DCoordinate" )
+parent.addChild( __children["Unify3DCoordinate"] )
+__children["Unify3DCoordinate"]["user"].addChild( Gaffer.StringPlug( "sourceSystem", defaultValue = "y-up" ) )
+Gaffer.Metadata.registerValue( __children["Unify3DCoordinate"]["user"]["sourceSystem"], "label", "Source System" )
+__children["Unify3DCoordinate"]["user"].addChild( Gaffer.StringPlug( "targetSystem", defaultValue = "y-up" ) )
+Gaffer.Metadata.registerValue( __children["Unify3DCoordinate"]["user"]["targetSystem"], "label", "Target System" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Unify 3D coordinate systems.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

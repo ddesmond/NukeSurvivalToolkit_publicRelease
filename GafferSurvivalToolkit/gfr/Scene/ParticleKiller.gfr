@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["ParticleKiller"] = GafferImage.Grade( "ParticleKiller" )
+parent.addChild( __children["ParticleKiller"] )
+__children["ParticleKiller"]["user"].addChild( Gaffer.FloatPlug( "threshold", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["ParticleKiller"]["user"]["threshold"], "label", "Threshold" )
+__children["ParticleKiller"]["user"].addChild( Gaffer.StringPlug( "mode", defaultValue = "age" ) )
+Gaffer.Metadata.registerValue( __children["ParticleKiller"]["user"]["mode"], "label", "Mode" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Kill/remove particles.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

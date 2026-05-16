@@ -1,0 +1,19 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["ChannelControl"] = GafferImage.Grade( "ChannelControl" )
+parent.addChild( __children["ChannelControl"] )
+__children["ChannelControl"]["user"].addChild( Gaffer.BoolPlug( "enableRed", defaultValue = True ) )
+Gaffer.Metadata.registerValue( __children["ChannelControl"]["user"]["enableRed"], "label", "Enable Red" )
+__children["ChannelControl"]["user"].addChild( Gaffer.BoolPlug( "enableGreen", defaultValue = True ) )
+Gaffer.Metadata.registerValue( __children["ChannelControl"]["user"]["enableGreen"], "label", "Enable Green" )
+__children["ChannelControl"]["user"].addChild( Gaffer.BoolPlug( "enableBlue", defaultValue = True ) )
+Gaffer.Metadata.registerValue( __children["ChannelControl"]["user"]["enableBlue"], "label", "Enable Blue" )
+__children["ChannelControl"]["user"].addChild( Gaffer.BoolPlug( "enableAlpha", defaultValue = True ) )
+Gaffer.Metadata.registerValue( __children["ChannelControl"]["user"]["enableAlpha"], "label", "Enable Alpha" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Channel enable/disable control.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

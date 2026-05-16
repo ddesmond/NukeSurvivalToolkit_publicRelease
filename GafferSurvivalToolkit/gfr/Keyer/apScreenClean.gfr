@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["apScreenClean"] = GafferImage.Grade( "apScreenClean" )
+parent.addChild( __children["apScreenClean"] )
+__children["apScreenClean"]["user"].addChild( Gaffer.FloatPlug( "despot", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["apScreenClean"]["user"]["despot"], "label", "Despot" )
+__children["apScreenClean"]["user"].addChild( Gaffer.FloatPlug( "blur", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["apScreenClean"]["user"]["blur"], "label", "Blur" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Screen matte cleanup.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

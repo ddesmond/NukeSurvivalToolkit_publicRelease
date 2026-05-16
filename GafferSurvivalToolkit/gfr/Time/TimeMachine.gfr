@@ -1,0 +1,17 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["TimeMachine"] = GafferImage.Grade( "TimeMachine" )
+parent.addChild( __children["TimeMachine"] )
+__children["TimeMachine"]["user"].addChild( Gaffer.FloatPlug( "speed", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["TimeMachine"]["user"]["speed"], "label", "Speed" )
+__children["TimeMachine"]["user"].addChild( Gaffer.IntPlug( "offset", defaultValue = 0 ) )
+Gaffer.Metadata.registerValue( __children["TimeMachine"]["user"]["offset"], "label", "Offset" )
+__children["TimeMachine"]["user"].addChild( Gaffer.BoolPlug( "reverse", defaultValue = False ) )
+Gaffer.Metadata.registerValue( __children["TimeMachine"]["user"]["reverse"], "label", "Reverse" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Time manipulation/remapping.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

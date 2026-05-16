@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["GuidedBlur"] = GafferImage.Grade( "GuidedBlur" )
+parent.addChild( __children["GuidedBlur"] )
+__children["GuidedBlur"]["user"].addChild( Gaffer.FloatPlug( "size", defaultValue = 5.0 ) )
+Gaffer.Metadata.registerValue( __children["GuidedBlur"]["user"]["size"], "label", "Size" )
+__children["GuidedBlur"]["user"].addChild( Gaffer.StringPlug( "guidance", defaultValue = "rgba" ) )
+Gaffer.Metadata.registerValue( __children["GuidedBlur"]["user"]["guidance"], "label", "Guidance Channel" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Edge-guided blur.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

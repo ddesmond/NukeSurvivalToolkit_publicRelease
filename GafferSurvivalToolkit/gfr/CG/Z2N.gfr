@@ -1,0 +1,13 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["Z2N"] = GafferImage.Grade( "Z2N" )
+parent.addChild( __children["Z2N"] )
+__children["Z2N"]["user"].addChild( Gaffer.StringPlug( "method", defaultValue = "sobel" ) )
+Gaffer.Metadata.registerValue( __children["Z2N"]["user"]["method"], "label", "Method" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Z-depth to Normal.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

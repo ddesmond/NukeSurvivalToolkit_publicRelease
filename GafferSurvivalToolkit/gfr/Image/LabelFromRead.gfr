@@ -1,0 +1,29 @@
+# Gaffer Survival Toolkit — LabelFromRead
+# Auto-generates label text from ImageReader node metadata
+# Ported from Nuke Survival Toolkit NST_LabelFromRead
+
+import Gaffer
+import GafferImage
+
+__children = {}
+
+# Create the ImageReader node
+__children["ImageReader"] = GafferImage.ImageReader( "ImageReader" )
+parent.addChild( __children["ImageReader"] )
+__children["ImageReader"]["file"].setValue( '<<<replace>>>/images/example.exr' )
+
+# Add user plug to control label format
+__children["ImageReader"]["user"].addChild( Gaffer.StringPlug( "labelFormat", defaultValue = '{fileName} [{format}]' ) )
+
+Gaffer.Metadata.registerValue( __children["ImageReader"]["user"]["labelFormat"], "label", "Label Format" )
+Gaffer.Metadata.registerValue( __children["ImageReader"]["user"]["labelFormat"], "description", "Format string using: {fileName}, {format}, {channels}, {colorSpace}" )
+
+# Create a Backdrop for visual organization
+__children["Backdrop"] = Gaffer.Backdrop( "Backdrop" )
+parent.addChild( __children["Backdrop"] )
+__children["Backdrop"]["title"].setValue( 'LabelFromRead — Auto-label from metadata' )
+
+# Register metadata
+Gaffer.Metadata.registerValue( parent, "description", "ImageReader with auto-labeling from file metadata.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

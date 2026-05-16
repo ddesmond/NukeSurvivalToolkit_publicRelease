@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["viewer_render"] = GafferImage.Grade( "viewer_render" )
+parent.addChild( __children["viewer_render"] )
+__children["viewer_render"]["user"].addChild( Gaffer.StringPlug( "quality", defaultValue = "draft" ) )
+Gaffer.Metadata.registerValue( __children["viewer_render"]["user"]["quality"], "label", "Quality" )
+__children["viewer_render"]["user"].addChild( Gaffer.StringPlug( "region", defaultValue = "full" ) )
+Gaffer.Metadata.registerValue( __children["viewer_render"]["user"]["region"], "label", "Region" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Viewer-driven render.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

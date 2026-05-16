@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["HighPass"] = GafferImage.Grade( "HighPass" )
+parent.addChild( __children["HighPass"] )
+__children["HighPass"]["user"].addChild( Gaffer.FloatPlug( "radius", defaultValue = 2.0 ) )
+Gaffer.Metadata.registerValue( __children["HighPass"]["user"]["radius"], "label", "Radius" )
+__children["HighPass"]["user"].addChild( Gaffer.FloatPlug( "mix", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["HighPass"]["user"]["mix"], "label", "Mix" )
+
+Gaffer.Metadata.registerValue( parent, "description", "High-pass filter.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

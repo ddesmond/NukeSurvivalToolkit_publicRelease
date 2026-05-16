@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["UVEditor"] = GafferImage.Grade( "UVEditor" )
+parent.addChild( __children["UVEditor"] )
+__children["UVEditor"]["user"].addChild( Gaffer.StringPlug( "udim", defaultValue = "1001" ) )
+Gaffer.Metadata.registerValue( __children["UVEditor"]["user"]["udim"], "label", "UDIM" )
+__children["UVEditor"]["user"].addChild( Gaffer.FloatPlug( "scale", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["UVEditor"]["user"]["scale"], "label", "Scale" )
+
+Gaffer.Metadata.registerValue( parent, "description", "UV editing in scene.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

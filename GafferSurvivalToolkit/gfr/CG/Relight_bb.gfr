@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["Relight_bb"] = GafferImage.Grade( "Relight_bb" )
+parent.addChild( __children["Relight_bb"] )
+__children["Relight_bb"]["user"].addChild( Gaffer.V3fPlug( "lightPos", defaultValue = (0.0, 1.0, 0.0) ) )
+Gaffer.Metadata.registerValue( __children["Relight_bb"]["user"]["lightPos"], "label", "Light Position" )
+__children["Relight_bb"]["user"].addChild( Gaffer.FloatPlug( "intensity", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["Relight_bb"]["user"]["intensity"], "label", "Intensity" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Relight from bounding box.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

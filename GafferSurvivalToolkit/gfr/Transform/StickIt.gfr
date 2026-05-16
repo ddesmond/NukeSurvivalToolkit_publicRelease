@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["StickIt"] = GafferImage.Grade( "StickIt" )
+parent.addChild( __children["StickIt"] )
+__children["StickIt"]["user"].addChild( Gaffer.StringPlug( "projectionType", defaultValue = "planar" ) )
+Gaffer.Metadata.registerValue( __children["StickIt"]["user"]["projectionType"], "label", "Projection Type" )
+__children["StickIt"]["user"].addChild( Gaffer.StringPlug( "filter", defaultValue = "cubic" ) )
+Gaffer.Metadata.registerValue( __children["StickIt"]["user"]["filter"], "label", "Filter" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Surface projection tool.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

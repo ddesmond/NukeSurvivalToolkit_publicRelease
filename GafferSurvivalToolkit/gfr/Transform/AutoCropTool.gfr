@@ -1,0 +1,17 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["AutoCropTool"] = GafferImage.Grade( "AutoCropTool" )
+parent.addChild( __children["AutoCropTool"] )
+__children["AutoCropTool"]["user"].addChild( Gaffer.FloatPlug( "threshold", defaultValue = 0.01 ) )
+Gaffer.Metadata.registerValue( __children["AutoCropTool"]["user"]["threshold"], "label", "Threshold" )
+__children["AutoCropTool"]["user"].addChild( Gaffer.StringPlug( "channels", defaultValue = "rgba.alpha" ) )
+Gaffer.Metadata.registerValue( __children["AutoCropTool"]["user"]["channels"], "label", "Channels" )
+__children["AutoCropTool"]["user"].addChild( Gaffer.IntPlug( "padding", defaultValue = 0 ) )
+Gaffer.Metadata.registerValue( __children["AutoCropTool"]["user"]["padding"], "label", "Padding" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Auto-crop to content.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

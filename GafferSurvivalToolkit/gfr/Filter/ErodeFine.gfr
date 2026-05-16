@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["ErodeFine"] = GafferImage.Grade( "ErodeFine" )
+parent.addChild( __children["ErodeFine"] )
+__children["ErodeFine"]["user"].addChild( Gaffer.StringPlug( "channels", defaultValue = "rgba.alpha" ) )
+Gaffer.Metadata.registerValue( __children["ErodeFine"]["user"]["channels"], "label", "Channels" )
+__children["ErodeFine"]["user"].addChild( Gaffer.FloatPlug( "size", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["ErodeFine"]["user"]["size"], "label", "Size" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Fine erosion control.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

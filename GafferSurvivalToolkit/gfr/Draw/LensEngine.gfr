@@ -1,0 +1,17 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["LensEngine"] = GafferImage.Grade( "LensEngine" )
+parent.addChild( __children["LensEngine"] )
+__children["LensEngine"]["user"].addChild( Gaffer.FloatPlug( "distortion", defaultValue = 0.0 ) )
+Gaffer.Metadata.registerValue( __children["LensEngine"]["user"]["distortion"], "label", "Distortion" )
+__children["LensEngine"]["user"].addChild( Gaffer.FloatPlug( "vignette", defaultValue = 0.0 ) )
+Gaffer.Metadata.registerValue( __children["LensEngine"]["user"]["vignette"], "label", "Vignette" )
+__children["LensEngine"]["user"].addChild( Gaffer.FloatPlug( "chromatic", defaultValue = 0.0 ) )
+Gaffer.Metadata.registerValue( __children["LensEngine"]["user"]["chromatic"], "label", "Chromatic Aberration" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Lens effect engine.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

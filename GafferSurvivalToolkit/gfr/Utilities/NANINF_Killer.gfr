@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["NANINF_Killer"] = GafferImage.Grade( "NANINF_Killer" )
+parent.addChild( __children["NANINF_Killer"] )
+__children["NANINF_Killer"]["user"].addChild( Gaffer.FloatPlug( "replaceWith", defaultValue = 0.0 ) )
+Gaffer.Metadata.registerValue( __children["NANINF_Killer"]["user"]["replaceWith"], "label", "Replace With" )
+__children["NANINF_Killer"]["user"].addChild( Gaffer.StringPlug( "channels", defaultValue = "rgba" ) )
+Gaffer.Metadata.registerValue( __children["NANINF_Killer"]["user"]["channels"], "label", "Channels" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Kill NaN/Inf pixel values.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

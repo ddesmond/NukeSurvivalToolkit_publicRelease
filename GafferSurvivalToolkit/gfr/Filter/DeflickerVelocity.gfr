@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["DeflickerVelocity"] = GafferImage.Grade( "DeflickerVelocity" )
+parent.addChild( __children["DeflickerVelocity"] )
+__children["DeflickerVelocity"]["user"].addChild( Gaffer.FloatPlug( "threshold", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["DeflickerVelocity"]["user"]["threshold"], "label", "Threshold" )
+__children["DeflickerVelocity"]["user"].addChild( Gaffer.IntPlug( "radius", defaultValue = 3 ) )
+Gaffer.Metadata.registerValue( __children["DeflickerVelocity"]["user"]["radius"], "label", "Radius" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Velocity-based deflicker.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

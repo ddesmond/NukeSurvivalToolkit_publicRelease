@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["RotoQC"] = GafferImage.Grade( "RotoQC" )
+parent.addChild( __children["RotoQC"] )
+__children["RotoQC"]["user"].addChild( Gaffer.StringPlug( "channel", defaultValue = "rgba.alpha" ) )
+Gaffer.Metadata.registerValue( __children["RotoQC"]["user"]["channel"], "label", "Channel" )
+__children["RotoQC"]["user"].addChild( Gaffer.FloatPlug( "threshold", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["RotoQC"]["user"]["threshold"], "label", "Threshold" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Roto quality check.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

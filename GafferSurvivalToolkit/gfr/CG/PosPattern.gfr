@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["PosPattern"] = GafferImage.Grade( "PosPattern" )
+parent.addChild( __children["PosPattern"] )
+__children["PosPattern"]["user"].addChild( Gaffer.StringPlug( "pattern", defaultValue = "grid" ) )
+Gaffer.Metadata.registerValue( __children["PosPattern"]["user"]["pattern"], "label", "Pattern" )
+__children["PosPattern"]["user"].addChild( Gaffer.FloatPlug( "scale", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["PosPattern"]["user"]["scale"], "label", "Scale" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Position-based pattern.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

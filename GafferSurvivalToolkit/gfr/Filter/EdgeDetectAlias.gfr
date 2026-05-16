@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["EdgeDetectAlias"] = GafferImage.Grade( "EdgeDetectAlias" )
+parent.addChild( __children["EdgeDetectAlias"] )
+__children["EdgeDetectAlias"]["user"].addChild( Gaffer.FloatPlug( "threshold", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["EdgeDetectAlias"]["user"]["threshold"], "label", "Threshold" )
+__children["EdgeDetectAlias"]["user"].addChild( Gaffer.FloatPlug( "sensitivity", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["EdgeDetectAlias"]["user"]["sensitivity"], "label", "Sensitivity" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Detect aliasing artifacts.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

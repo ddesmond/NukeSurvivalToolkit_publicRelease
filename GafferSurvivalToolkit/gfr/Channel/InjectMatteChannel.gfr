@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["InjectMatteChannel"] = GafferImage.Grade( "InjectMatteChannel" )
+parent.addChild( __children["InjectMatteChannel"] )
+__children["InjectMatteChannel"]["user"].addChild( Gaffer.StringPlug( "matteChannel", defaultValue = "rgba.alpha" ) )
+Gaffer.Metadata.registerValue( __children["InjectMatteChannel"]["user"]["matteChannel"], "label", "Matte Channel" )
+__children["InjectMatteChannel"]["user"].addChild( Gaffer.FloatPlug( "matteOpacity", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["InjectMatteChannel"]["user"]["matteOpacity"], "label", "Matte Opacity" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Inject matte into alpha channel.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

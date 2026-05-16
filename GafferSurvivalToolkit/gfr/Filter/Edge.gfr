@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["Edge"] = GafferImage.Grade( "Edge" )
+parent.addChild( __children["Edge"] )
+__children["Edge"]["user"].addChild( Gaffer.StringPlug( "method", defaultValue = "sobel" ) )
+Gaffer.Metadata.registerValue( __children["Edge"]["user"]["method"], "label", "Method" )
+__children["Edge"]["user"].addChild( Gaffer.FloatPlug( "threshold", defaultValue = 0.5 ) )
+Gaffer.Metadata.registerValue( __children["Edge"]["user"]["threshold"], "label", "Threshold" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Edge detection.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

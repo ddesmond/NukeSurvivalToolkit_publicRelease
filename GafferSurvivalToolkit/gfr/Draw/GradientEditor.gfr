@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["GradientEditor"] = GafferImage.Grade( "GradientEditor" )
+parent.addChild( __children["GradientEditor"] )
+__children["GradientEditor"]["user"].addChild( Gaffer.StringPlug( "preset", defaultValue = "Linear" ) )
+Gaffer.Metadata.registerValue( __children["GradientEditor"]["user"]["preset"], "label", "Preset" )
+__children["GradientEditor"]["user"].addChild( Gaffer.BoolPlug( "interpolation", defaultValue = True ) )
+Gaffer.Metadata.registerValue( __children["GradientEditor"]["user"]["interpolation"], "label", "Interpolation" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Interactive gradient editor.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

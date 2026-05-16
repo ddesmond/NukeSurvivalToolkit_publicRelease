@@ -1,0 +1,15 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["UVMapper"] = GafferImage.Grade( "UVMapper" )
+parent.addChild( __children["UVMapper"] )
+__children["UVMapper"]["user"].addChild( Gaffer.FloatPlug( "scale", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["UVMapper"]["user"]["scale"], "label", "Scale" )
+__children["UVMapper"]["user"].addChild( Gaffer.V2fPlug( "offset", defaultValue = (0.0, 0.0) ) )
+Gaffer.Metadata.registerValue( __children["UVMapper"]["user"]["offset"], "label", "Offset" )
+
+Gaffer.Metadata.registerValue( parent, "description", "UV mapping utility.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

@@ -1,0 +1,19 @@
+import Gaffer
+import GafferImage
+
+__children = {}
+
+__children["ITransform"] = GafferImage.Grade( "ITransform" )
+parent.addChild( __children["ITransform"] )
+__children["ITransform"]["user"].addChild( Gaffer.V2fPlug( "center", defaultValue = (0.5, 0.5) ) )
+Gaffer.Metadata.registerValue( __children["ITransform"]["user"]["center"], "label", "Center" )
+__children["ITransform"]["user"].addChild( Gaffer.FloatPlug( "scale", defaultValue = 1.0 ) )
+Gaffer.Metadata.registerValue( __children["ITransform"]["user"]["scale"], "label", "Scale" )
+__children["ITransform"]["user"].addChild( Gaffer.FloatPlug( "rotation", defaultValue = 0.0 ) )
+Gaffer.Metadata.registerValue( __children["ITransform"]["user"]["rotation"], "label", "Rotation" )
+__children["ITransform"]["user"].addChild( Gaffer.V2fPlug( "translate", defaultValue = (0.0, 0.0) ) )
+Gaffer.Metadata.registerValue( __children["ITransform"]["user"]["translate"], "label", "Translate" )
+
+Gaffer.Metadata.registerValue( parent, "description", "Image transform.\n\nPorted from Nuke Survival Toolkit." )
+
+del __children

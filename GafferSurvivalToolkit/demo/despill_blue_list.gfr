@@ -1,32 +1,29 @@
-// Converted from Nuke .nk file: despill_blue_list
-// Note: Expression-based procedural patterns may need manual conversion
-// since Gaffer.Expression works on scalars, not per-pixel data.
+import Gaffer
+import GafferImage
+import GafferOSL
+import IECore
+import imath
 
-Gaffer.ScriptNode {
-    children : [
-        GafferImage.Ramp "ColorWheel1" {
-            "enabled" : true,
-            "gamma" : Imath.Color4f(0.45, 0.45, 0.45, 0.45),
-        },
-        Gaffer.Expression "DoubleRedAve2" {
-            "enabled" : true,
-            // _note: Nuke Expression with per-pixel math: ['b>(g+2*r)/2*LimitPercentage?(g+2*r)/2*LimitPercentage:b', 'b-(2*r+g)*LimitPercentage/2']
-        },
-        Gaffer.Expression "Average" {
-            "enabled" : true,
-            // _note: Nuke Expression with per-pixel math: ['b>(g+r)/2*LimitPercentage?(g+r)/2*LimitPercentage:b', 'b-(r+g)*LimitPercentage/2']
-        },
-        Gaffer.Expression "DoubleGreenAve" {
-            "enabled" : true,
-            // _note: Nuke Expression with per-pixel math: ['b>(2*g+r)/2*LimitPercentage?(2*g+r)/2*LimitPercentage:b', 'b-(r+2*g)*LimitPercentage/2']
-        },
-        Gaffer.Expression "GreenLimitsBlue" {
-            "enabled" : true,
-            // _note: Nuke Expression with per-pixel math: ['b>g*LimitPercentage?g*LimitPercentage:b', 'b-g*LimitPercentage']
-        },
-        Gaffer.Expression "RedLimitsBlue" {
-            "enabled" : true,
-            // _note: Nuke Expression with per-pixel math: ['b>r*LimitPercentage?r*LimitPercentage:b', 'b-r*LimitPercentage']
-        },
-    ],
-}
+__children = {}
+
+__children["Constant"] = GafferImage.Constant( "Constant" )
+parent.addChild( __children["Constant"] )
+__children["Constant"]["format"].setValue( Gaffer.Format( 1920, 1080, 1.0, "HD_1080" ) )
+__children["Constant"]["color"].setValue( imath.Color4f( 0.2, 0.3, 0.8, 1 ) )
+
+__children["OSLImage"] = GafferOSL.OSLImage( "OSLImage" )
+parent.addChild( __children["OSLImage"] )
+__children["OSLImage"]["in"].setInput( __children["Constant"]["out"] )
+__children["OSLImage"]["channels"].addChild( Gaffer.NameValuePlug( "", Gaffer.Color3fPlug( "value", defaultValue = imath.Color3f( 1, 1, 1 ), flags = Gaffer.Plug.Flags.Default | Gaffer.Plug.Flags.Dynamic, ), True, "channel", Gaffer.Plug.Flags.Default | Gaffer.Plug.Flags.Dynamic ) )
+
+__children["OSLCode"] = GafferOSL.OSLCode( "OSLCode" )
+parent.addChild( __children["OSLCode"] )
+__children["OSLCode"]["out"].addChild( Gaffer.Color3fPlug( "output1", direction = Gaffer.Plug.Direction.Out, defaultValue = imath.Color3f( 0, 0, 0 ), flags = Gaffer.Plug.Flags.Default | Gaffer.Plug.Flags.Dynamic, ) )
+__children["OSLCode"]["code"].setValue( 'color c = inLayer( "rgba" );\nfloat key = max( 0.0, c.b - (c.r + c.g) / 2.0 );\nc.b = c.b - key * 0.5;\nc.r = c.r + key * 0.25;\nc.g = c.g + key * 0.25;\noutput1 = c.rgb;' )
+
+__children["OSLImage"]["channels"]["channel"]["value"].setInput( __children["OSLCode"]["out"]["output1"] )
+__children["OSLImage"]["channels"]["channel"]["value"]["r"].setInput( __children["OSLCode"]["out"]["output1"]["r"] )
+__children["OSLImage"]["channels"]["channel"]["value"]["g"].setInput( __children["OSLCode"]["out"]["output1"]["g"] )
+__children["OSLImage"]["channels"]["channel"]["value"]["b"].setInput( __children["OSLCode"]["out"]["output1"]["b"] )
+
+del __children

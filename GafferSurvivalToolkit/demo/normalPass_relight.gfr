@@ -1,15 +1,26 @@
-// Converted from Nuke .nk file: normalPass_relight
-// Note: Expression-based procedural patterns may need manual conversion
-// since Gaffer.Expression works on scalars, not per-pixel data.
+import Gaffer
+import GafferImage
+import GafferOSL
+import IECore
+import imath
 
-Gaffer.ScriptNode {
-    children : [
-        GafferImage.Shuffle "Shuffle1" {
-            "enabled" : true,
-        },
-        Gaffer.Expression "Expression" {
-            "enabled" : true,
-            // _note: Nuke Expression with per-pixel math: ['max((r*norm.r)+(g*norm.g)+(b*norm.b),0)']
-        },
-    ],
-}
+__children = {}
+
+__children["Constant"] = GafferImage.Constant( "Constant" )
+parent.addChild( __children["Constant"] )
+__children["Constant"]["format"].setValue( Gaffer.Format( 1920, 1080, 1.0, "HD_1080" ) )
+__children["Constant"]["color"].setValue( imath.Color4f( 0.5, 0.5, 0.5, 1 ) )
+
+__children["OSLImage"] = GafferOSL.OSLImage( "OSLImage" )
+parent.addChild( __children["OSLImage"] )
+__children["OSLImage"]["in"].setInput( __children["Constant"]["out"] )
+__children["OSLImage"]["channels"].addChild( Gaffer.NameValuePlug( "A", Gaffer.FloatPlug( "value", defaultValue = 1.0, flags = Gaffer.Plug.Flags.Default | Gaffer.Plug.Flags.Dynamic, ), True, "channel", Gaffer.Plug.Flags.Default | Gaffer.Plug.Flags.Dynamic ) )
+
+__children["OSLCode"] = GafferOSL.OSLCode( "OSLCode" )
+parent.addChild( __children["OSLCode"] )
+__children["OSLCode"]["out"].addChild( Gaffer.FloatPlug( "output1", direction = Gaffer.Plug.Direction.Out, defaultValue = 0.0, flags = Gaffer.Plug.Flags.Default | Gaffer.Plug.Flags.Dynamic, ) )
+__children["OSLCode"]["code"].setValue( 'color n = inLayer( "rgba" );\nvector lightDir = normalize( vector( 0.5, 0.5, 1.0 ) );\nvector normal = normalize( vector( n.r * 2.0 - 1.0, n.g * 2.0 - 1.0, n.b * 2.0 - 1.0 ) );\nfloat diffuse = max( 0.0, dot( normal, lightDir ) );\noutput1 = diffuse;' )
+
+__children["OSLImage"]["channels"]["channel"]["value"].setInput( __children["OSLCode"]["out"]["output1"] )
+
+del __children

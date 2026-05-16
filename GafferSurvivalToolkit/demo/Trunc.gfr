@@ -1,16 +1,29 @@
-// Converted from Nuke .nk file: Trunc
-// Note: Expression-based procedural patterns may need manual conversion
-// since Gaffer.Expression works on scalars, not per-pixel data.
+import Gaffer
+import GafferImage
+import GafferOSL
+import IECore
+import imath
 
-Gaffer.ScriptNode {
-    children : [
-        GafferImage.Ramp "ColorWheel1" {
-            "enabled" : true,
-            "gamma" : Imath.Color4f(0.45, 0.45, 0.45, 0.45),
-        },
-        Gaffer.Expression "Trunc" {
-            "enabled" : true,
-            // _note: Nuke Expression with per-pixel math: ['trunc(r*scale)/scale', 'trunc(g*scale)/scale', 'trunc(b*scale)/scale']
-        },
-    ],
-}
+__children = {}
+
+__children["Constant"] = GafferImage.Constant( "Constant" )
+parent.addChild( __children["Constant"] )
+__children["Constant"]["format"].setValue( Gaffer.Format( 1920, 1080, 1.0, "HD_1080" ) )
+__children["Constant"]["color"].setValue( imath.Color4f( 0.5, 0.5, 0.5, 1 ) )
+
+__children["OSLImage"] = GafferOSL.OSLImage( "OSLImage" )
+parent.addChild( __children["OSLImage"] )
+__children["OSLImage"]["in"].setInput( __children["Constant"]["out"] )
+__children["OSLImage"]["channels"].addChild( Gaffer.NameValuePlug( "", Gaffer.Color3fPlug( "value", defaultValue = imath.Color3f( 1, 1, 1 ), flags = Gaffer.Plug.Flags.Default | Gaffer.Plug.Flags.Dynamic, ), True, "channel", Gaffer.Plug.Flags.Default | Gaffer.Plug.Flags.Dynamic ) )
+
+__children["OSLCode"] = GafferOSL.OSLCode( "OSLCode" )
+parent.addChild( __children["OSLCode"] )
+__children["OSLCode"]["out"].addChild( Gaffer.Color3fPlug( "output1", direction = Gaffer.Plug.Direction.Out, defaultValue = imath.Color3f( 0, 0, 0 ), flags = Gaffer.Plug.Flags.Default | Gaffer.Plug.Flags.Dynamic, ) )
+__children["OSLCode"]["code"].setValue( 'color c = inLayer( "rgba" );\nfloat scale = 1.0;\noutput1 = color( trunc( c.r * scale ) / scale, trunc( c.g * scale ) / scale, trunc( c.b * scale ) / scale );' )
+
+__children["OSLImage"]["channels"]["channel"]["value"].setInput( __children["OSLCode"]["out"]["output1"] )
+__children["OSLImage"]["channels"]["channel"]["value"]["r"].setInput( __children["OSLCode"]["out"]["output1"]["r"] )
+__children["OSLImage"]["channels"]["channel"]["value"]["g"].setInput( __children["OSLCode"]["out"]["output1"]["g"] )
+__children["OSLImage"]["channels"]["channel"]["value"]["b"].setInput( __children["OSLCode"]["out"]["output1"]["b"] )
+
+del __children

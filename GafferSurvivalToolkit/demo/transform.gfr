@@ -1,12 +1,19 @@
-// Converted from Nuke .nk file: transform
-// Note: Expression-based procedural patterns may need manual conversion
-// since Gaffer.Expression works on scalars, not per-pixel data.
+import Gaffer
+import GafferImage
+import IECore
+import imath
 
-Gaffer.ScriptNode {
-    children : [
-        Gaffer.Expression "Transform" {
-            "enabled" : true,
-            // _note: Nuke Expression with per-pixel math: ['r(fx,fy)', 'r(fx,fy)', 'r(fx,fy)']
-        },
-    ],
-}
+__children = {}
+
+__children["Constant"] = GafferImage.Constant( "Constant" )
+parent.addChild( __children["Constant"] )
+__children["Constant"]["format"].setValue( Gaffer.Format( 1920, 1080, 1.0, "HD_1080" ) )
+__children["Constant"]["color"].setValue( imath.Color4f( 0.5, 0.3, 0.7, 1 ) )
+
+__children["ImageTransform"] = GafferImage.ImageTransform( "ImageTransform" )
+parent.addChild( __children["ImageTransform"] )
+__children["ImageTransform"]["in"].setInput( __children["Constant"]["out"] )
+__children["ImageTransform"]["translate"].setValue( imath.V2f( 410, 440 ) )
+__children["ImageTransform"]["scale"].setValue( imath.V2f( 2, 2 ) )
+
+del __children

@@ -1,42 +1,28 @@
-// Converted from Nuke .nk file: points_advanced
-// Note: Expression-based procedural patterns may need manual conversion
-// since Gaffer.Expression works on scalars, not per-pixel data.
+import Gaffer
+import GafferImage
+import GafferOSL
+import IECore
+import imath
 
-Gaffer.ScriptNode {
-    children : [
-        GafferImage.Shuffle "Shuffle1" {
-            "enabled" : true,
-        },
-        GafferImage.Crop "Crop1" {
-            "enabled" : true,
-            "area" : Imath.Box2i( Imath.V2i(212, 154), Imath.V2i(365, 326) ),
-        },
-        Gaffer.Expression "Expression4" {
-            "enabled" : true,
-            "offset" : "None",
-            "gain" : "None",
-            // _note: Nuke Expression with per-pixel math: ['fmod(y/rows,offsetX) == 0 ? floor(y/offsetX)%2 == 0 ? ((x+offset)%offsetY)/offsetY == 0 ? random_points==1 && random_every_frame == 0 ? gain*random(x,y,1) : random_points == 1 && random_every_frame == 1?random(x*y, 1, frame)*gain:random_points==0 && random_every_frame==1?random(frame,1)*gain:gain :0:0:0', 'fmod(y/rows,offsetX) == 0 ? floor(y/offsetX)%2 == 0 ? ((x+offset)%offsetY)/offsetY == 0 ? random_points==1 && random_every_frame == 0 ? gain*random(x,y,2) : random_points == 1 && random_every_frame == 1?random(x*y, 2, frame)*gain:random_points==0 && random_every_frame==1?random(frame,2)*gain:gain :0:0:0', 'fmod(y/rows,offsetX) == 0 ? floor(y/offsetX)%2 == 0 ? ((x+offset)%offsetY)/offsetY == 0 ? random_points==1 && random_every_frame == 0 ? gain*random(x,y,3) : random_points == 1 && random_every_frame == 1?random(x*y, 3, frame)*gain:random_points==0 && random_every_frame==1?random(frame,3)*gain:gain :0:0:0', 'fmod(y/rows,offsetX) == 0 ? floor(y/offsetX)%2 == 0 ? ((x+offset)%offsetY)/offsetY == 0 ? 1 :0:0:0']
-        },
-        Gaffer.Expression "Expression11" {
-            "enabled" : true,
-            "offset" : "None",
-            "gain" : "None",
-            // _note: Nuke Expression with per-pixel math: ['fmod((y+1)/rows,offsetX) == 0 ? floor(y/offsetX)%2 == 0 ? ((x)%offsetY)/offsetY == 0 ? random_points==1 && random_every_frame == 0 ? gain*random(x,y,1) : random_points == 1 && random_every_frame == 1?random(x*y, 1, frame)*gain:random_points==0 && random_every_frame==1?random(frame,1)*gain:gain :0:0:0', 'fmod((y+1)/rows,offsetX) == 0 ? floor(y/offsetX)%2 == 0 ? ((x)%offsetY)/offsetY == 0 ? random_points==1 && random_every_frame == 0 ? gain*random(x,y,2) : random_points == 1 && random_every_frame == 1?random(x*y, 2, frame)*gain:random_points==0 && random_every_frame==1?random(frame,2)*gain:gain :0:0:0', 'fmod((y+1)/rows,offsetX) == 0 ? floor(y/offsetX)%2 == 0 ? ((x)%offsetY)/offsetY == 0 ? random_points==1 && random_every_frame == 0 ? gain*random(x,y,3) : random_points == 1 && random_every_frame == 1?random(x*y, 3, frame)*gain:random_points==0 && random_every_frame==1?random(frame,3)*gain:gain :0:0:0', 'fmod((y+1)/rows,offsetX) == 0 ? floor(y/offsetX)%2 == 0 ? ((x)%offsetY)/offsetY == 0 ? 1 :0:0:0']
-        },
-        GafferImage.Merge "Merge4" {
-            "enabled" : true,
-        },
-        GafferImage.Dilate "Dilate10" {
-            "enabled" : true,
-            "radius" : 10.0,
-        },
-        GafferImage.Grade "Grade1" {
-            "enabled" : true,
-        },
-        Gaffer.Expression "MASTER_POINTS" {
-            "enabled" : true,
-            "offset" : Imath.Color4f(87.0, 87.0, 87.0, 87.0),
-            "gain" : Imath.Color4f(1.0, 1.0, 1.0, 1.0),
-        },
-    ],
-}
+__children = {}
+
+__children["Constant"] = GafferImage.Constant( "Constant" )
+parent.addChild( __children["Constant"] )
+__children["Constant"]["format"].setValue( Gaffer.Format( 1920, 1080, 1.0, "HD_1080" ) )
+
+__children["OSLImage"] = GafferOSL.OSLImage( "OSLImage" )
+parent.addChild( __children["OSLImage"] )
+__children["OSLImage"]["in"].setInput( __children["Constant"]["out"] )
+__children["OSLImage"]["channels"].addChild( Gaffer.NameValuePlug( "", Gaffer.Color3fPlug( "value", defaultValue = imath.Color3f( 1, 1, 1 ), flags = Gaffer.Plug.Flags.Default | Gaffer.Plug.Flags.Dynamic, ), True, "channel", Gaffer.Plug.Flags.Default | Gaffer.Plug.Flags.Dynamic ) )
+
+__children["OSLCode"] = GafferOSL.OSLCode( "OSLCode" )
+parent.addChild( __children["OSLCode"] )
+__children["OSLCode"]["out"].addChild( Gaffer.Color3fPlug( "output1", direction = Gaffer.Plug.Direction.Out, defaultValue = imath.Color3f( 0, 0, 0 ), flags = Gaffer.Plug.Flags.Default | Gaffer.Plug.Flags.Dynamic, ) )
+__children["OSLCode"]["code"].setValue( 'float offsetX = 135.0;\nfloat offsetY = 181.0;\nfloat offset = 87.0;\nfloat gain = 1.0;\nfloat px = floor( u * 1920.0 );\nfloat py = floor( v * 1080.0 );\nfloat isPoint = ( mod( py, offsetX ) == 0 && mod( px + offset, offsetY ) == 0 ) ? gain : 0.0;\nfloat r = cellnoise( px, py, 1.0 ) * isPoint;\nfloat g = cellnoise( px, py, 2.0 ) * isPoint;\nfloat b = cellnoise( px, py, 3.0 ) * isPoint;\noutput1 = color( r, g, b );' )
+
+__children["OSLImage"]["channels"]["channel"]["value"].setInput( __children["OSLCode"]["out"]["output1"] )
+__children["OSLImage"]["channels"]["channel"]["value"]["r"].setInput( __children["OSLCode"]["out"]["output1"]["r"] )
+__children["OSLImage"]["channels"]["channel"]["value"]["g"].setInput( __children["OSLCode"]["out"]["output1"]["g"] )
+__children["OSLImage"]["channels"]["channel"]["value"]["b"].setInput( __children["OSLCode"]["out"]["output1"]["b"] )
+
+del __children

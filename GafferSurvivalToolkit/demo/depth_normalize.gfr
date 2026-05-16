@@ -1,12 +1,25 @@
-// Converted from Nuke .nk file: depth_normalize
-// Note: Expression-based procedural patterns may need manual conversion
-// since Gaffer.Expression works on scalars, not per-pixel data.
+import Gaffer
+import GafferImage
+import GafferOSL
+import IECore
+import imath
 
-Gaffer.ScriptNode {
-    children : [
-        Gaffer.Expression "Expression1" {
-            "enabled" : true,
-            // _note: Nuke Expression with per-pixel math: ['z==0?0:1/z']
-        },
-    ],
-}
+__children = {}
+
+__children["Constant"] = GafferImage.Constant( "Constant" )
+parent.addChild( __children["Constant"] )
+__children["Constant"]["format"].setValue( Gaffer.Format( 1920, 1080, 1.0, "HD_1080" ) )
+
+__children["OSLImage"] = GafferOSL.OSLImage( "OSLImage" )
+parent.addChild( __children["OSLImage"] )
+__children["OSLImage"]["in"].setInput( __children["Constant"]["out"] )
+__children["OSLImage"]["channels"].addChild( Gaffer.NameValuePlug( "depth", Gaffer.FloatPlug( "value", defaultValue = 1.0, flags = Gaffer.Plug.Flags.Default | Gaffer.Plug.Flags.Dynamic, ), True, "channel", Gaffer.Plug.Flags.Default | Gaffer.Plug.Flags.Dynamic ) )
+
+__children["OSLCode"] = GafferOSL.OSLCode( "OSLCode" )
+parent.addChild( __children["OSLCode"] )
+__children["OSLCode"]["out"].addChild( Gaffer.FloatPlug( "output1", direction = Gaffer.Plug.Direction.Out, defaultValue = 0.0, flags = Gaffer.Plug.Flags.Default | Gaffer.Plug.Flags.Dynamic, ) )
+__children["OSLCode"]["code"].setValue( 'float z = inChannel( "depth" );\noutput1 = (z == 0.0) ? 0.0 : 1.0 / z;' )
+
+__children["OSLImage"]["channels"]["channel"]["value"].setInput( __children["OSLCode"]["out"]["output1"] )
+
+del __children

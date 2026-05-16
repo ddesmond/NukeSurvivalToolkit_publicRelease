@@ -1,36 +1,28 @@
-// Converted from Nuke .nk file: points
-// Note: Expression-based procedural patterns may need manual conversion
-// since Gaffer.Expression works on scalars, not per-pixel data.
+import Gaffer
+import GafferImage
+import GafferOSL
+import IECore
+import imath
 
-Gaffer.ScriptNode {
-    children : [
-        GafferImage.Shuffle "Shuffle1" {
-            "enabled" : true,
-        },
-        GafferImage.Crop "Crop1" {
-            "enabled" : true,
-            "area" : Imath.Box2i( Imath.V2i(198, 168), Imath.V2i(378, 312) ),
-        },
-        GafferImage.Resize "Reformat1" {
-            "enabled" : true,
-            "format" : Gaffer.Format(3840, 2160, 1, "UHD_4K"),
-        },
-        Gaffer.Expression "Points" {
-            "enabled" : true,
-            "multiply" : Imath.Color4f(1.0, 1.0, 1.0, 1.0),
-            // _note: Nuke Expression with per-pixel math: ['fmod(x,offsetX)==0?fmod(y,offsetY)==0?random_colors?random:value:0:0', 'fmod(x,offsetX)==0?fmod(y,offsetY)==0?random_colors?random:value:0:0', 'fmod(x,offsetX)==0?fmod(y,offsetY)==0?random_colors?random:value:0:0', 'fmod(x,offsetX)==0?fmod(y,offsetY)==0?random_colors?1:value:0:0']
-        },
-        GafferImage.Dilate "Dilate1" {
-            "enabled" : true,
-            "radius" : 25.0,
-        },
-        GafferImage.Grade "Grade1" {
-            "enabled" : true,
-        },
-        Gaffer.Expression "Points1" {
-            "enabled" : true,
-            "multiply" : Imath.Color4f(1.0, 1.0, 1.0, 1.0),
-            // _note: Nuke Expression with per-pixel math: ['fmod(x,offsetX)==0?fmod(y,offsetY)==0?random_colors?random:value:0:0', 'fmod(x,offsetX)==0?fmod(y,offsetY)==0?random_colors?random:value:0:0', 'fmod(x,offsetX)==0?fmod(y,offsetY)==0?random_colors?random:value:0:0', 'fmod(x,offsetX)==0?fmod(y,offsetY)==0?random_colors?1:value:0:0']
-        },
-    ],
-}
+__children = {}
+
+__children["Constant"] = GafferImage.Constant( "Constant" )
+parent.addChild( __children["Constant"] )
+__children["Constant"]["format"].setValue( Gaffer.Format( 1920, 1080, 1.0, "HD_1080" ) )
+
+__children["OSLImage"] = GafferOSL.OSLImage( "OSLImage" )
+parent.addChild( __children["OSLImage"] )
+__children["OSLImage"]["in"].setInput( __children["Constant"]["out"] )
+__children["OSLImage"]["channels"].addChild( Gaffer.NameValuePlug( "", Gaffer.Color3fPlug( "value", defaultValue = imath.Color3f( 1, 1, 1 ), flags = Gaffer.Plug.Flags.Default | Gaffer.Plug.Flags.Dynamic, ), True, "channel", Gaffer.Plug.Flags.Default | Gaffer.Plug.Flags.Dynamic ) )
+
+__children["OSLCode"] = GafferOSL.OSLCode( "OSLCode" )
+parent.addChild( __children["OSLCode"] )
+__children["OSLCode"]["out"].addChild( Gaffer.Color3fPlug( "output1", direction = Gaffer.Plug.Direction.Out, defaultValue = imath.Color3f( 0, 0, 0 ), flags = Gaffer.Plug.Flags.Default | Gaffer.Plug.Flags.Dynamic, ) )
+__children["OSLCode"]["code"].setValue( 'float offsetX = 200.0;\nfloat offsetY = 200.0;\nfloat value = 1.0;\nfloat px = floor( u * 1920.0 );\nfloat py = floor( v * 1080.0 );\nfloat isPoint = ( mod( px, offsetX ) == 0 && mod( py, offsetY ) == 0 ) ? value : 0.0;\noutput1 = color( isPoint, isPoint, isPoint );' )
+
+__children["OSLImage"]["channels"]["channel"]["value"].setInput( __children["OSLCode"]["out"]["output1"] )
+__children["OSLImage"]["channels"]["channel"]["value"]["r"].setInput( __children["OSLCode"]["out"]["output1"]["r"] )
+__children["OSLImage"]["channels"]["channel"]["value"]["g"].setInput( __children["OSLCode"]["out"]["output1"]["g"] )
+__children["OSLImage"]["channels"]["channel"]["value"]["b"].setInput( __children["OSLCode"]["out"]["output1"]["b"] )
+
+del __children

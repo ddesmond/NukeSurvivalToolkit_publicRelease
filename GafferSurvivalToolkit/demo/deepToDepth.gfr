@@ -1,12 +1,17 @@
-// Converted from Nuke .nk file: deepToDepth
-// Note: Expression-based procedural patterns may need manual conversion
-// since Gaffer.Expression works on scalars, not per-pixel data.
+import Gaffer
+import GafferImage
+import IECore
+import imath
 
-Gaffer.ScriptNode {
-    children : [
-        Gaffer.Expression "DeepToDepth" {
-            "enabled" : true,
-            // _note: Nuke Expression with per-pixel math: ['deep.r == 0 ? inf : deep.r']
-        },
-    ],
-}
+__children = {}
+
+__children["Constant"] = GafferImage.Constant( "Constant" )
+parent.addChild( __children["Constant"] )
+__children["Constant"]["format"].setValue( Gaffer.Format( 1920, 1080, 1.0, "HD_1080" ) )
+
+__children["DeepState"] = GafferImage.DeepState( "DeepState" )
+parent.addChild( __children["DeepState"] )
+__children["DeepState"]["in"].setInput( __children["Constant"]["out"] )
+__children["DeepState"]["mode"].setValue( GafferImage.DeepState.Mode.Front )
+
+del __children

@@ -651,10 +651,15 @@ def __registerGSTMenu():
     try:
         app = Gaffer.ApplicationRoot.currentApplication()
         if app is not None:
+            # Right-click context menu in Graph Editor (NodeMenu)
             nodeMenu = GafferUI.NodeMenu.acquire(app)
             nodeMenu.definition().append(
                 "/Image/GST", {"subMenu": __nodeMenuDefinition}
             )
+
+            # Top-level menubar dropdown in ScriptWindow
+            scriptWindowMenu = GafferUI.ScriptWindow.menuDefinition(app)
+            scriptWindowMenu.append("/GST", {"subMenu": __nodeMenuDefinition})
     except Exception as e:
         IECore.msg(
             IECore.Msg.Level.Warning, "GST_menu", f"Could not register GST menu: {e}"

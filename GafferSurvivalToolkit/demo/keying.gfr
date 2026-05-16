@@ -1,0 +1,16 @@
+// Converted from Nuke .nk file: keying
+// Note: Expression-based procedural patterns may need manual conversion
+// since Gaffer.Expression works on scalars, not per-pixel data.
+
+Gaffer.ScriptNode {
+    children : [
+        Gaffer.Expression "Expression_Tweaking" {
+            "enabled" : true,
+            // _note: Nuke Expression with per-pixel math: ['r > strip_low_r ? r : 0', 'g > strip_low_g ? g : 0', 'b > strip_low_b ? b : 0']
+        },
+        Gaffer.Expression "Expression_Keying" {
+            "enabled" : true,
+            // _note: Nuke Expression with per-pixel math: ['valid ? 1 - (r_ratio + g_ratio + b_ratio)/(ratio.r + ratio.g + ratio.b) : 0\\n']
+        },
+    ],
+}

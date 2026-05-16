@@ -1,0 +1,16 @@
+// Converted from Nuke .nk file: GradientCorner
+// Note: Expression-based procedural patterns may need manual conversion
+// since Gaffer.Expression works on scalars, not per-pixel data.
+
+Gaffer.ScriptNode {
+    children : [
+        GafferImage.Constant "Constant1" {
+            "enabled" : true,
+            "channels" : "rgb",
+        },
+        Gaffer.Expression "GradientCorner" {
+            "enabled" : true,
+            // _note: Nuke Expression with per-pixel math: ['DownLeftColor.r*DownLeftCorner+DownRightColor.r*DownRightCorner+UpRightColor.r*UpRightCorner+UpLeftColor.r*UpLeftCorner', 'DownLeftColor.g*DownLeftCorner+DownRightColor.g*DownRightCorner+UpRightColor.g*UpRightCorner+UpLeftColor.g*UpLeftCorner', 'DownLeftColor.b*DownLeftCorner+DownRightColor.b*DownRightCorner+UpRightColor.b*UpRightCorner+UpLeftColor.b*UpLeftCorner']
+        },
+    ],
+}

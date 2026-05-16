@@ -1,0 +1,66 @@
+// Converted from Nuke .nk file: NST_UVEditor_demo_clean
+// Note: Expression-based procedural patterns may need manual conversion
+// since Gaffer.Expression works on scalars, not per-pixel data.
+
+Gaffer.ScriptNode {
+    children : [
+        GafferScene.Group "Axis2" {
+            "enabled" : true,
+        },
+        GafferScene.Camera "Camera4" {
+            "enabled" : true,
+        },
+        GafferScene.SceneReader "ReadGeo8" {
+            "enabled" : true,
+            "fileName" : "./Trex_UVtile_skin.abc",
+        },
+        GafferScene.Group "Axis3" {
+            "enabled" : true,
+        },
+        GafferScene.Camera "Camera2" {
+            "enabled" : true,
+        },
+        GafferScene.SceneReader "ReadGeo5" {
+            "enabled" : true,
+            "fileName" : "./Trex_UVtile_skin.abc",
+        },
+        GafferScene.SceneReader "ReadGeo9" {
+            "enabled" : true,
+            "fileName" : "./Trex_UVtile_skin.abc",
+        },
+        GafferImage.Resize "Reformat3" {
+            "enabled" : true,
+            "format" : Gaffer.Format(1280, 720, 1, "HD_720"),
+        },
+        GafferScene.Group "Axis1" {
+            "enabled" : true,
+        },
+        GafferScene.Camera "Camera1" {
+            "enabled" : true,
+        },
+        GafferScene.SceneReader "ReadGeo3" {
+            "enabled" : true,
+            "fileName" : "./Trex_UVtile_skin.abc",
+        },
+        GafferScene.SceneReader "ReadGeo4" {
+            "enabled" : true,
+            "fileName" : "./Trex_UVtile_skin.abc",
+        },
+        GafferImage.Resize "Reformat2" {
+            "enabled" : true,
+            "format" : Gaffer.Format(1280, 720, 1, "HD_720"),
+        },
+        GafferScene.SceneReader "ReadGeo1" {
+            "enabled" : true,
+            "fileName" : "./Trex_UVtile_skin.abc",
+        },
+        GafferImage.Resize "Reformat1" {
+            "enabled" : true,
+            "format" : Gaffer.Format(1280, 720, 1, "HD_720"),
+        },
+        GafferScene.SceneReader "ReadGeo2" {
+            "enabled" : true,
+            "fileName" : "./Trex_UVtile_skin.abc",
+        },
+    ],
+}

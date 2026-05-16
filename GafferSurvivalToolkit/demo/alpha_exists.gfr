@@ -1,0 +1,15 @@
+// Converted from Nuke .nk file: alpha_exists
+// Note: Expression-based procedural patterns may need manual conversion
+// since Gaffer.Expression works on scalars, not per-pixel data.
+
+Gaffer.ScriptNode {
+    children : [
+        GafferImage.Constant "Constant1" {
+            "enabled" : true,
+            "color" : Imath.Color4f(1.0, 1.0, 1.0, 1.0),
+        },
+        Gaffer.Expression "Alpha_channel_Exist" {
+            "enabled" : true,
+        },
+    ],
+}

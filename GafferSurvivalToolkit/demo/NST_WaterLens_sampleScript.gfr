@@ -1,0 +1,84 @@
+// Converted from Nuke .nk file: NST_WaterLens_sampleScript
+// Note: Expression-based procedural patterns may need manual conversion
+// since Gaffer.Expression works on scalars, not per-pixel data.
+
+Gaffer.ScriptNode {
+    children : [
+        GafferImage.ImageReader "Read5" {
+            "enabled" : true,
+            "fileName" : "<<<replace>>>/images/waterLensExampleBG.jpg",
+            "format" : Gaffer.Format(1280, 720, 1, "HD_720"),
+        },
+        GafferImage.Merge "Merge10" {
+            "enabled" : true,
+        },
+        GafferImage.Merge "Merge11" {
+            "enabled" : true,
+        },
+        GafferImage.Merge "Merge12" {
+            "enabled" : true,
+        },
+        GafferImage.Resize "Reformat4" {
+            "enabled" : true,
+        },
+        GafferImage.Merge "Merge13" {
+            "enabled" : true,
+        },
+        GafferImage.ImageReader "Read2" {
+            "enabled" : true,
+            "fileName" : "<<<replace>>>/images/waterLensExampleBG.jpg",
+            "format" : Gaffer.Format(1280, 720, 1, "HD_720"),
+        },
+        GafferImage.Resize "Reformat1" {
+            "enabled" : true,
+        },
+        GafferImage.Merge "Merge5" {
+            "enabled" : true,
+        },
+        GafferImage.ImageReader "Read1" {
+            "enabled" : true,
+            "fileName" : "<<<replace>>>/images/waterLensExampleBG.jpg",
+            "format" : Gaffer.Format(1280, 720, 1, "HD_720"),
+        },
+        GafferImage.Merge "Merge1" {
+            "enabled" : true,
+        },
+        GafferImage.Merge "Merge2" {
+            "enabled" : true,
+        },
+        GafferImage.Merge "Merge4" {
+            "enabled" : true,
+        },
+        GafferImage.Resize "Reformat3" {
+            "enabled" : true,
+        },
+        GafferImage.Merge "Merge3" {
+            "enabled" : true,
+        },
+        GafferImage.ImageReader "Read4" {
+            "enabled" : true,
+            "fileName" : "<<<replace>>>/images/waterLensExampleBG.jpg",
+            "format" : Gaffer.Format(1280, 720, 1, "HD_720"),
+        },
+        GafferImage.Merge "Merge6" {
+            "enabled" : true,
+        },
+        GafferImage.Merge "Merge7" {
+            "enabled" : true,
+        },
+        GafferImage.Merge "Merge8" {
+            "enabled" : true,
+        },
+        GafferImage.Resize "Reformat2" {
+            "enabled" : true,
+        },
+        GafferImage.Merge "Merge9" {
+            "enabled" : true,
+        },
+        GafferImage.ImageReader "Read3" {
+            "enabled" : true,
+            "fileName" : "<<<replace>>>/images/waterLensExampleBG.jpg",
+            "format" : Gaffer.Format(1280, 720, 1, "HD_720"),
+        },
+    ],
+}

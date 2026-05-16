@@ -1,0 +1,12 @@
+// Converted from Nuke .nk file: gradient_horizontal
+// Note: Expression-based procedural patterns may need manual conversion
+// since Gaffer.Expression works on scalars, not per-pixel data.
+
+Gaffer.ScriptNode {
+    children : [
+        Gaffer.Expression "gradient_horizontal" {
+            "enabled" : true,
+            // _note: Nuke Expression with per-pixel math: ['x / width', 'x / width', 'x / width', 'x / width']
+        },
+    ],
+}

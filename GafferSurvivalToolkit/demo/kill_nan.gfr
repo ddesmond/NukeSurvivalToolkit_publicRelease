@@ -1,0 +1,16 @@
+// Converted from Nuke .nk file: kill_nan
+// Note: Expression-based procedural patterns may need manual conversion
+// since Gaffer.Expression works on scalars, not per-pixel data.
+
+Gaffer.ScriptNode {
+    children : [
+        Gaffer.Expression "Create_nan_pixel" {
+            "enabled" : true,
+            // _note: Nuke Expression with per-pixel math: ['r!=0?sqrt(-1):0', 'g!=0?sqrt(-1):0', 'b!=0?sqrt(-1):0', 'a!=0?sqrt(-1):0']
+        },
+        Gaffer.Expression "Kill_nan_pixel" {
+            "enabled" : true,
+            // _note: Nuke Expression with per-pixel math: ['isnan(r)?r(x+x_offset,y+y_offset):r', 'isnan(g)?g(x+x_offset,y+y_offset):g', 'isnan(b)?b(x+x_offset,y+y_offset):b', 'isnan(a)?a(x+x_offset,y+y_offset):a']
+        },
+    ],
+}

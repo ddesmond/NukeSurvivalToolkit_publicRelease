@@ -1,0 +1,32 @@
+// Converted from Nuke .nk file: despill_blue_list
+// Note: Expression-based procedural patterns may need manual conversion
+// since Gaffer.Expression works on scalars, not per-pixel data.
+
+Gaffer.ScriptNode {
+    children : [
+        GafferImage.Ramp "ColorWheel1" {
+            "enabled" : true,
+            "gamma" : Imath.Color4f(0.45, 0.45, 0.45, 0.45),
+        },
+        Gaffer.Expression "DoubleRedAve2" {
+            "enabled" : true,
+            // _note: Nuke Expression with per-pixel math: ['b>(g+2*r)/2*LimitPercentage?(g+2*r)/2*LimitPercentage:b', 'b-(2*r+g)*LimitPercentage/2']
+        },
+        Gaffer.Expression "Average" {
+            "enabled" : true,
+            // _note: Nuke Expression with per-pixel math: ['b>(g+r)/2*LimitPercentage?(g+r)/2*LimitPercentage:b', 'b-(r+g)*LimitPercentage/2']
+        },
+        Gaffer.Expression "DoubleGreenAve" {
+            "enabled" : true,
+            // _note: Nuke Expression with per-pixel math: ['b>(2*g+r)/2*LimitPercentage?(2*g+r)/2*LimitPercentage:b', 'b-(r+2*g)*LimitPercentage/2']
+        },
+        Gaffer.Expression "GreenLimitsBlue" {
+            "enabled" : true,
+            // _note: Nuke Expression with per-pixel math: ['b>g*LimitPercentage?g*LimitPercentage:b', 'b-g*LimitPercentage']
+        },
+        Gaffer.Expression "RedLimitsBlue" {
+            "enabled" : true,
+            // _note: Nuke Expression with per-pixel math: ['b>r*LimitPercentage?r*LimitPercentage:b', 'b-r*LimitPercentage']
+        },
+    ],
+}

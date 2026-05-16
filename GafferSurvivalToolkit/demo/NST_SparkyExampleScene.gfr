@@ -1,0 +1,46 @@
+// Converted from Nuke .nk file: NST_SparkyExampleScene
+// Note: Expression-based procedural patterns may need manual conversion
+// since Gaffer.Expression works on scalars, not per-pixel data.
+
+Gaffer.ScriptNode {
+    children : [
+        GafferScene.Camera "Camera1" {
+            "enabled" : true,
+        },
+        GafferScene.Group "Scene1" {
+            "enabled" : true,
+        },
+        GafferImage.Blur "Blur1" {
+            "enabled" : true,
+            "radius" : 55.0,
+        },
+        GafferImage.Shuffle "Shuffle1" {
+            "enabled" : true,
+        },
+        GafferImage.Merge "Merge3" {
+            "enabled" : true,
+            "operation" : "GafferImage.Merge.Operation.Over",
+        },
+        GafferImage.DeepRecolor "DeepRecolor1" {
+            "enabled" : true,
+        },
+        GafferScene.Group "Axis1" {
+            "enabled" : true,
+        },
+        GafferImage.DeepMerge "DeepMerge2" {
+            "enabled" : true,
+        },
+        GafferScene.Group "Axis2" {
+            "enabled" : true,
+        },
+        GafferImage.Grade "Grade1" {
+            "enabled" : true,
+        },
+        GafferImage.Grade "Grade2" {
+            "enabled" : true,
+        },
+        GafferImage.Merge "Merge1" {
+            "enabled" : true,
+        },
+    ],
+}

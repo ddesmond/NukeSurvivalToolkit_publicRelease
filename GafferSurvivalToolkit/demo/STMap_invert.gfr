@@ -1,0 +1,12 @@
+// Converted from Nuke .nk file: STMap_invert
+// Note: Expression-based procedural patterns may need manual conversion
+// since Gaffer.Expression works on scalars, not per-pixel data.
+
+Gaffer.ScriptNode {
+    children : [
+        Gaffer.Expression "ST_invert" {
+            "enabled" : true,
+            // _note: Nuke Expression with per-pixel math: ['((x+0.5)/width)-r+((x+0.5)/width)', '((y+0.5)/height)-g+((y+0.5)/height)']
+        },
+    ],
+}

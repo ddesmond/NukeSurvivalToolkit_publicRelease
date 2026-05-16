@@ -1,0 +1,20 @@
+// Converted from Nuke .nk file: fBm
+// Note: Expression-based procedural patterns may need manual conversion
+// since Gaffer.Expression works on scalars, not per-pixel data.
+
+Gaffer.ScriptNode {
+    children : [
+        GafferImage.Shuffle "Shuffle9" {
+            "enabled" : true,
+        },
+        Gaffer.Expression "Expression6" {
+            "enabled" : true,
+            "offset" : Imath.Color4f(0.365, 0.365, 0.365, 0.365),
+            // _note: Nuke Expression with per-pixel math: ['random(r,g,b)+offset']
+        },
+        Gaffer.Expression "Expression5" {
+            "enabled" : true,
+            // _note: Nuke Expression with per-pixel math: ['fBm(r,g,b,octaves,noise01.red,gain)']
+        },
+    ],
+}

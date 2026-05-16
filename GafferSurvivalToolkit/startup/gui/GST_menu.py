@@ -660,10 +660,165 @@ def __registerGSTMenu():
             # Top-level menubar dropdown in ScriptWindow
             scriptWindowMenu = GafferUI.ScriptWindow.menuDefinition(app)
             scriptWindowMenu.append("/GST", {"subMenu": __nodeMenuDefinition})
+
+            # Demo scripts submenu in menubar
+            scriptWindowMenu.append("/GST/Demos", {"subMenu": __demoMenuDefinition})
     except Exception as e:
         IECore.msg(
             IECore.Msg.Level.Warning, "GST_menu", f"Could not register GST menu: {e}"
         )
+
+
+def __loadDemo(menu, demoPath):
+    """Load a demo .gfr file into the current script."""
+    script = menu.ancestor(GafferUI.ScriptWindow).scriptNode()
+    GST_helper.filepathLoadReference(script, demoPath)
+
+
+def __registerDemo(menuDefinition, path, demoPath):
+    """Register a demo .gfr file in the menu."""
+    fullPath = (GST_root / demoPath).as_posix()
+    menuDefinition.append(
+        f"/{path}",
+        {
+            "command": lambda menu: __loadDemo(menu, fullPath),
+        },
+    )
+
+
+def __demoMenuDefinition():
+    """Build the Demos submenu from demo/ directory."""
+    menuDefinition = IECore.MenuDefinition()
+
+    # Demo scripts converted from Nuke .nk files
+    __registerDemo(
+        menuDefinition, "WaterLens Demo", "demo/NST_WaterLens_sampleScript.gfr"
+    )
+    __registerDemo(menuDefinition, "SSMesh Demo", "demo/NST_SSMesh_demo.gfr")
+    __registerDemo(menuDefinition, "UVEditor Demo", "demo/NST_UVEditor_demo_clean.gfr")
+    __registerDemo(
+        menuDefinition,
+        "ParticleLights Demo",
+        "demo/NST_ParticleLights_ExampleScript.gfr",
+    )
+    __registerDemo(
+        menuDefinition, "X_Aton Volumetrics Demo", "demo/NST_X_Aton_Examples.gfr"
+    )
+    __registerDemo(menuDefinition, "Sparky Demo", "demo/NST_SparkyExampleScene.gfr")
+    __registerDemo(
+        menuDefinition, "LightSwitch Puppet Demo", "demo/NST_LightSwitchPuppet.gfr"
+    )
+    __registerDemo(
+        menuDefinition, "STMap Keying Setup", "demo/NST_STMap_Keying_Setup.gfr"
+    )
+    __registerDemo(
+        menuDefinition,
+        "Advanced Keying Template",
+        "demo/NST_AdvancedKeyingTemplate.gfr",
+    )
+    __registerDemo(menuDefinition, "Noise4D Template", "demo/NST_Noise4D.gfr")
+    __registerDemo(menuDefinition, "Deep Thickness", "demo/deepThickness.gfr")
+
+    menuDefinition.append("/Divider", {"divider": True})
+
+    # Expression-based procedural patterns
+    __registerDemo(menuDefinition, "Patterns/Bricks", "demo/bricks.gfr")
+    __registerDemo(menuDefinition, "Patterns/Circles", "demo/circles.gfr")
+    __registerDemo(menuDefinition, "Patterns/Circles User", "demo/circles_user.gfr")
+    __registerDemo(menuDefinition, "Patterns/Coordinates", "demo/coordinates.gfr")
+    __registerDemo(
+        menuDefinition, "Patterns/Gradient Horizontal", "demo/gradient_horizontal.gfr"
+    )
+    __registerDemo(
+        menuDefinition, "Patterns/Gradient Vertical", "demo/gradient_vertical.gfr"
+    )
+    __registerDemo(menuDefinition, "Patterns/Radial", "demo/radial.gfr")
+    __registerDemo(
+        menuDefinition, "Patterns/Radial Gradient", "demo/radial_gradient.gfr"
+    )
+    __registerDemo(menuDefinition, "Patterns/Radial Rays", "demo/radial_rays.gfr")
+    __registerDemo(menuDefinition, "Patterns/Turbulence", "demo/turbulence.gfr")
+    __registerDemo(menuDefinition, "Patterns/Twist", "demo/twist.gfr")
+    __registerDemo(menuDefinition, "Patterns/fBm", "demo/fBm.gfr")
+
+    menuDefinition.append("/Divider2", {"divider": True})
+
+    # Keying and Despill demos
+    __registerDemo(menuDefinition, "Keying/Despill Green", "demo/despill_green.gfr")
+    __registerDemo(menuDefinition, "Keying/Despill Blue", "demo/despill_blue.gfr")
+    __registerDemo(
+        menuDefinition, "Keying/Despill Green List", "demo/despill_green_list.gfr"
+    )
+    __registerDemo(
+        menuDefinition, "Keying/Despill Blue List", "demo/despill_blue_list.gfr"
+    )
+    __registerDemo(menuDefinition, "Keying/Keying Expression", "demo/keying.gfr")
+    __registerDemo(menuDefinition, "Keying/Difference Key", "demo/differenceKey.gfr")
+    __registerDemo(
+        menuDefinition, "Keying/IBK Gizmo Expression", "demo/IBKGizmo_Expression.gfr"
+    )
+
+    menuDefinition.append("/Divider3", {"divider": True})
+
+    # Alpha and Channel demos
+    __registerDemo(menuDefinition, "Alpha/Binary", "demo/alpha_binary.gfr")
+    __registerDemo(menuDefinition, "Alpha/Comparison", "demo/alpha_comparison.gfr")
+    __registerDemo(menuDefinition, "Alpha/Exists", "demo/alpha_exists.gfr")
+    __registerDemo(menuDefinition, "Alpha/Sum", "demo/alpha_sum.gfr")
+
+    # Pixel validation demos
+    __registerDemo(menuDefinition, "Pixel/Absolute Value", "demo/abs.gfr")
+    __registerDemo(menuDefinition, "Pixel/Check Negative", "demo/check_negative.gfr")
+    __registerDemo(menuDefinition, "Pixel/Check NaN/Inf", "demo/check_nan_inf.gfr")
+    __registerDemo(menuDefinition, "Pixel/Create NaN", "demo/create_nan.gfr")
+    __registerDemo(menuDefinition, "Pixel/Create Inf", "demo/create_inf.gfr")
+    __registerDemo(menuDefinition, "Pixel/Kill NaN", "demo/kill_nan.gfr")
+    __registerDemo(menuDefinition, "Pixel/Kill Inf", "demo/kill_inf.gfr")
+
+    # Transform demos
+    __registerDemo(menuDefinition, "Transform/Transform", "demo/transform.gfr")
+    __registerDemo(
+        menuDefinition, "Transform/Transform Advanced", "demo/transform_advanced.gfr"
+    )
+    __registerDemo(menuDefinition, "Transform/STMap Invert", "demo/STMap_invert.gfr")
+    __registerDemo(menuDefinition, "Transform/UV to Vector", "demo/UV_to_Vector.gfr")
+    __registerDemo(menuDefinition, "Transform/Vector to UV", "demo/Vector_to_UV.gfr")
+
+    # Deep demos
+    __registerDemo(menuDefinition, "Deep/Deep to Depth", "demo/deepToDepth.gfr")
+    __registerDemo(menuDefinition, "Deep/Depth Normalize", "demo/depth_normalize.gfr")
+
+    # CG demos
+    __registerDemo(menuDefinition, "CG/C4x4", "demo/C4x4.gfr")
+    __registerDemo(
+        menuDefinition, "CG/Normal Pass Relight", "demo/normalPass_relight.gfr"
+    )
+    __registerDemo(menuDefinition, "CG/Points", "demo/points.gfr")
+    __registerDemo(menuDefinition, "CG/Points Advanced", "demo/points_advanced.gfr")
+
+    # Line demos
+    __registerDemo(menuDefinition, "Lines/Horizontal", "demo/Lines_Horizontal.gfr")
+    __registerDemo(menuDefinition, "Lines/Vertical", "demo/Lines_Vertical.gfr")
+    __registerDemo(
+        menuDefinition,
+        "Lines/Horizontal Animated",
+        "demo/Lines_Horizontal_Animated.gfr",
+    )
+    __registerDemo(
+        menuDefinition, "Lines/Vertical Animated", "demo/Lines_Vertical_Animated.gfr"
+    )
+
+    # Random demos
+    __registerDemo(menuDefinition, "Random/Colors", "demo/Random_colors.gfr")
+    __registerDemo(menuDefinition, "Random/Every Frame", "demo/Random_every_frame.gfr")
+    __registerDemo(menuDefinition, "Random/Every Pixel", "demo/Random_every_pixel.gfr")
+
+    # Misc
+    __registerDemo(menuDefinition, "Misc/Noise", "demo/Noise.gfr")
+    __registerDemo(menuDefinition, "Misc/Trunc", "demo/Trunc.gfr")
+    __registerDemo(menuDefinition, "Misc/Gradient Corner", "demo/GradientCorner.gfr")
+
+    return menuDefinition
 
 
 __registerGSTMenu()

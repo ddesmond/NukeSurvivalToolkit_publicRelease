@@ -1,0 +1,26 @@
+// Converted from Nuke .nk file: bricks
+// Note: Expression-based procedural patterns may need manual conversion
+// since Gaffer.Expression works on scalars, not per-pixel data.
+
+Gaffer.ScriptNode {
+    children : [
+        GafferImage.Resize "Reformat1" {
+            "enabled" : true,
+            "format" : Gaffer.Format(1920, 1080, 1, "HD_1080"),
+        },
+        Gaffer.Expression "bricks" {
+            "enabled" : true,
+            "radius" : 216.0,
+            "offset" : Imath.Color4f(132.0, 132.0, 132.0, 132.0),
+            // _note: Nuke Expression with per-pixel math: ['floor(y/size)%2 == 0? (x%(dimension_width*scale))/(difference_size*width_brick*scale) : ((x+offset)%dimension_width)/(difference_size*width_brick)', 'floor(y/size)%2 == 0? (y%dimension_height)/(difference_size) : ((y)%dimension_height)/(difference_size)']
+        },
+        GafferImage.Ramp "ColorWheel1" {
+            "enabled" : true,
+            "gamma" : Imath.Color4f(0.45, 0.45, 0.45, 0.45),
+        },
+        GafferImage.VectorWarp "STMap1" {
+            "enabled" : true,
+            "channels" : "rgba",
+        },
+    ],
+}

@@ -1,0 +1,25 @@
+// Converted from Nuke .nk file: NST_STMap_Keying_Setup
+// Note: Expression-based procedural patterns may need manual conversion
+// since Gaffer.Expression works on scalars, not per-pixel data.
+
+Gaffer.ScriptNode {
+    children : [
+        GafferImage.Blur "Blur1" {
+            "enabled" : true,
+            "radius" : 150.0,
+        },
+        GafferImage.Shuffle "Shuffle1" {
+            "enabled" : true,
+        },
+        GafferImage.Shuffle "Shuffle2" {
+            "enabled" : true,
+        },
+        GafferImage.VectorWarp "STMap1" {
+            "enabled" : true,
+        },
+        GafferImage.Merge "Merge1" {
+            "enabled" : true,
+            "operation" : "GafferImage.Merge.Operation.Over",
+        },
+    ],
+}

@@ -1,0 +1,12 @@
+// Converted from Nuke .nk file: circles
+// Note: Expression-based procedural patterns may need manual conversion
+// since Gaffer.Expression works on scalars, not per-pixel data.
+
+Gaffer.ScriptNode {
+    children : [
+        Gaffer.Expression "Circles" {
+            "enabled" : true,
+            // _note: Nuke Expression with per-pixel math: ['sin(sqrt(x * x + y * y ))', 'sin(sqrt(x * x + y * y ))', 'sin(sqrt(x * x + y * y ))', 'sin(sqrt(x * x + y * y ))']
+        },
+    ],
+}

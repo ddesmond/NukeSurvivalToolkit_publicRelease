@@ -1,0 +1,26 @@
+// Converted from Nuke .nk file: check_nan_inf
+// Note: Expression-based procedural patterns may need manual conversion
+// since Gaffer.Expression works on scalars, not per-pixel data.
+
+Gaffer.ScriptNode {
+    children : [
+        Gaffer.Expression "Expression17" {
+            "enabled" : true,
+            // _note: Nuke Expression with per-pixel math: ['isinf(r)?1000:0', 'isinf(g)?1000:0', 'isinf(b)?1000:0', 'isinf(a)?1000:0']
+        },
+        GafferImage.Blur "Blur204" {
+            "enabled" : true,
+            "channels" : "rgba",
+            "radius" : 20.0,
+        },
+        Gaffer.Expression "Expression16" {
+            "enabled" : true,
+            // _note: Nuke Expression with per-pixel math: ['isnan(r)?1000:0', 'isnan(g)?1000:0', 'isnan(b)?1000:0', 'isnan(a)?1000:0']
+        },
+        GafferImage.Blur "Blur205" {
+            "enabled" : true,
+            "channels" : "rgba",
+            "radius" : 20.0,
+        },
+    ],
+}

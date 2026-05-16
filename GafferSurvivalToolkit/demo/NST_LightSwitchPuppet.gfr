@@ -1,0 +1,8 @@
+// Converted from Nuke .nk file: NST_LightSwitchPuppet
+// Note: Expression-based procedural patterns may need manual conversion
+// since Gaffer.Expression works on scalars, not per-pixel data.
+
+Gaffer.ScriptNode {
+    children : [
+    ],
+}

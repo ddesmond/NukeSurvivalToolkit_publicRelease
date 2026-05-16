@@ -1,0 +1,15 @@
+// Converted from Nuke .nk file: C4x4
+// Note: Expression-based procedural patterns may need manual conversion
+// since Gaffer.Expression works on scalars, not per-pixel data.
+
+Gaffer.ScriptNode {
+    children : [
+        Gaffer.Expression "Expression3" {
+            "enabled" : true,
+            // _note: Nuke Expression with per-pixel math: ['r * Axis1.world_matrix.0 + g * Axis1.world_matrix.1 + b * Axis1.world_matrix.2 + Axis1.world_matrix.3', 'r * Axis1.world_matrix.4 + g * Axis1.world_matrix.5 + b * Axis1.world_matrix.6 + Axis1.world_matrix.7', 'r * Axis1.world_matrix.8 + g * Axis1.world_matrix.9 + b * Axis1.world_matrix.10+ Axis1.world_matrix.11']
+        },
+        GafferScene.Group "Axis1" {
+            "enabled" : true,
+        },
+    ],
+}

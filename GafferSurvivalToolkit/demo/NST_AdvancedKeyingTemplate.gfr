@@ -1,0 +1,90 @@
+// Converted from Nuke .nk file: NST_AdvancedKeyingTemplate
+// Note: Expression-based procedural patterns may need manual conversion
+// since Gaffer.Expression works on scalars, not per-pixel data.
+
+Gaffer.ScriptNode {
+    children : [
+        GafferImage.Shuffle "Shuffle33" {
+            "enabled" : true,
+        },
+        GafferImage.Shuffle "Shuffle34" {
+            "enabled" : true,
+        },
+        GafferImage.Shuffle "Shuffle35" {
+            "enabled" : true,
+        },
+        GafferImage.Shuffle "Shuffle36" {
+            "enabled" : true,
+        },
+        GafferImage.Merge "Merge2" {
+            "enabled" : true,
+            "operation" : "GafferImage.Merge.Operation.Over",
+        },
+        GafferImage.Merge "Merge3" {
+            "enabled" : true,
+            "operation" : "GafferImage.Merge.Operation.Over",
+        },
+        GafferImage.Merge "Merge5" {
+            "enabled" : true,
+            "operation" : "GafferImage.Merge.Operation.Over",
+        },
+        GafferImage.Merge "Merge10" {
+            "enabled" : true,
+            "operation" : "GafferImage.Merge.Operation.Over",
+        },
+        GafferImage.Clamp "Clamp3" {
+            "enabled" : true,
+            "channels" : "rgba",
+        },
+        GafferImage.Grade "Multiply2" {
+            "enabled" : true,
+            "channels" : "despill",
+            "multiply" : Imath.Color4f(0.0, 0.0, 0.0, 0.0),
+        },
+        GafferImage.Shuffle "Shuffle39" {
+            "enabled" : true,
+        },
+        GafferImage.Grade "Grade4" {
+            "enabled" : true,
+            "channels" : "rgba",
+        },
+        GafferImage.Grade "Grade6" {
+            "enabled" : true,
+        },
+        GafferImage.Merge "Merge36" {
+            "enabled" : true,
+            "operation" : "GafferImage.Merge.Operation.Over",
+        },
+        GafferImage.Shuffle "Shuffle40" {
+            "enabled" : true,
+        },
+        GafferImage.Shuffle "Shuffle41" {
+            "enabled" : true,
+        },
+        GafferImage.Grade "Grade7" {
+            "enabled" : true,
+            "channels" : "rgba",
+            "whitePoint" : 0.5,
+        },
+        GafferImage.Merge "Merge49" {
+            "enabled" : true,
+            "operation" : "GafferImage.Merge.Operation.Over",
+        },
+        GafferImage.Shuffle "Shuffle42" {
+            "enabled" : true,
+        },
+        GafferImage.Shuffle "Shuffle43" {
+            "enabled" : true,
+        },
+        GafferImage.Merge "Merge51" {
+            "enabled" : true,
+        },
+        GafferImage.Shuffle "Shuffle44" {
+            "enabled" : true,
+        },
+        GafferImage.Merge "Merge52" {
+            "enabled" : true,
+            "operation" : "GafferImage.Merge.Operation.Over",
+        },
+    ],
+}

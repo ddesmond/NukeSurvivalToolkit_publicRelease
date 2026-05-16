@@ -1,0 +1,17 @@
+// Converted from Nuke .nk file: check_negative
+// Note: Expression-based procedural patterns may need manual conversion
+// since Gaffer.Expression works on scalars, not per-pixel data.
+
+Gaffer.ScriptNode {
+    children : [
+        Gaffer.Expression "Expression3" {
+            "enabled" : true,
+            // _note: Nuke Expression with per-pixel math: ['r < 0 ? 1000 : 0', 'g < 0 ? 1000 : 0', 'b < 0 ? 1000 : 0', 'a < 0 ? 1000 : 0']
+        },
+        GafferImage.Blur "Blur3" {
+            "enabled" : true,
+            "channels" : "rgba",
+            "radius" : 20.0,
+        },
+    ],
+}

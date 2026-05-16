@@ -1,0 +1,27 @@
+// Converted from Nuke .nk file: NST_ParticleLights_ExampleScript
+// Note: Expression-based procedural patterns may need manual conversion
+// since Gaffer.Expression works on scalars, not per-pixel data.
+
+Gaffer.ScriptNode {
+    children : [
+        GafferScene.Group "Axis2" {
+            "enabled" : true,
+        },
+        GafferScene.Camera "Camera1" {
+            "enabled" : true,
+        },
+        GafferScene.Group "Axis3" {
+            "enabled" : true,
+        },
+        GafferScene.Group "Scene1" {
+            "enabled" : true,
+        },
+        GafferImage.Merge "Merge1" {
+            "enabled" : true,
+            "operation" : "GafferImage.Merge.Operation.Over",
+        },
+        GafferScene.Group "Axis1" {
+            "enabled" : true,
+        },
+    ],
+}

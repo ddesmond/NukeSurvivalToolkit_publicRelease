@@ -1,0 +1,12 @@
+// Converted from Nuke .nk file: UV_to_Vector
+// Note: Expression-based procedural patterns may need manual conversion
+// since Gaffer.Expression works on scalars, not per-pixel data.
+
+Gaffer.ScriptNode {
+    children : [
+        Gaffer.Expression "UV_to_Vector" {
+            "enabled" : true,
+            // _note: Nuke Expression with per-pixel math: ['(r-(x+0.5)/width)*width', '(g-(y+0.5)/height)*height', '0']
+        },
+    ],
+}

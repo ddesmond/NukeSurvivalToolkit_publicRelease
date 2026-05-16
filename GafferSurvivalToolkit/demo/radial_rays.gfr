@@ -1,0 +1,14 @@
+// Converted from Nuke .nk file: radial_rays
+// Note: Expression-based procedural patterns may need manual conversion
+// since Gaffer.Expression works on scalars, not per-pixel data.
+
+Gaffer.ScriptNode {
+    children : [
+        Gaffer.Expression "Radial_Rays" {
+            "enabled" : true,
+            "offset" : Imath.Color4f(4.0, 4.0, 4.0, 4.0),
+            "radius" : 9.3,
+            // _note: Nuke Expression with per-pixel math: ['sin( ( atan(x - center.x, y - center.y) + offset) * size)', 'sin( ( atan(x - center.x, y - center.y) + offset) * size)', 'sin( ( atan(x - center.x, y - center.y) + offset) * size)', 'sin( ( atan(x - center.x, y - center.y) + offset) * size)']
+        },
+    ],
+}

@@ -1,0 +1,12 @@
+// Converted from Nuke .nk file: Random_every_pixel
+// Note: Expression-based procedural patterns may need manual conversion
+// since Gaffer.Expression works on scalars, not per-pixel data.
+
+Gaffer.ScriptNode {
+    children : [
+        Gaffer.Expression "Random_every_pixel" {
+            "enabled" : true,
+            // _note: Nuke Expression with per-pixel math: ['random', 'random', 'random', 'random']
+        },
+    ],
+}

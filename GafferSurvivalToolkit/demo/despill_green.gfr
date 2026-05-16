@@ -1,0 +1,16 @@
+// Converted from Nuke .nk file: despill_green
+// Note: Expression-based procedural patterns may need manual conversion
+// since Gaffer.Expression works on scalars, not per-pixel data.
+
+Gaffer.ScriptNode {
+    children : [
+        GafferImage.Ramp "ColorWheel1" {
+            "enabled" : true,
+            "gamma" : Imath.Color4f(0.45, 0.45, 0.45, 0.45),
+        },
+        Gaffer.Expression "Green_Despill" {
+            "enabled" : true,
+            // _note: Nuke Expression with per-pixel math: ['g-key', 'key']
+        },
+    ],
+}

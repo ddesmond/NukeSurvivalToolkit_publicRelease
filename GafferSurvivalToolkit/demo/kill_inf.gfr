@@ -1,0 +1,16 @@
+// Converted from Nuke .nk file: kill_inf
+// Note: Expression-based procedural patterns may need manual conversion
+// since Gaffer.Expression works on scalars, not per-pixel data.
+
+Gaffer.ScriptNode {
+    children : [
+        Gaffer.Expression "Create_inf_pixel" {
+            "enabled" : true,
+            // _note: Nuke Expression with per-pixel math: ['r!=0?1*exp(500)/0.0000000001:0', 'g!=0?1*exp(500)/0.0000000001:0', 'b!=0?1*exp(500)/0.0000000001:0', 'a!=0?1*exp(500)/0.0000000001:0']
+        },
+        Gaffer.Expression "Kill_inf_pixel" {
+            "enabled" : true,
+            // _note: Nuke Expression with per-pixel math: ['isinf(r)?r(x+x_offset,y+y_offset):r', 'isinf(g)?g(x+x_offset,y+y_offset):g', 'isinf(b)?b(x+x_offset,y+y_offset):b', 'isinf(a)?a(x+x_offset,y+y_offset):a']
+        },
+    ],
+}

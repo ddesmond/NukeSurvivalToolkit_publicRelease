@@ -1,0 +1,15 @@
+// Converted from Nuke .nk file: normalPass_relight
+// Note: Expression-based procedural patterns may need manual conversion
+// since Gaffer.Expression works on scalars, not per-pixel data.
+
+Gaffer.ScriptNode {
+    children : [
+        GafferImage.Shuffle "Shuffle1" {
+            "enabled" : true,
+        },
+        Gaffer.Expression "Expression" {
+            "enabled" : true,
+            // _note: Nuke Expression with per-pixel math: ['max((r*norm.r)+(g*norm.g)+(b*norm.b),0)']
+        },
+    ],
+}

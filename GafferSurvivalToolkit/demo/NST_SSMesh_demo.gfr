@@ -1,0 +1,78 @@
+// Converted from Nuke .nk file: NST_SSMesh_demo
+// Note: Expression-based procedural patterns may need manual conversion
+// since Gaffer.Expression works on scalars, not per-pixel data.
+
+Gaffer.ScriptNode {
+    children : [
+        GafferScene.Camera "Camera2" {
+            "enabled" : true,
+        },
+        GafferScene.Group "Scene1" {
+            "enabled" : true,
+        },
+        GafferScene.Camera "Camera1" {
+            "enabled" : true,
+        },
+        GafferScene.Group "Scene2" {
+            "enabled" : true,
+        },
+        GafferScene.Camera "Camera3" {
+            "enabled" : true,
+        },
+        GafferScene.Group "Scene3" {
+            "enabled" : true,
+        },
+        GafferScene.Camera "Camera4" {
+            "enabled" : true,
+        },
+        GafferScene.Group "Scene4" {
+            "enabled" : true,
+        },
+        GafferScene.Camera "Camera5" {
+            "enabled" : true,
+        },
+        GafferScene.Group "Scene5" {
+            "enabled" : true,
+        },
+        GafferScene.Camera "Camera6" {
+            "enabled" : true,
+        },
+        GafferScene.Group "Scene6" {
+            "enabled" : true,
+        },
+        GafferScene.Camera "Camera7" {
+            "enabled" : true,
+        },
+        GafferImage.Shuffle "Shuffle1" {
+            "enabled" : true,
+        },
+        GafferImage.Resize "Reformat1" {
+            "enabled" : true,
+        },
+        GafferImage.Grade "Grade1" {
+            "enabled" : true,
+        },
+        GafferScene.Camera "Camera8" {
+            "enabled" : true,
+        },
+        GafferImage.Ramp "ColorWheel1" {
+            "enabled" : true,
+            "gamma" : Imath.Color4f(0.45, 0.45, 0.45, 0.45),
+        },
+        GafferImage.Merge "Merge1" {
+            "enabled" : true,
+        },
+        GafferImage.Resize "Reformat2" {
+            "enabled" : true,
+        },
+        GafferImage.Merge "Merge2" {
+            "enabled" : true,
+        },
+        GafferScene.Camera "Camera10" {
+            "enabled" : true,
+        },
+        GafferScene.Group "Scene8" {
+            "enabled" : true,
+        },
+    ],
+}

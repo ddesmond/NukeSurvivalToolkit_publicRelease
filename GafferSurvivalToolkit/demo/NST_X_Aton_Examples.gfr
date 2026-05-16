@@ -1,0 +1,142 @@
+// Converted from Nuke .nk file: NST_X_Aton_Examples
+// Note: Expression-based procedural patterns may need manual conversion
+// since Gaffer.Expression works on scalars, not per-pixel data.
+
+Gaffer.ScriptNode {
+    children : [
+        GafferScene.Group "Axis1" {
+            "enabled" : true,
+        },
+        GafferScene.Camera "Camera1" {
+            "enabled" : true,
+        },
+        GafferScene.Group "Scene1" {
+            "enabled" : true,
+        },
+        GafferImage.Grade "Grade1" {
+            "enabled" : true,
+            "multiply" : Imath.Color4f(0.5, 0.5, 0.5, 0.5),
+            "gamma" : Imath.Color4f(0.6, 0.6, 0.74, 0.6),
+        },
+        GafferScene.Group "Scene2" {
+            "enabled" : true,
+        },
+        GafferImage.Merge "Merge1" {
+            "enabled" : true,
+            "operation" : "GafferImage.Merge.Operation.Over",
+        },
+        GafferImage.Merge "Merge2" {
+            "enabled" : true,
+            "operation" : "GafferImage.Merge.Operation.Over",
+        },
+        GafferImage.Grade "Grade3" {
+            "enabled" : true,
+            "multiply" : Imath.Color4f(1.38, 0.52, 0.16, 1.0),
+            "gamma" : Imath.Color4f(0.96, 0.79, 0.82, 1.0),
+        },
+        GafferImage.Resize "Reformat1" {
+            "enabled" : true,
+        },
+        GafferScene.Camera "Camera2" {
+            "enabled" : true,
+        },
+        GafferImage.Shuffle "Shuffle1" {
+            "enabled" : true,
+        },
+        Gaffer.Expression "Expression1" {
+            "enabled" : true,
+            // _note: Nuke Expression with per-pixel math: ['a>.1']
+        },
+        GafferImage.Merge "Merge3" {
+            "enabled" : true,
+            "operation" : "GafferImage.Merge.Operation.Over",
+        },
+        GafferImage.Crop "Crop1" {
+            "enabled" : true,
+            "area" : Imath.Box2i( Imath.V2i(0, 0), Imath.V2i(1920, 1080) ),
+        },
+        Gaffer.Expression "Expression2" {
+            "enabled" : true,
+            // _note: Nuke Expression with per-pixel math: ['a>0']
+        },
+        GafferImage.Constant "Constant1" {
+            "enabled" : true,
+            "channels" : "rgb",
+            "color" : Imath.Color4f(1.0, 1.0, 1.0, 1.0),
+        },
+        GafferImage.Merge "Merge4" {
+            "enabled" : true,
+        },
+        GafferScene.Camera "Camera4" {
+            "enabled" : true,
+        },
+        GafferImage.Crop "Crop2" {
+            "enabled" : true,
+            "area" : Imath.Box2i( Imath.V2i(0, 0), Imath.V2i(1920, 1080) ),
+        },
+        GafferImage.Shuffle "Shuffle2" {
+            "enabled" : true,
+        },
+        GafferImage.Grade "Multiply1" {
+            "enabled" : true,
+            "multiply" : "None",
+        },
+        GafferImage.Grade "Grade5" {
+            "enabled" : true,
+            "channels" : "alpha",
+            "gamma" : Imath.Color4f(0.2, 0.2, 0.2, 0.2),
+        },
+        GafferImage.Merge "Merge8" {
+            "enabled" : true,
+            "mix" : 0.1,
+        },
+        GafferImage.Grade "Grade6" {
+            "enabled" : true,
+            "multiply" : Imath.Color4f(0.66, 1.02, 3.2, 1.0),
+            "gamma" : Imath.Color4f(0.89, 1.1, 1.42, 1.0),
+        },
+        GafferImage.Grade "Multiply2" {
+            "enabled" : true,
+            "multiply" : Imath.Color4f(0.25, 0.25, 0.25, 0.25),
+        },
+        GafferImage.Crop "Crop3" {
+            "enabled" : true,
+            "area" : Imath.Box2i( Imath.V2i(0, 0), Imath.V2i(1920, 1080) ),
+        },
+        GafferImage.Merge "Merge7" {
+            "enabled" : true,
+        },
+        GafferImage.Grade "Grade7" {
+            "enabled" : true,
+            "gamma" : Imath.Color4f(0.75, 0.75, 0.75, 0.75),
+        },
+        GafferImage.Blur "Blur7" {
+            "enabled" : true,
+            "radius" : 500.0,
+        },
+        GafferImage.Merge "Merge9" {
+            "enabled" : true,
+            "operation" : "GafferImage.Merge.Operation.Over",
+        },
+        GafferImage.Merge "Merge10" {
+            "enabled" : true,
+            "operation" : "GafferImage.Merge.Operation.Over",
+        },
+        GafferImage.Grade "Grade8" {
+            "enabled" : true,
+            "multiply" : Imath.Color4f(1.2, 1.0, 1.0, 1.0),
+            "gamma" : Imath.Color4f(0.9, 1.0, 1.0, 1.0),
+        },
+        GafferImage.Grade "Grade10" {
+            "enabled" : true,
+        },
+        GafferImage.Grade "Grade9" {
+            "enabled" : true,
+            "multiply" : Imath.Color4f(0.26, 0.26, 0.26, 0.26),
+            "gamma" : Imath.Color4f(0.83, 0.83, 0.83, 0.83),
+        },
+        GafferImage.Resize "Reformat3" {
+            "enabled" : true,
+        },
+    ],
+}

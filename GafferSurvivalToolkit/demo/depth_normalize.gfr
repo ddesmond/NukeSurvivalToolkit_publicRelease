@@ -1,0 +1,12 @@
+// Converted from Nuke .nk file: depth_normalize
+// Note: Expression-based procedural patterns may need manual conversion
+// since Gaffer.Expression works on scalars, not per-pixel data.
+
+Gaffer.ScriptNode {
+    children : [
+        Gaffer.Expression "Expression1" {
+            "enabled" : true,
+            // _note: Nuke Expression with per-pixel math: ['z==0?0:1/z']
+        },
+    ],
+}

@@ -1,0 +1,42 @@
+// Converted from Nuke .nk file: points_advanced
+// Note: Expression-based procedural patterns may need manual conversion
+// since Gaffer.Expression works on scalars, not per-pixel data.
+
+Gaffer.ScriptNode {
+    children : [
+        GafferImage.Shuffle "Shuffle1" {
+            "enabled" : true,
+        },
+        GafferImage.Crop "Crop1" {
+            "enabled" : true,
+            "area" : Imath.Box2i( Imath.V2i(212, 154), Imath.V2i(365, 326) ),
+        },
+        Gaffer.Expression "Expression4" {
+            "enabled" : true,
+            "offset" : "None",
+            "gain" : "None",
+            // _note: Nuke Expression with per-pixel math: ['fmod(y/rows,offsetX) == 0 ? floor(y/offsetX)%2 == 0 ? ((x+offset)%offsetY)/offsetY == 0 ? random_points==1 && random_every_frame == 0 ? gain*random(x,y,1) : random_points == 1 && random_every_frame == 1?random(x*y, 1, frame)*gain:random_points==0 && random_every_frame==1?random(frame,1)*gain:gain :0:0:0', 'fmod(y/rows,offsetX) == 0 ? floor(y/offsetX)%2 == 0 ? ((x+offset)%offsetY)/offsetY == 0 ? random_points==1 && random_every_frame == 0 ? gain*random(x,y,2) : random_points == 1 && random_every_frame == 1?random(x*y, 2, frame)*gain:random_points==0 && random_every_frame==1?random(frame,2)*gain:gain :0:0:0', 'fmod(y/rows,offsetX) == 0 ? floor(y/offsetX)%2 == 0 ? ((x+offset)%offsetY)/offsetY == 0 ? random_points==1 && random_every_frame == 0 ? gain*random(x,y,3) : random_points == 1 && random_every_frame == 1?random(x*y, 3, frame)*gain:random_points==0 && random_every_frame==1?random(frame,3)*gain:gain :0:0:0', 'fmod(y/rows,offsetX) == 0 ? floor(y/offsetX)%2 == 0 ? ((x+offset)%offsetY)/offsetY == 0 ? 1 :0:0:0']
+        },
+        Gaffer.Expression "Expression11" {
+            "enabled" : true,
+            "offset" : "None",
+            "gain" : "None",
+            // _note: Nuke Expression with per-pixel math: ['fmod((y+1)/rows,offsetX) == 0 ? floor(y/offsetX)%2 == 0 ? ((x)%offsetY)/offsetY == 0 ? random_points==1 && random_every_frame == 0 ? gain*random(x,y,1) : random_points == 1 && random_every_frame == 1?random(x*y, 1, frame)*gain:random_points==0 && random_every_frame==1?random(frame,1)*gain:gain :0:0:0', 'fmod((y+1)/rows,offsetX) == 0 ? floor(y/offsetX)%2 == 0 ? ((x)%offsetY)/offsetY == 0 ? random_points==1 && random_every_frame == 0 ? gain*random(x,y,2) : random_points == 1 && random_every_frame == 1?random(x*y, 2, frame)*gain:random_points==0 && random_every_frame==1?random(frame,2)*gain:gain :0:0:0', 'fmod((y+1)/rows,offsetX) == 0 ? floor(y/offsetX)%2 == 0 ? ((x)%offsetY)/offsetY == 0 ? random_points==1 && random_every_frame == 0 ? gain*random(x,y,3) : random_points == 1 && random_every_frame == 1?random(x*y, 3, frame)*gain:random_points==0 && random_every_frame==1?random(frame,3)*gain:gain :0:0:0', 'fmod((y+1)/rows,offsetX) == 0 ? floor(y/offsetX)%2 == 0 ? ((x)%offsetY)/offsetY == 0 ? 1 :0:0:0']
+        },
+        GafferImage.Merge "Merge4" {
+            "enabled" : true,
+        },
+        GafferImage.Dilate "Dilate10" {
+            "enabled" : true,
+            "radius" : 10.0,
+        },
+        GafferImage.Grade "Grade1" {
+            "enabled" : true,
+        },
+        Gaffer.Expression "MASTER_POINTS" {
+            "enabled" : true,
+            "offset" : Imath.Color4f(87.0, 87.0, 87.0, 87.0),
+            "gain" : Imath.Color4f(1.0, 1.0, 1.0, 1.0),
+        },
+    ],
+}

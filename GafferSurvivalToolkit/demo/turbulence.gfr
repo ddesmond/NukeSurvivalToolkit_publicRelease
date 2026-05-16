@@ -1,20 +1,29 @@
-// Converted from Nuke .nk file: turbulence
-// Note: Expression-based procedural patterns may need manual conversion
-// since Gaffer.Expression works on scalars, not per-pixel data.
+import Gaffer
+import GafferImage
+import GafferOSL
+import IECore
+import imath
 
-Gaffer.ScriptNode {
-    children : [
-        GafferImage.Shuffle "Shuffle9" {
-            "enabled" : true,
-        },
-        Gaffer.Expression "Expression6" {
-            "enabled" : true,
-            "offset" : Imath.Color4f(0.365, 0.365, 0.365, 0.365),
-            // _note: Nuke Expression with per-pixel math: ['random(r,g,b)+offset']
-        },
-        Gaffer.Expression "Expression5" {
-            "enabled" : true,
-            // _note: Nuke Expression with per-pixel math: ['turbulence(r,g,b,octaves,noise01.red,gain)']
-        },
-    ],
-}
+__children = {}
+
+__children["Constant"] = GafferImage.Constant( "Constant" )
+parent.addChild( __children["Constant"] )
+__children["Constant"]["format"].setValue( Gaffer.Format( 1920, 1080, 1.0, "HD_1080" ) )
+
+__children["OSLImage"] = GafferOSL.OSLImage( "OSLImage" )
+parent.addChild( __children["OSLImage"] )
+__children["OSLImage"]["in"].setInput( __children["Constant"]["out"] )
+__children["OSLImage"]["channels"].addChild( Gaffer.NameValuePlug( "", Gaffer.Color3fPlug( "value", defaultValue = imath.Color3f( 1, 1, 1 ), flags = Gaffer.Plug.Flags.Default | Gaffer.Plug.Flags.Dynamic, ), True, "channel", Gaffer.Plug.Flags.Default | Gaffer.Plug.Flags.Dynamic ) )
+
+__children["Noise"] = GafferOSL.OSLShader( "Noise" )
+parent.addChild( __children["Noise"] )
+__children["Noise"].loadShader( "Pattern/Noise" )
+__children["Noise"]["parameters"]["type"].setValue( "turbulence" )
+__children["Noise"]["parameters"]["scale"].setValue( 5.0 )
+
+__children["OSLImage"]["channels"]["channel"]["value"].setInput( __children["Noise"]["out"]["n"] )
+__children["OSLImage"]["channels"]["channel"]["value"]["r"].setInput( __children["Noise"]["out"]["n"]["r"] )
+__children["OSLImage"]["channels"]["channel"]["value"]["g"].setInput( __children["Noise"]["out"]["n"]["g"] )
+__children["OSLImage"]["channels"]["channel"]["value"]["b"].setInput( __children["Noise"]["out"]["n"]["b"] )
+
+del __children

@@ -1,21 +1,23 @@
-// Converted from Nuke .nk file: abs
-// Note: Expression-based procedural patterns may need manual conversion
-// since Gaffer.Expression works on scalars, not per-pixel data.
+import Gaffer
+import GafferImage
+import IECore
+import imath
 
-Gaffer.ScriptNode {
-    children : [
-        GafferImage.Constant "Constant2" {
-            "enabled" : true,
-            "color" : Imath.Color4f(1.0, 1.0, 1.0, 1.0),
-        },
-        GafferImage.Grade "Multiply1" {
-            "enabled" : true,
-            "channels" : "rgba",
-            "multiply" : Imath.Color4f(-1.0, -1.0, -1.0, -1.0),
-        },
-        Gaffer.Expression "ABS" {
-            "enabled" : true,
-            // _note: Nuke Expression with per-pixel math: ['abs(r)', 'abs(g)', 'abs(b)', 'abs(a)']
-        },
-    ],
-}
+__children = {}
+
+__children["Constant"] = GafferImage.Constant( "Constant" )
+parent.addChild( __children["Constant"] )
+__children["Constant"]["format"].setValue( Gaffer.Format( 1920, 1080, 1.0, "HD_1080" ) )
+__children["Constant"]["color"].setValue( imath.Color4f( -0.5, -0.3, -0.8, -0.2 ) )
+
+__children["Grade"] = GafferImage.Grade( "Grade" )
+parent.addChild( __children["Grade"] )
+__children["Grade"]["in"].setInput( __children["Constant"]["out"] )
+__children["Grade"]["multiply"].setValue( imath.Color4f( -1, -1, -1, -1 ) )
+
+__children["Clamp"] = GafferImage.Clamp( "Clamp" )
+parent.addChild( __children["Clamp"] )
+__children["Clamp"]["in"].setInput( __children["Grade"]["out"] )
+__children["Clamp"]["minimum"].setValue( imath.Color4f( 0, 0, 0, 0 ) )
+
+del __children

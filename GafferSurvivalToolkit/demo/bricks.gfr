@@ -1,26 +1,28 @@
-// Converted from Nuke .nk file: bricks
-// Note: Expression-based procedural patterns may need manual conversion
-// since Gaffer.Expression works on scalars, not per-pixel data.
+import Gaffer
+import GafferImage
+import GafferOSL
+import IECore
+import imath
 
-Gaffer.ScriptNode {
-    children : [
-        GafferImage.Resize "Reformat1" {
-            "enabled" : true,
-            "format" : Gaffer.Format(1920, 1080, 1, "HD_1080"),
-        },
-        Gaffer.Expression "bricks" {
-            "enabled" : true,
-            "radius" : 216.0,
-            "offset" : Imath.Color4f(132.0, 132.0, 132.0, 132.0),
-            // _note: Nuke Expression with per-pixel math: ['floor(y/size)%2 == 0? (x%(dimension_width*scale))/(difference_size*width_brick*scale) : ((x+offset)%dimension_width)/(difference_size*width_brick)', 'floor(y/size)%2 == 0? (y%dimension_height)/(difference_size) : ((y)%dimension_height)/(difference_size)']
-        },
-        GafferImage.Ramp "ColorWheel1" {
-            "enabled" : true,
-            "gamma" : Imath.Color4f(0.45, 0.45, 0.45, 0.45),
-        },
-        GafferImage.VectorWarp "STMap1" {
-            "enabled" : true,
-            "channels" : "rgba",
-        },
-    ],
-}
+__children = {}
+
+__children["Constant"] = GafferImage.Constant( "Constant" )
+parent.addChild( __children["Constant"] )
+__children["Constant"]["format"].setValue( Gaffer.Format( 1920, 1080, 1.0, "HD_1080" ) )
+
+__children["OSLImage"] = GafferOSL.OSLImage( "OSLImage" )
+parent.addChild( __children["OSLImage"] )
+__children["OSLImage"]["in"].setInput( __children["Constant"]["out"] )
+__children["OSLImage"]["channels"].addChild( Gaffer.NameValuePlug( "", Gaffer.Color3fPlug( "value", defaultValue = imath.Color3f( 1, 1, 1 ), flags = Gaffer.Plug.Flags.Default | Gaffer.Plug.Flags.Dynamic, ), True, "channel", Gaffer.Plug.Flags.Default | Gaffer.Plug.Flags.Dynamic ) )
+
+__children["OSLCode"] = GafferOSL.OSLCode( "OSLCode" )
+parent.addChild( __children["OSLCode"] )
+__children["OSLCode"]["out"].addChild( Gaffer.Color3fPlug( "output1", direction = Gaffer.Plug.Direction.Out, defaultValue = imath.Color3f( 0, 0, 0 ), flags = Gaffer.Plug.Flags.Default | Gaffer.Plug.Flags.Dynamic, ) )
+__children["OSLCode"]["code"].setValue( 'float size = 0.1;\nfloat offset = 0.5;\nfloat bx = floor( u / size );\nfloat by = floor( v / size );\nfloat brick = mod( bx + mod( by, 2.0 ) * offset, 2.0 );\nfloat mx = mod( u, size ) / size;\nfloat my = mod( v, size ) / size;\nfloat edge = (mx < 0.05 || mx > 0.95 || my < 0.05 || my > 0.95) ? 0.0 : 1.0;\nfloat c = brick * edge;\noutput1 = color( c, c, c );' )
+
+__children["OSLImage"]["channels"]["channel"]["value"].setInput( __children["OSLCode"]["out"]["output1"] )
+__children["OSLImage"]["channels"]["channel"]["value"]["r"].setInput( __children["OSLCode"]["out"]["output1"]["r"] )
+__children["OSLImage"]["channels"]["channel"]["value"]["g"].setInput( __children["OSLCode"]["out"]["output1"]["g"] )
+__children["OSLImage"]["channels"]["channel"]["value"]["b"].setInput( __children["OSLCode"]["out"]["output1"]["b"] )
+
+del __children

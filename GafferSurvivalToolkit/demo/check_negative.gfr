@@ -1,17 +1,18 @@
-// Converted from Nuke .nk file: check_negative
-// Note: Expression-based procedural patterns may need manual conversion
-// since Gaffer.Expression works on scalars, not per-pixel data.
+import Gaffer
+import GafferImage
+import IECore
+import imath
 
-Gaffer.ScriptNode {
-    children : [
-        Gaffer.Expression "Expression3" {
-            "enabled" : true,
-            // _note: Nuke Expression with per-pixel math: ['r < 0 ? 1000 : 0', 'g < 0 ? 1000 : 0', 'b < 0 ? 1000 : 0', 'a < 0 ? 1000 : 0']
-        },
-        GafferImage.Blur "Blur3" {
-            "enabled" : true,
-            "channels" : "rgba",
-            "radius" : 20.0,
-        },
-    ],
-}
+__children = {}
+
+__children["Constant"] = GafferImage.Constant( "Constant" )
+parent.addChild( __children["Constant"] )
+__children["Constant"]["format"].setValue( Gaffer.Format( 1920, 1080, 1.0, "HD_1080" ) )
+
+__children["Clamp"] = GafferImage.Clamp( "Clamp" )
+parent.addChild( __children["Clamp"] )
+__children["Clamp"]["in"].setInput( __children["Constant"]["out"] )
+__children["Clamp"]["minimum"].setValue( imath.Color4f( 0, 0, 0, 0 ) )
+__children["Clamp"]["maximum"].setValue( imath.Color4f( 0, 0, 0, 1 ) )
+
+del __children
